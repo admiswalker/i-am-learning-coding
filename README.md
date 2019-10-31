@@ -1,5 +1,20 @@
 # i-am-learning-coding
 
+### memo
+- 全てインクルード．
+  ```
+  #include <bits/stdc++.h>
+  ```
+- using．
+  ```
+  using namespace std;
+  ```
+- Compiling
+  ```
+  g++ main.cpp -std=c++14
+  ```
+
+
 ### [AtCoder に登録したら次にやること ～ これだけ解けば十分闘える！過去問精選 10 問 ～](https://qiita.com/drken/items/fd4e5e3630d0f5859067)
 
 | title                                        | date       |
