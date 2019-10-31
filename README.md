@@ -1,15 +1,15 @@
 # i-am-learning-coding
 
-### memo
-- 全てインクルード．
+### Memo
+- Including all.
   ```
   #include <bits/stdc++.h>
   ```
-- using．
+- Using directive．
   ```
   using namespace std;
   ```
-- Compiling
+- Compiling.
   ```
   g++ main.cpp -std=c++14
   ```
