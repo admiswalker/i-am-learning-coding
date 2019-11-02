@@ -9,6 +9,11 @@
   ```
   using namespace std;
   ```
+- Making file.
+  ```
+  $ echo -e '#include <bits/stdc++.hpp>\nusing namespace std;\n\nint main(){\n    \n    \n    \n    return 0;\n}' > main.cpp
+  ```
+
 - Compiling.
   ```
   g++ main.cpp -std=c++14
