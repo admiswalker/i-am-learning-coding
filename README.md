@@ -11,7 +11,7 @@
   ```
 - Making file.
   ```
-  $ echo -e '#include <bits/stdc++.hpp>\nusing namespace std;\n\nint main(){\n    \n    \n    \n    return 0;\n}' > main.cpp
+  $ echo -e '#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    \n    \n    \n    return 0;\n}' > main.cpp
   ```
 
 - Compiling.
