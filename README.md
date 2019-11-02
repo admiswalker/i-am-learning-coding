@@ -33,3 +33,5 @@
 | 第 6 問: ABC 088 B - Card Game for Two (200 点) | 2019.11.01 |
 | 第 7 問: ABC 085 B - Kagami Mochi (200 点)      | 2019.11.02 |
 | 第 8 問: ABC 085 C - Otoshidama (300 点)        | 2019.11.02 |
+| 第 9 問: ABC 049 C - Daydream (300 点)          | 2019.11.02 |
+
