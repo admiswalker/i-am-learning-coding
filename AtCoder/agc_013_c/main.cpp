@@ -51,6 +51,7 @@ vector<struct XW> advanceXW(const vector<struct XW>& vecXW, int L){
             vecXW_ret[h] = advanceX(vecXW[h] , L);
         }else{
             int dis = distance(vecXW[h], vecXW[d], L);
+//            printf("h: %d, d: %d, dis: %d\n", h, d, dis);
             if      (dis==0){ vecXW_ret[h] = advanceX(invW(vecXW[h]), L);
             }else if(dis==1){ vecXW_ret[h] =          invW(vecXW[h]);
             }else           { vecXW_ret[h] = advanceX(     vecXW[h],  L);
@@ -91,80 +92,6 @@ int main(){
     return 0;
 }
 
-/*
-#include <bits/stdc++.h>
-using namespace std;
-
-struct XW{
-    XW(){ X=0; W=0; }
-    ~XW(){}
-    int64_t X; // place
-    int64_t W; // direction:: 1: forword or 2: back.
-};
-
-bool isForword(struct XW& XW){ if(XW.W==1){ return true; }else{ return false; } }
-bool isBack   (struct XW& XW){ if(XW.W==2){ return true; }else{ return false; } }
-void advance(vector<struct XW>& vecXW, int L){
-    for(int i=0; i<vecXW.size(); ++i){
-        if      ( isForword(vecXW[i]) ){ vecXW[i].X += 5; if(vecXW[i].X == L*10){ vecXW[i].X -= L*10; }
-        }else if( isBack   (vecXW[i]) ){ vecXW[i].X -= 5; if(vecXW[i].X < 0    ){ vecXW[i].X += L*10; }
-        }else                          { printf("ERROR: advance()\n");
-        }
-    }
-}
-
-void invW(struct XW& rhs){
-    if      (rhs.W==1){ rhs.W=2;
-    }else if(rhs.W==2){ rhs.W=1;
-    }else             { printf("ERROR in invW\n");
-    }
-}
-void check_direction(vector<struct XW>& vecXW){
-    if(vecXW[0].X == vecXW[vecXW.size()-1].X){
-        invW(vecXW[0]             );
-        invW(vecXW[vecXW.size()-1]);
-    }
-    for(int i=1; i<vecXW.size(); ++i){
-        if(vecXW[i-1].X == vecXW[i].X){
-            invW(vecXW[i-1]);
-            invW(vecXW[i  ]);
-        }
-    }
-}
-
-void print_place(const vector<struct XW>& vecXW){
-    for(int i=0; i<vecXW.size(); ++i){
-        if(vecXW[i].X==0){
-            cout << 0 << endl;
-        }else{
-            cout << vecXW[i].X/10 << endl;
-//            cout << vecXW[i].X << endl;
-        }
-    }
-}
-
-int main(){
-    int N, L, T;
-    cin >> N >> L >> T;
-    
-    vector<struct XW> vecXW(N);
-    
-    for(int i=0; i<vecXW.size(); ++i){
-        int X, W; cin >> X >> W;
-        vecXW[i].X=X*10;
-        vecXW[i].W=W;
-    }
-    
-    for(int64_t t=0; t<T*10; t+=5){
-        advance(vecXW, L);
-        check_direction(vecXW);
-    }
-    
-    print_place(vecXW);
-    
-    return 0;
-}
-//*/
 // 0.0 sec
 //   0  1  2  3  4  5  6  7
 //   1        2        1
