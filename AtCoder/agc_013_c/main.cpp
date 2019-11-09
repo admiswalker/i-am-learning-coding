@@ -37,8 +37,9 @@ int distance(const struct XW& lhs, const struct XW& rhs, const int L){
     return min(d1, d2);
 }
 
-vector<struct XW> advanceXW(const vector<struct XW>& vecXW, int L){
-    vector<struct XW> vecXW_ret(vecXW.size());
+//vector<struct XW> advanceXW(const vector<struct XW>& vecXW, int L){
+void advanceXW(vector<struct XW>& vecXW, vector<struct XW>& vecXW_buf, int L){
+//    vector<struct XW> vecXW_buf(vecXW.size());
     
     for(int i=0; i<vecXW.size(); ++i){
         int p = i-1; if(i==0           ){ p=vecXW.size()-1; } // prev
@@ -48,17 +49,18 @@ vector<struct XW> advanceXW(const vector<struct XW>& vecXW, int L){
         int d; if( isBack(vecXW[h]) ){ d=p; }else{ d=n; } // place of direction
         
         if(isSameDirection(vecXW[h], vecXW[d])){
-            vecXW_ret[h] = advanceX(vecXW[h] , L);
+            vecXW_buf[h] = advanceX(vecXW[h] , L);
         }else{
             int dis = distance(vecXW[h], vecXW[d], L);
 //            printf("h: %d, d: %d, dis: %d\n", h, d, dis);
-            if      (dis==0){ vecXW_ret[h] = advanceX(invW(vecXW[h]), L);
-            }else if(dis==1){ vecXW_ret[h] =          invW(vecXW[h]);
-            }else           { vecXW_ret[h] = advanceX(     vecXW[h],  L);
+            if      (dis==0){ vecXW_buf[h] = advanceX(invW(vecXW[h]), L);
+            }else if(dis==1){ vecXW_buf[h] =          invW(vecXW[h]);
+            }else           { vecXW_buf[h] = advanceX(     vecXW[h],  L);
             }
         }
     }
-    return vecXW_ret;
+//    return vecXW_buf;
+    swap(vecXW, vecXW_buf);
 }
 
 void print_place(const vector<struct XW>& vecXW){
@@ -76,6 +78,7 @@ int main(){
     cin >> N >> L >> T;
     
     vector<struct XW> vecXW(N);
+    vector<struct XW> vecXW_buf(N);
     
     for(int i=0; i<vecXW.size(); ++i){
         int X, W; cin >> X >> W;
@@ -84,7 +87,8 @@ int main(){
     }
     
     for(int64_t t=0; t<T; ++t){
-        vecXW = advanceXW(vecXW, L);
+//        vecXW = advanceXW(vecXW, L);
+        advanceXW(vecXW, vecXW_buf, L);
     }
     
     print_place(vecXW);
