@@ -25,7 +25,6 @@ int main(){
     
     int ans=0;
     for(int i=0; i<numEq; ++i){
-//        stirng tmp((char)str[0]);
         string tmp;
         tmp += str[0];
         
@@ -39,15 +38,15 @@ int main(){
         }
         
         if(sum==7){
-            break;
             ans = i;
+            break;
         }
     }
     
     for(int i=0; i<str.size()-1; ++i){
         printf("%c", str[i]);
         if(ans&1){ printf("+");
-        }else    { printf("+");
+        }else    { printf("-");
         }
         ans = ans >> 1;
     }
