@@ -25,17 +25,26 @@ bool search(vector<string>& mat, int r_begin, int c_begin){
     return false;
 }
 
+pair<int,int> secrch_x(const vector<string>& mat, char x){
+    for(int r=0; r<mat.size(); ++r){
+        for(int c=0; c<mat[r].size(); ++c){
+            if(mat[r][c]==x){
+                return pair<int,int>(r, c);
+            }
+        }
+    }
+    return pair<int,int>(0, 0);
+}
+
 int main(){
     int H, W; cin >> H >> W;
 	vector<string> mat(H);
-	
-    int r_begin, c_begin;
     for(int r=0; r<mat.size(); ++r){
         cin >> mat[r];
-        for(int c=0; c<mat[r].size(); ++c){
-            if(mat[r][c]=='s'){ r_begin=r; c_begin=c; }
-        }
     }
+    
+    int r_begin, c_begin;
+    tie<int,int>(r_begin, c_begin) = secrch_x(mat, 's');
     
     bool ret = search(mat, r_begin, c_begin);
     
@@ -43,4 +52,3 @@ int main(){
     
     return 0;
 }
-
