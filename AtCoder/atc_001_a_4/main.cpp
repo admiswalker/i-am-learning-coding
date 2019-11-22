@@ -3,10 +3,12 @@
 
 #include <bits/stdc++.h>
 using namespace std;
-#define rep(i,a,n) for(int i=(a), i##_len=(n); i<i##_len; ++i)
 
-int dx[] = {1, 0, -1,  0};
-int dy[] = {0, 1,  0, -1};
+struct cww{cww(){ios::sync_with_stdio(false);cin.tie(0);}}star;
+#define rep(i,a,n) for(int i=(a), i##_len=(n); i<i##_len; ++i)
+#define rrep(i,a,n) for(int i=(a), i##_len=(n); i>i##_len; --i)
+constexpr int dx[] = {1, 0, -1,  0};
+constexpr int dy[] = {0, 1,  0, -1};
 
 pair<int,int> secrch_x(const vector<string>& mat, char x){
     for(int r=0; r<mat.size(); ++r){
