@@ -9,6 +9,13 @@
   ```
   using namespace std;
   ```
+- For performance.
+  ```
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
+  ```
+  - ref: [C++の標準入出力についてのメモ](https://hhelibex.hatenablog.jp/entry/2017/10/23/165711)
+
 - Making file.
   ```
   $ echo -e '#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    \n    \n    \n    return 0;\n}' > main.cpp
@@ -18,7 +25,6 @@
   ```
   g++ main.cpp -std=c++14
   ```
-
 
 ### [AtCoder に登録したら次にやること ～ これだけ解けば十分闘える！過去問精選 10 問 ～](https://qiita.com/drken/items/fd4e5e3630d0f5859067)
 
