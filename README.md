@@ -85,5 +85,6 @@
 #### 例題 2-1-4　特殊な状態の列挙
 | title                                          | date             | note      |
 | ---------------------------------------------- | ---------------- | --------- |
-| ABC 054 C One-stroke Path                      |                  |           |
+| ABC 054 C One-stroke Path                      | 2019.11.24 (写経) | recursive |
+| ABC 054 C One-stroke Path                      |                  | stuck     |
 
