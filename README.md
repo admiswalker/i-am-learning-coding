@@ -86,5 +86,5 @@
 | title                                          | date             | note      |
 | ---------------------------------------------- | ---------------- | --------- |
 | ABC 054 C One-stroke Path                      | 2019.11.24 (写経) | recursive |
-| ABC 054 C One-stroke Path                      | pass (単に stuck に積むには，手間が掛かり過ぎる or メモリコピーが多くなる．) | stuck     |
+| ABC 054 C One-stroke Path                      | pass             | stuck (単に stuck に積むには，手間が掛かり過ぎる or メモリコピーが多くなるので，pass)． |
 
