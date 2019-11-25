@@ -15,7 +15,9 @@ int search(const string& target, const vector<string>& vecWord){
     
     for(int i=0; i<target.size(); ++i){
         for(int n=0; n<vecWord.size(); ++n){
-            if(isEqual(&target[i], target.size()-i+1, vecWord[n])){ ++num; i+=vecWord[n].size()-1; break; }
+            if(isEqual(&target[i], target.size()-i+1, vecWord[n])){ ++num; i+=vecWord[n].size()-1; break; } // 1ms
+//            if(target.compare(i, vecWord[n].size(), vecWord[n])==0){ ++num; i+=vecWord[n].size()-1; break; } // 1~ 2ms
+//            if(target.substr(i,vecWord[n].size())==vecWord[n]){ ++num; i+=vecWord[n].size()-1; break; } // 2ms
         }
     }
     
