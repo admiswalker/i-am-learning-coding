@@ -1,3 +1,56 @@
+// ref: https://atcoder.jp/contests/abc076/submissions/1717950
+#include <bits/stdc++.h>
+using namespace std;
+
+//  true: 0以外
+// false: 0
+
+int main(){
+    iobase::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    string Sd; cin >> Sd;
+    string T;  cin >> T;
+    
+    for(int i=Sd.size()-T.size(); ~i; --i){ // i!=i_max に同じ?
+        int t;
+        for(t=0; t<T.size(); ++t){
+            if(Sd[i + t] != T[t] && Sd[i + t] != '?'){ break; }
+        }
+        if(t < T.size()){ continue; }
+        for(int t=0; t<i; ++t){ cout << ((Sd[t]=='?') ? 'a':Sd[t]); }
+    }
+    cout << "UNRESTORABLE" << endl;
+    
+    return 0;
+}
+
+
+/*
+#include <cstdio>
+#include <cstring>
+
+char s[100], t[100];
+int main(){
+    scanf("%s%s", s, t);
+    int n = strlen(s), m = strlen(t);
+    for(int i = n - m; ~i; --i){
+        int j;
+        for(j = 0; j < m; ++j){
+            if (s[i + j] != t[j] && s[i + j] != '?'){ break; }
+        }
+        if(j >= m){
+            for(int j = 0; j < i; ++j){ putchar((s[j] == '?') ? 'a' : s[j]); }
+            for(int j = 0; j < m; ++j){ putchar(t[j]); }
+            for(int j = i + m; j < n; ++j){ putchar((s[j] == '?') ? 'a' : s[j]); }
+            return 0;
+        }
+    }
+    puts("UNRESTORABLE");
+    return 0;
+}
+//*/
+/*
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -73,3 +126,4 @@ int main(){
     
     return 0;
 }
+//*/
