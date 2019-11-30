@@ -1,4 +1,4 @@
-// ref: https://atcoder.jp/contests/abc076/submissions/1717950
+//*
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -6,25 +6,48 @@ using namespace std;
 // false: 0
 
 int main(){
-    iobase::sync_with_stdio(false);
+    ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
     string Sd; cin >> Sd;
     string T;  cin >> T;
     
-    for(int i=Sd.size()-T.size(); ~i; --i){ // i!=i_max に同じ?
+    for(int i=0; i<Sd.size()-T.size()+1; ++i){
         int t;
         for(t=0; t<T.size(); ++t){
             if(Sd[i + t] != T[t] && Sd[i + t] != '?'){ break; }
         }
         if(t < T.size()){ continue; }
-        for(int t=0; t<i; ++t){ cout << ((Sd[t]=='?') ? 'a':Sd[t]); }
+        for(int k=0;   k<i;        ++k){ cout << ((Sd[k]=='?') ? 'a':Sd[k]); }
+        for(int k=0;   k<T.size(); ++k){ cout << T[k]; }
+        for(int k=i+t; k<T.size(); ++k){ cout << ((Sd[k]=='?') ? 'a':Sd[k]); }
+        return 0;
     }
     cout << "UNRESTORABLE" << endl;
     
     return 0;
 }
 
+// ref: https://atcoder.jp/contests/abc076/submissions/1717950
+//*/
+
+// Additional TEST case 1
+/*
+ab???ba
+abcba
+
+candidate1: abcbaba
+candidate1: ababcba <--
+ */
+
+// Additional TEST case 2
+/*
+cb???bc
+cbabc
+
+candidate1: cbabcbc <--
+candidate1: cbcbabc
+ */
 
 /*
 #include <cstdio>
@@ -50,6 +73,9 @@ int main(){
     return 0;
 }
 //*/
+
+
+
 /*
 #include <bits/stdc++.h>
 using namespace std;
