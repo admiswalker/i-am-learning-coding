@@ -33,15 +33,11 @@ const int BITS_COUNT_TABLE[256] = {
     3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7,
     4, 5, 5, 6, 5, 6, 6, 7, 5, 6, 6, 7, 6, 7, 7, 8,
 };
-
-int numofbits2(uint64_t bits)
-{
-    int num  = 0;
-
+int numofbits2(uint64_t bits){
+    int num = 0;
     for (int i=0 ; i<sizeof(bits) ; i++ ) {
         num += BITS_COUNT_TABLE[((unsigned char*)&bits)[i]];
     }
-
     return num;
     // ref: http://www.nminoru.jp/~nminoru/programming/bitcount.html
 }
