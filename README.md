@@ -121,3 +121,4 @@ AtCoder 上で類題がないため pass.
 | [ABC 015 D 高橋くんの苦悩](https://atcoder.jp/contests/abc015/tasks/abc015_4) | 2019.12.01      | bit 全探索 TLE |
 |                                                                             | 2019.12.04      | 再帰 TLE (bit 全探索 よりは速い) |
 |                                                                             | 2019.12.04      | memo (118 ms) |
+|                                                                             | 2019.12.07      | memo (57 ms) |
