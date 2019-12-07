@@ -126,4 +126,4 @@ AtCoder 上で類題がないため pass.
 #### 例題 2-3-2 最長共通部分列問題
 | title                                                                      | date             | note          |
 | -------------------------------------------------------------------------- | ---------------- | ------------- |
-| [ndeedなう C Optimal Recommendations](https://atcoder.jp/contests/indeednow-finala-open/tasks/indeednow_2015_finala_c) |                  |               |
+| [indeedなう C Optimal Recommendations](https://atcoder.jp/contests/indeednow-finala-open/tasks/indeednow_2015_finala_c) |                  |               |
