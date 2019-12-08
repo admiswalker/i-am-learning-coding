@@ -111,7 +111,7 @@
 | ABC 083 C Multiple Gift                        | 2019.11.30       |           |
 
 #### 例題 2-2-5
-AtCoder 上で類題がないため pass.
+AtCoder 上の類題が提示されていないため pass.
 
 ### 2-3 値を覚えて再利用 "動的計画法"
 
@@ -127,3 +127,11 @@ AtCoder 上で類題がないため pass.
 | title                                                                      | date             | note          |
 | -------------------------------------------------------------------------- | ---------------- | ------------- |
 | [indeedなう C Optimal Recommendations](https://atcoder.jp/contests/indeednow-finala-open/tasks/indeednow_2015_finala_c) | 2019.12.08 (写経) |               |
+
+#### 例題 2-3-3 個数制限なしナップサック問題
+AtCoder 上の類題が提示されていないため pass.
+
+#### 例題 2-3-4 01ナップサック問題その２
+| title                                                                      | date             | note          |
+| -------------------------------------------------------------------------- | ---------------- | ------------- |
+| [ABC 032 D ナップサック問題](https://atcoder.jp/contests/abc032/tasks/abc032_d) |                |               |
