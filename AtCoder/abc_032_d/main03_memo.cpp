@@ -7,20 +7,20 @@ struct VW{
 };
 
 #define dp_m(i, j)                              \
-    dp[(W+1)*(i) + (j)]
-int64_t dps(const vector<struct VW>& vecVW, const int64_t N, const int64_t W){
+    dp[(W+1ull)*(i) + (j)]
+int64_t dps(const vector<struct VW>& vecVW, const uint64_t N, const int64_t W){
     vector<int64_t> dp((2)*(W+1), 0);
     
-    for(int64_t i=0; i<N; ++i){
+    for(uint64_t i=0; i<N; ++i){
         for(int64_t w=0; w<=W; ++w){
             int64_t w_minusW = w - vecVW[i].w;
-            if(w_minusW<0){ dp_m((i+1)&1, w) = dp_m(i&1, w);
-            }    else     { dp_m((i+1)&1, w) = max(dp_m(i&1, w), dp_m(i&1, w_minusW)+vecVW[i].v);
+            if(w_minusW<0){ dp_m((i+1ull)&1, w) = dp_m(i&1ull, w);
+            }    else     { dp_m((i+1ull)&1, w) = max(dp_m(i&1ull, w), dp_m(i&1ull, w_minusW)+vecVW[i].v);
             }
         }
     }
     
-    return dp_m(N, W);
+    return dp_m(N&1ull, W);
 }
 #undef dp_m
 
