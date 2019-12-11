@@ -13,13 +13,11 @@ int64_t sum(const vector<int>& vecRhs){
     dp[(sumV+1)*(i) + (j)]
 int64_t dps(const vector<int>& vecV, const vector<int>& vecW, const uint64_t N, const int64_t W){
     int64_t sumV = sum(vecV);
-    printf("sumV: %ld\n", sumV);
     
     vector<int64_t> dp((N+1)*(sumV+1), 0);
-    for(int i=0; i<=sumV; ++i){ dp_m(0, i)=LLONG_MAX/2; }
-    
     dp_m(0, 0) = 0ll;
-    //*
+    for(int i=1; i<=sumV; ++i){ dp_m(0, i)=LLONG_MAX/2; }
+    
     for(uint64_t i=0; i<N; ++i){
         for(int64_t v=0; v<=sumV; ++v){
             int64_t cal = v - vecV[i];
@@ -28,10 +26,9 @@ int64_t dps(const vector<int>& vecV, const vector<int>& vecW, const uint64_t N, 
             }
         }
     }
-    //*/
+    
     int64_t ans=0ll;
     for(int64_t v=0; v<=sumV; ++v){
-        printf("dp_m: %ld\n", dp_m(N, v));
         if(dp_m(N, v)<=W){ ans = v; }
     }
     return ans;
