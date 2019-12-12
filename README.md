@@ -135,3 +135,5 @@ AtCoder 上の類題が提示されていないため pass.
 | title                                                                      | date             | note          |
 | -------------------------------------------------------------------------- | ---------------- | ------------- |
 | [ABC 032 D ナップサック問題](https://atcoder.jp/contests/abc032/tasks/abc032_d) |                |               |
+
+メモ：あとで，https://atcoder.jp/contests/abc032/submissions/8123494 を読んでもう一度解く．
