@@ -134,6 +134,6 @@ AtCoder 上の類題が提示されていないため pass.
 #### 例題 2-3-4 01ナップサック問題その２
 | title                                                                      | date             | note          |
 | -------------------------------------------------------------------------- | ---------------- | ------------- |
-| [ABC 032 D ナップサック問題](https://atcoder.jp/contests/abc032/tasks/abc032_d) |                |               |
+| [ABC 032 D ナップサック問題](https://atcoder.jp/contests/abc032/tasks/abc032_d) | 2019.12.14 (写経) | 現状 3 パターンに場合分けしている |
 
 メモ：あとで，https://atcoder.jp/contests/abc032/submissions/8123494 を読んでもう一度解く．
