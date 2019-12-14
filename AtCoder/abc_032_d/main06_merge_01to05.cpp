@@ -91,12 +91,18 @@ int main(){
     int N, W; cin >> N >> W;
     vector<int> vecV(N), vecW(N);
     for(int i=0; i<N; ++i){ cin >> vecV[i] >> vecW[i]; }
+    int maxV = max(vecV);
     int maxW = max(vecW);
-    
+    /*
     int64_t ans=0;
     if      (   N<=30  ){ ans = dps_re   (vecV, vecW, 0, W);
     }else if(maxW<=1000){ ans = dps_memoW(vecV, vecW, N, W);
     }else               { ans = dps_memoV(vecV, vecW, N, W);
+    }//*/
+    int64_t ans=0;
+    if      (maxV<=1000){ ans = dps_memoV(vecV, vecW, N, W);
+    }else if(maxW<=1000){ ans = dps_memoW(vecV, vecW, N, W);
+    }else               { ans = dps_re   (vecV, vecW, 0, W);
     }
     cout << ans << endl;
     
