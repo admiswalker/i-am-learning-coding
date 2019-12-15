@@ -5,36 +5,40 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-using ll = long long;
-#define rep(i, n)   for(ll i=0, i##_length=(n); i< i##_length; ++i)
+typedef int64_t int64;
+
+//#define rep(i, n) for(int64 i=0, i##_length=(n); i< i##_length; ++i)
+#define rep(i, n) for(int64 i=0; i<(int64)n; ++i)
 #define all(v) (v).begin(), (v).end()
 
 class Item{
+private:
 public:
-    ll value, weight, index;
-    Item() {}
-    Item(ll value, ll weight, ll index) : value(value), weight(weight), index(index) {}
+    Item(){}
+    Item(int64 value, int64 weight, int64 index) : value(value), weight(weight), index(index) {}
+    
+    int64 value, weight, index;
 };
 
 class KnapsackBB{
 public:
     vector<Item> items;
-    ll N;
-    ll W;
+    int64 N;
+    int64 W;
     //現在探索している商品の選び方　used_items[i]=true -> i番目の商品を選択
     vector<bool> used_items;
     //現時点で最適な商品の選び方　opt_items[i]=true -> i番目の商品を選択
     vector<bool> opt_items;
     //現時点で最適な商品の選び方をしたときの価値合計
-    ll opt_value=0;
-
-    KnapsackBB(vector<Item> &items, ll W) : items(items), N(items.size()), W(W) {}
-
+    int64 opt_value=0;
+    
+    KnapsackBB(vector<Item> &items, int64 W) : items(items), N(items.size()), W(W) {}
+    
     //分枝限定法で探索
     //index=index-1番目の商品までは選択が終わった、index番目からの商品はまだ調べてない
     //value=今のところの価値合計
     //weight=今のところの重さ合計
-    void searchbb(int index,ll value,ll weight){
+    void searchbb(int index,int64 value,int64 weight){
         //全部調べ終わった
         if(index==N){
             if(opt_value < value){
@@ -43,9 +47,9 @@ public:
             }
             return;
         }
-
+        
         //緩和問題を解く
-        ll tmp_weight=weight;
+        int64 tmp_weight=weight;
         double tmp_value=value;
         for(int i=index;i<N;i++){
             if(tmp_weight+items[i].weight == W){
@@ -85,14 +89,14 @@ public:
         searchbb(index+1, value, weight);
     }
 
-    ll search(){
+    int64 search(){
         //商品をコスパのよい順に並び替え
         sort(all(items), [](const Item &x, const Item &y) {
                 return ((double)x.value/x.weight) > ((double)y.value/y.weight);
             });
 
         //暫定解として貪欲に選んでみる
-        ll tmp_weight=0,tmp_value=0;
+        int64 tmp_weight=0,tmp_value=0;
         vector<bool> tmp_items(N,false);
         rep(i,N){
             if(tmp_weight+items[i].weight <= W){
@@ -111,8 +115,8 @@ public:
     }
 };
 
-signed main(){
-    ll N,W;
+int main(){
+    int64 N,W;
     cin >> N >> W;
     vector<Item> items(N);
     rep(i,N){
@@ -120,12 +124,12 @@ signed main(){
         cin >> items[i].weight;
         items[i].index = i;
     }
-
+    
     //分枝限定法で探索
     KnapsackBB knapsack(items, W);
-    ll opt_value = knapsack.search();
+    int64 opt_value = knapsack.search();
     cout << opt_value << endl;
-
+    
     return 0;
 }
 
