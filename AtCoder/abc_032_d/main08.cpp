@@ -40,9 +40,6 @@ struct VW{
     ~VW(){}
     int v;
     int w;
-//    struct VW& operator=(const struct VW& rhs){
-//        return *this;
-//    }
     bool operator<(const struct VW& rhs) const {
         return (double)(*this).v/(double)(*this).w < (double)rhs.v/(double)rhs.w;
     };
@@ -50,19 +47,41 @@ struct VW{
         return (double)(*this).v/(double)(*this).w > (double)rhs.v/(double)rhs.w;
     };
 };
-/*
+
+double estimate(const vector<struct VW>& vecVW, int64_t i, int N, int64_t w_minusW){
+    double estV=0.0;
+    int64_t w=0;
+    
+    for(; i<N && w<=w_minusW; ++i){
+        estV += (double)vecVW[i].v;
+        w    += vecVW[i].w;
+    }
+    estV += (w_minusW-w)*vecVW[vecVW.size()-1].v;
+    return estV;
+}
+
 // branchAndBound
-int64_t bab(const vector<int>& vecVW, unsigned int i, int64_t w){
-    if(i==vecV.size()){ return 0; }
+int64_t bab(const vector<struct VW>& vecVW, unsigned int i, int64_t w){
+    if(i==vecVW.size()){ return 0; }
     
     int64_t val=0;
-    int64_t w_minusW = w - vecW[i];
-    if(w_minusW<0){ val =     bab(vecV, vecW, i+1, w);
-    }     else    { val = max(bab(vecV, vecW, i+1, w_minusW)+vecV[i], bab(vecV, vecW, i+1, w)); }
+    int64_t w_minusW = w - vecVW[i].w;
+    if(w_minusW<0){
+        val = bab(vecVW, i+1, w);
+    }else{
+        int64_t calc_i = bab(vecVW, i+1, w_minusW)+vecVW[i].v;
+        int64_t pass_i = 0;
+        
+        double est = estimate(vecVW, i+1, vecVW.size(), w_minusW);
+        if(est>calc_i){
+            pass_i = bab(vecVW, i+1, w);
+        }
+        val = max(calc_i, pass_i);
+    }
     
     return val;
 }
-//*/
+
 //---
 
 int main(){
@@ -74,12 +93,9 @@ int main(){
     for(unsigned int i=0; i<vecVW.size(); ++i){ cin >> vecVW[i].v >> vecVW[i].w; }
     
     sort_gr(vecVW);
-    for(unsigned int i=0; i<vecVW.size(); ++i){
-        printf("%d: %lf\n", i, (double)vecVW[i].v/(double)vecVW[i].w);
-    }
     
-//    int64_t ans = bab(vecV, vecW, 0, W);
-//    cout << ans << endl;
+    int64_t ans = bab(vecVW, 0, W);
+    cout << ans << endl;
     
     return 0;
 }
