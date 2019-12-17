@@ -73,7 +73,7 @@ int64_t bab(const vector<struct VW>& vecVW, unsigned int i, int64_t w){
         int64_t pass_i = 0;
         
         double est = estimate(vecVW, i+1, vecVW.size(), w_minusW);
-        if(est>calc_i){
+        if(est<calc_i){
             pass_i = bab(vecVW, i+1, w);
         }
         val = max(calc_i, pass_i);
