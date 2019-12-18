@@ -1,5 +1,10 @@
 // 岩波講座 ソフトウェア科学 ３ アルゴリズムとデータ構造 石畑 清
 // page.396 - 399 (C) ナップザック問題の分枝限定法による解法
+// 
+// と
+// 
+// 速いコードhttps://atcoder.jp/contests/abc032/submissions/8123494
+// 
 // を参考に実装する．
 
 #include <bits/stdc++.h>
@@ -51,49 +56,27 @@ struct VW{
 double estimate(const vector<struct VW>& vecVW, int64_t i, int N, int64_t w_minusW){
     double estV=0.0;
     int64_t w=0;
-    /*
+    
     for(; i<N && w<=w_minusW; ++i){
         estV += (double)vecVW[i].v;
         w    += vecVW[i].w;
     }
     estV += (w_minusW-w)*vecVW[vecVW.size()-1].v;
-    //*/
-    //*
-    for(; i<N; ++i){
-        if(w<=w_minusW){
-            estV += (double)vecVW[i].v;
-            w    += vecVW[i].w;
-        }else{
-            estV += (w_minusW-w)*vecVW[i].v;
-            break;
-        }
-    }*/
-    /*
-    for(; i<N; ++i){
-        if(w+vecVW[i].w<=w_minusW){
-            estV += (double)vecVW[i].v;
-            w    += vecVW[i].w;
-        }else{
-            estV += (double)(w_minusW-w)*((double)vecVW[i].v/(double)vecVW[i].w);
-            printf("%ld\n", w_minusW-w);
-            break;
-        }
-    }//*/
-    /*
-    for(; i<N; ++i){
-        if(w+vecVW[i].w <= w_minusW){
-            estV += (double)vecVW[i].v;
-            w    += vecVW[i].w;
-        }else{
-            estV += (double)(w_minusW-w)*(double)vecVW[i].v;
-            break;
-        }
-    }//*/
+    return estV;
+}
+double estimate_ProvisionalSolution(const vector<struct VW>& vecVW, int W){
+    double estV=0.0;
+    int64_t w_sum=0;
+    
+    for(int i=0; i<vecVW.size() && (w_sum+vecVW[i].w)<=W; ++i){
+        estV  += (double)vecVW[i].v;
+        w_sum += vecVW[i].w;
+    }
     return estV;
 }
 
 // branchAndBound
-int64_t bab(const vector<struct VW>& vecVW, unsigned int i, int64_t w){
+int64_t bab(const vector<struct VW>& vecVW, double est, unsigned int i, int64_t w){
     if(i==vecVW.size()){ return 0; }
     
     int64_t val=0;
@@ -103,11 +86,10 @@ int64_t bab(const vector<struct VW>& vecVW, unsigned int i, int64_t w){
     }else{
         int64_t calc_i = bab(vecVW, i+1, w_minusW)+vecVW[i].v;
         int64_t pass_i = 0;
+        if(calc_i<est){ return calc_i; }
         
-        double est = estimate(vecVW, i+1, vecVW.size(), w_minusW);
-        if(est<(double)calc_i){
-            pass_i = bab(vecVW, i+1, w);
-        }
+        est = estimate(vecVW, i+1, vecVW.size(), w_minusW);
+        pass_i = bab(vecVW, i+1, w);
         val = max(calc_i, pass_i);
     }
     
@@ -126,6 +108,7 @@ int main(){
     
     sort_gr(vecVW);
     
+    int64_t ans_prov = estimate_provisional_val();
     int64_t ans = bab(vecVW, 0, W);
     cout << ans << endl;
     
