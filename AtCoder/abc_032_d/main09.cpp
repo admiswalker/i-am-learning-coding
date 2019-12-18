@@ -76,8 +76,11 @@ double estimate_ProvisionalSolution(const vector<struct VW>& vecVW, int W){
 }
 
 // branchAndBound
-int64_t bab(const vector<struct VW>& vecVW, double est, unsigned int i, int64_t w){
-    if(i==vecVW.size()){ return 0; }
+int64_t bab(const vector<struct VW>& vecVW, double est_max, double est_cur, unsigned int i, int64_t w){
+    if(i==vecVW.size()){
+        if(est_cur>est_max){ est_cur=est_max; } // 最後まで計算した値を代入して，しきい値となる est を更新する．
+        return 0;
+    }
     
     int64_t val=0;
     int64_t w_minusW = w - vecVW[i].w;
@@ -88,7 +91,7 @@ int64_t bab(const vector<struct VW>& vecVW, double est, unsigned int i, int64_t 
         int64_t pass_i = 0;
         if(calc_i<est){ return calc_i; }
         
-        est = estimate(vecVW, i+1, vecVW.size(), w_minusW);
+        est_cur = estimate(vecVW, i+1, vecVW.size(), w_minusW);
         pass_i = bab(vecVW, i+1, w);
         val = max(calc_i, pass_i);
     }
@@ -108,8 +111,8 @@ int main(){
     
     sort_gr(vecVW);
     
-    int64_t ans_prov = estimate_provisional_val();
-    int64_t ans = bab(vecVW, 0, W);
+    double est_max = estimate_ProvisionalSolution(vecVW, W);
+    int64_t ans = bab(vecVW, est_max, 0, 0, W);
     cout << ans << endl;
     
     return 0;

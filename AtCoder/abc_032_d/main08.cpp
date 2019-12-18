@@ -67,7 +67,7 @@ double estimate(const vector<struct VW>& vecVW, int64_t i, int N, int64_t w_minu
             estV += (w_minusW-w)*vecVW[i].v;
             break;
         }
-    }*/
+    }//*/
     /*
     for(; i<N; ++i){
         if(w+vecVW[i].w<=w_minusW){
