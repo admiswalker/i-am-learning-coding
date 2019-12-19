@@ -44,19 +44,19 @@ double estimate(const vector<struct VW>& vecVW, int64_t i, int64_t v_cur, int64_
 }
 
 // branchAndBound
-void bab(const vector<struct VW>& vecVW, unsigned int i, int64_t& v_max, int64_t v_cur, int64_t w_cur){
+void bab(const vector<struct VW>& vecVW, int64_t& v_max, unsigned int i, int64_t v_cur, int64_t w_cur){
     if(i==vecVW.size()){
-        if(v_cur > v_max){ v_cur = v_max; } // 最後まで計算した値を代入して，しきい値となる est を更新する．
+        if(v_cur > v_max){ v_max = v_cur; }
         return;
     }
     
     if(w_cur >= vecVW[i].w){
-        bab(vecVW, i+1, v_max, v_cur + vecVW[i].v, w_cur - vecVW[i].w);
+        bab(vecVW, v_max, i+1, v_cur + vecVW[i].v, w_cur - vecVW[i].w);
     }
     
     double est = estimate(vecVW, i+1, v_cur, w_cur);
     if(est > v_max){
-        bab(vecVW, i+1, v_max, v_cur, w_cur);
+        bab(vecVW, v_max, i+1, v_cur, w_cur);
     }
     
     return;
@@ -75,7 +75,7 @@ int main(){
     sort_gr(vecVW);
     
     int64_t v_max = 0;
-    bab(vecVW, 0, v_max, 0, W);
+    bab(vecVW, v_max, 0, 0, W);
     cout << v_max << endl;
     
     return 0;
