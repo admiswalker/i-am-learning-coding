@@ -144,4 +144,6 @@ AtCoder 上の類題が提示されていないため pass.
 | -------------------------------------------------------------------------- | ---------------- | ------------- |
 | [Maximum-Cup 2018 D Many Go Round](https://atcoder.jp/contests/maximum-cup-2018/tasks/maximum_cup_2018_d) |   |  |
 
-
+わからないので，
+https://atcoder.jp/contests/maximum-cup-2018/submissions/4834449
+を参考にしてみる (予定)．
