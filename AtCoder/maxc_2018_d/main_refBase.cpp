@@ -22,7 +22,6 @@ int main(){
     cin >> N >> M >> L >> X;
     
     vector<vector<int>> place2laps(M);
-    
     for(int i=0; i<N; ++i){
         int a; cin >> a;
         int div = a / M;
@@ -31,12 +30,8 @@ int main(){
     }
     
     vector<vector<int>> D(2);
-    for(unsigned int p=0; p<D.size(); ++p){
-        D[p].resize(1000);
-        
-        D[p][0] = 1;
-        for(unsigned int q=1; q<D[p].size(); ++q){ D[p][q] = 1e9; }
-    }
+    D[0].resize(M); D[0][0]=1; for(unsigned int q=1; q<D[0].size(); ++q){ D[0][q]=1e9; }
+    D[1].resize(M); D[1][0]=1; for(unsigned int q=1; q<D[1].size(); ++q){ D[1][q]=1e9; }
     
     for(int i=1; i<M; ++i){
         if( !place2laps[i].size() ){ continue; }
@@ -44,27 +39,24 @@ int main(){
         sort(place2laps[i]);
         
         vector<pair<int, int>> vecPL;
-        int place = 0; // place
-        int laps  = 0; // numOfLaps
+        int place=0, laps=0;
         for(auto laps_cur: place2laps[i]){
             place += i;
             laps  += laps_cur;
             if(place >= M){ place-=M; ++laps; }
             
-//            if(place == 0){ continue; }
             vecPL.push_back( make_pair(place, laps) );
         }
         
-        vector<pair<int, int>> V3;
         for(int p=0; p<M; ++p){
             if( D[0][p] >= 5e8){ continue; }
             
             for(auto pl: vecPL){
-                int place = pl.first;
-                int laps  = pl.second;
-                if(p + place >= M){ place-=M; ++laps; }
+                int place, laps;
+                tie(place, laps) = pl;
+                if(p+place >= M){ place-=M; ++laps; }
                 
-                D[1][p+place] = min(D[1][p+place], D[0][p+laps]);
+                D[1][p+place] = min(D[1][p+place], D[0][p]+laps);
             }
         }
         
@@ -72,7 +64,7 @@ int main(){
             printf("Yes\n");
             return 0;
         }
-        memcpy(&D[0][0], &D[1][0], 4 * M);
+        D[0] = D[1];
     }
     printf("No\n");
     
