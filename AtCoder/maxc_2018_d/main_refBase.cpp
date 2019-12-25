@@ -25,19 +25,17 @@ int main(){
     int N, M, L, X;
     cin >> N >> M >> L >> X;
     
-//    vector<int> V[1000];
     vector<vector<int>> place2laps(M);
     
     for(int i=0; i<N; ++i){
         int a; cin >> a;
         int div = a / M;
         int mod = a - M*div; // same as a "a % M"
-//        V[mod].push_back(div);
         place2laps[mod].push_back(div);
     }
     
     int D[2][1000];
-    rep(i, 2000) *(D[0] + i) = 1e9;
+    for(int i=0; i<2000; ++i){ *(D[0] + i) = 1e9; }
     D[0][0] = 1;
     D[1][0] = 1;
     for(int i=1; i<M; ++i){
@@ -48,9 +46,7 @@ int main(){
         vector<pair<int, int>> V2;
         int k1 = 0; // place
         int k2 = 0; // numOfLaps
-//        for(int j=0; j<V[i].size(); ++j){
         for(unsigned int j=0; j<place2laps[i].size(); ++j){
-//            int buf =V [i][j];
             int laps = place2laps[i][j];
             k1 += i;
             k2 += laps;
