@@ -30,7 +30,6 @@ int main(){
         place2laps[mod].push_back( div );
     }
     
-//    int D[2][1000];
     vector<vector<int>> D(2);
     for(unsigned int p=0; p<D.size(); ++p){
         D[p].resize(1000);
@@ -39,9 +38,6 @@ int main(){
         for(unsigned int q=1; q<D[p].size(); ++q){ D[p][q] = 1e9; }
     }
     
-//    for(int i=0; i<2000; ++i){ *(D[0] + i) = 1e9; }
-//    D[0][0] = 1;
-//    D[1][0] = 1;
     for(int i=1; i<M; ++i){
         if( !place2laps[i].size() ){ continue; }
         
@@ -61,7 +57,6 @@ int main(){
         
         vector<pair<int, int>> V3;
         for(int p=0; p<M; ++p){
-//            if(*(D[0] + p) >= 5e8){ continue; }
             if( D[0][p] >= 5e8){ continue; }
             
             for(auto pl: vecPL){
@@ -69,12 +64,10 @@ int main(){
                 int laps  = pl.second;
                 if(p + place >= M){ place-=M; ++laps; }
                 
-//                *(D[1] + p + place) = min(*(D[1] + p + place), *(D[0] + p) + laps);
                 D[1][p+place] = min(D[1][p+place], D[0][p+laps]);
             }
         }
         
-//        if(*(D[1] + L) < X){
         if(D[1][L] < X){
             printf("Yes\n");
             return 0;
