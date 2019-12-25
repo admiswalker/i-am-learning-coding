@@ -1,4 +1,4 @@
-// ref: https://atcoder.jp/contests/maximum-cup-2018/submissions/4834449
+// ref of base: https://atcoder.jp/contests/maximum-cup-2018/submissions/4834449
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -29,9 +29,10 @@ int main(){
         place2laps[mod].push_back( div );
     }
     
-    vector<vector<int>> D(2);
-    D[0].resize(M); D[0][0]=1; for(unsigned int q=1; q<D[0].size(); ++q){ D[0][q]=1e9; }
-    D[1].resize(M); D[1][0]=1; for(unsigned int q=1; q<D[1].size(); ++q){ D[1][q]=1e9; }
+    vector<int> dp_min(M);
+    vector<int> dp_tmp(M);
+    dp_min[0]=0; for(unsigned int i=1; i<dp_min.size(); ++i){ dp_min[i]=INT_MAX; }
+    dp_tmp[0]=0; for(unsigned int i=1; i<dp_tmp.size(); ++i){ dp_tmp[i]=INT_MAX; }
     
     for(int i=1; i<M; ++i){
         if( !place2laps[i].size() ){ continue; }
@@ -49,22 +50,22 @@ int main(){
         }
         
         for(int p=0; p<M; ++p){
-            if( D[0][p] >= 5e8){ continue; }
+            if( dp_tmp[p] == INT_MAX){ continue; }
             
             for(auto pl: vecPL){
                 int place, laps;
                 tie(place, laps) = pl;
                 if(p+place >= M){ place-=M; ++laps; }
                 
-                D[1][p+place] = min(D[1][p+place], D[0][p]+laps);
+                dp_min[p+place] = min(dp_min[p+place], dp_tmp[p]+laps);
             }
         }
         
-        if(D[1][L] < X){
+        if(dp_min[L] < X){
             printf("Yes\n");
             return 0;
         }
-        D[0] = D[1];
+        swap(dp_min, dp_tmp);
     }
     printf("No\n");
     
