@@ -27,7 +27,7 @@ int main(){
         int a; cin >> a;
         int div = a / M;
         int mod = a - M*div; // same as a "a % M"
-        place2laps[mod].push_back(div);
+        place2laps[mod].push_back( div );
     }
     
     int D[2][1000];
@@ -39,31 +39,31 @@ int main(){
         
         sort(place2laps[i]);
         
-        vector<pair<int, int>> V2;
+        vector<pair<int, int>> vecPL;
         int place = 0; // place
         int laps  = 0; // numOfLaps
-        for(unsigned int j=0; j<place2laps[i].size(); ++j){
+        for(auto laps_cur: place2laps[i]){
             place += i;
-            laps  += place2laps[i][j];
-            if(place >= M){ place -= M; laps++; }
+            laps  += laps_cur;
+            if(place >= M){ place-=M; ++laps; }
             
 //            if(place == 0){ continue; }
-            V2.push_back( make_pair(place, laps) );
+            vecPL.push_back( make_pair(place, laps) );
         }
+        
         vector<pair<int, int>> V3;
-        for(int j=0; j<M; ++j){
-            if(*(D[0] + j) < 5e8){
-                for(auto p : V2){
-                    int b = p.first;
-                    int c = p.second;
-                    if(j + b >= M){
-                        b -= M;
-                        c++;
-                    }
-                    *(D[1] + j + b) = min(*(D[1] + j + b), *(D[0] + j) + c);
-                }
+        for(int p=0; p<M; ++p){
+            if(*(D[0] + p) >= 5e8){ continue; }
+            
+            for(auto pl: vecPL){
+                int place = pl.first;
+                int laps  = pl.second;
+                if(p + place >= M){ place-=M; ++laps; }
+                
+                *(D[1] + p+ place) = min(*(D[1] + p + place), *(D[0] + p) + laps);
             }
         }
+        
         if(*(D[1] + L) < X){
             printf("Yes\n");
             return 0;
