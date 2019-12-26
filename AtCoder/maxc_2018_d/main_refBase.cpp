@@ -29,10 +29,8 @@ int main(){
         place2laps[mod].push_back( div );
     }
     
-    vector<int> dp_min(M);
-    vector<int> dp_tmp(M);
-    dp_min[0]=0; for(unsigned int i=1; i<dp_min.size(); ++i){ dp_min[i]=INT_MAX; }
-    dp_tmp[0]=0; for(unsigned int i=1; i<dp_tmp.size(); ++i){ dp_tmp[i]=INT_MAX; }
+    vector<int> dp_min (M, INT_MAX); dp_min [0]=0;
+    vector<int> dp_prev(M, INT_MAX); dp_prev[0]=0;
     
     for(int i=1; i<M; ++i){
         if( !place2laps[i].size() ){ continue; }
@@ -50,14 +48,14 @@ int main(){
         }
         
         for(int p=0; p<M; ++p){
-            if( dp_tmp[p] == INT_MAX){ continue; }
+            if( dp_prev[p] == INT_MAX){ continue; }
             
             for(auto pl: vecPL){
                 int place, laps;
                 tie(place, laps) = pl;
                 if(p+place >= M){ place-=M; ++laps; }
                 
-                dp_min[p+place] = min(dp_min[p+place], dp_tmp[p]+laps);
+                dp_min[p+place] = min(dp_min[p+place], dp_prev[p]+laps);
             }
         }
         
@@ -65,7 +63,7 @@ int main(){
             printf("Yes\n");
             return 0;
         }
-        swap(dp_min, dp_tmp);
+        dp_prev = dp_min;
     }
     printf("No\n");
     
