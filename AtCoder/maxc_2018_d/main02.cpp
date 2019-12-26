@@ -59,40 +59,51 @@ bool dps_internal(const vector<int>& place2laps, int N, int M, int L, int X){
 }//*/
 //---
 
-int standardization(int& place, int M){
-    if(place < M){ return 0; }
-    
-    int div = place / M;
-    int mod = place - M*div;
-    place = mod;
-    
-    return div;
-}
 bool dps(const vector<int>& vecA, int N, int M, int L, int X){
     
-    vector<int> dp_min(M, INT_MAX); dp_min[0] = 0;
-    vector<int> dp_tmp(M, INT_MAX); dp_tmp[0] = 0;
+    vector<vector<int>> place2laps(M);
+    for(int i=0; i<N; ++i){
+        int div = vecA[i] / M;
+        int mod = vecA[i] - M*div; // same as a "a % M"
+        place2laps[mod].push_back( div );
+    }
+    for(unsigned int i=0; i<place2laps.size(); ++i){
+        sort( place2laps[i] );
+    }
+    
+    vector<pair<int, int>> vecPL;
+    int place=0, laps=0;
+    for(int p=0; p<M; ++p){
+        if( place2laps[p].size()==0 ){ continue; }
+        
+        for(unsigned int i=0; i<place2laps[p].size(); ++i){
+            place += p;
+            laps  += place2laps[p][i] + (place/M);
+            place  = (place%M);
+//            if(place >= M){ place-=M; ++laps; }
+            
+            vecPL.push_back( make_pair(place, laps) );
+        }
+    }
+    
+    vector<int> dp_min (M, INT_MAX); dp_min [0] = 0;
+    vector<int> dp_prev(M, INT_MAX); dp_prev[0] = 0;
     
     for(int p=0; p<M; ++p){
-        if(dp_tmp[p] == INT_MAX){ continue; }
+        if(dp_prev[p] == INT_MAX){ continue; }
         
-        int place=0;
-        int laps =0;
-        for(unsigned int i=0; i<vecA.size(); ++i){
-//            place += p + vecA[i];
-//            laps  += standardization(place, M);
-            place += p + vecA[i];
-            laps  += place / M;
-            place  = place % M;
+        for(unsigned int i=0; i<vecPL.size(); ++i){
+            int place, laps;
+            tie(place, laps) = vecPL[i];
+            if(p+place >= M){ place-=M; ++laps; }
             
-            dp_min[place] = min(dp_min[place], dp_tmp[p]+laps);
+            dp_min[p+place] = min(dp_min[p+place], dp_prev[p]+laps);
         }
         
         if(dp_min[L] < X){ return true; }
-//        swap(dp_min, dp_tmp);
-        dp_tmp = dp_min;
+        dp_prev = dp_min;
+        break;
     }
-    
     return false;
 }
 
@@ -138,8 +149,8 @@ bool dps(const vector<int>& vecA, int N, int M, int L, int X){
 }
 //*/
 int main(){
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+//    ios_base::sync_with_stdio(false);
+//    cin.tie(NULL);
     
     int N, M, L, X;
     cin >> N >> M >> L >> X;
