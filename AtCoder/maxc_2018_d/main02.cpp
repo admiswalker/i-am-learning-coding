@@ -102,7 +102,6 @@ bool dps(const vector<int>& vecA, int N, int M, int L, int X){
         
         if(dp_min[L] < X){ return true; }
         dp_prev = dp_min;
-        break;
     }
     return false;
 }
