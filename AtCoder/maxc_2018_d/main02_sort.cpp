@@ -18,13 +18,15 @@ public:
     int div;
     int mod;
     divMod(){}
-//    divMod(const divMod& rhs){ div=rhs.div; mod=rhs.mod; }
-//    divMod(const int& div_in, const int& mod_in){ div=div_in; mod=mod_in; }
     ~divMod(){}
     
     bool operator<(const struct divMod& rhs){
-        if      ( (*this).div <  rhs.div ){ return true;
-        }else if( (*this).div == rhs.div ){ return (*this).mod < rhs.mod;
+//        if      ( (*this).div <  rhs.div ){ return true;
+//        }else if( (*this).div == rhs.div ){ return (*this).mod < rhs.mod;
+//        }else                             { return false;
+//        }
+        if      ( (*this).mod <  rhs.mod ){ return true;
+        }else if( (*this).mod == rhs.mod ){ return (*this).div < rhs.div;
         }else                             { return false;
         }
     }
@@ -40,10 +42,16 @@ bool dps(const vector<int>& vecA, int N, int M, int L, int X){
         vecPL[i].mod = mod;
     }
     sort( vecPL );
+//    for(unsigned int i=0; i<vecPL.size(); ++i){
+//        printf("%d: ", vecPL[i].div);
+//        printf("%d", vecPL[i].mod);
+//        printf("\n");
+//    }
     
     vector<int> dp_min (M, INT_MAX); dp_min [0] = 0;
     vector<int> dp_prev(M, INT_MAX); dp_prev[0] = 0;
     
+//    vector<int> vecNum(N); for(int i=0; i<vecNum.size(); ++i){ vecNum[i]=i; }
     for(unsigned int i=0; i<vecPL.size(); ++i){
         for(int p=0; p<M; ++p){
             if(dp_prev[p] == INT_MAX){ continue; }
@@ -53,6 +61,7 @@ bool dps(const vector<int>& vecA, int N, int M, int L, int X){
             if(place >= M){ place-=M; ++laps; }
             
             dp_min[place] = min(dp_min[place], dp_prev[p]+laps);
+            if(i<vecPL.size()-1 && vecPL[i].mod==vecPL[i+1].mod){ i++; p--; continue; } // same mod has no meaning in its order. so we can process it in same time.
         }
         if(dp_min[L] < X){ return true; }
         dp_prev = dp_min;
