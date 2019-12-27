@@ -32,13 +32,14 @@ bool dps(const vector<int>& vecA, int N, int M, int L, int X){
         for(int p=0; p<M; ++p){
             if(dp_prev[p] == INT_MAX){ continue; }
             
-            int place, laps;
-            tie(place, laps) = vecPL[i];
-            if(p+place >= M){ place-=M; ++laps; }
+            int place = p + vecPL[i].first;
+            int laps  =     vecPL[i].second;
+            if(place >= M){ place-=M; ++laps; }
             
-            dp_min[p+place] = min(dp_min[p+place], dp_prev[p]+laps);
+            dp_min[place] = min(dp_min[place], dp_prev[p]+laps);
+            if(dp_min[L] < X){ return true; }
         }
-        if(dp_min[L] < X){ return true; }
+//        if(dp_min[L] < X){ return true; }
         dp_prev = dp_min;
     }
     return false;
