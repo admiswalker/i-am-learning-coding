@@ -142,8 +142,11 @@ AtCoder 上の類題が提示されていないため pass.
 #### 例題 2-3-5 個数制限付き部分和問題
 | title                                                                      | date             | note          |
 | -------------------------------------------------------------------------- | ---------------- | ------------- |
-| [Maximum-Cup 2018 D Many Go Round](https://atcoder.jp/contests/maximum-cup-2018/tasks/maximum_cup_2018_d) |   |  |
+| [Maximum-Cup 2018 D Many Go Round](https://atcoder.jp/contests/maximum-cup-2018/tasks/maximum_cup_2018_d) | 2019.12.27 |  |
 
-わからないので，
-https://atcoder.jp/contests/maximum-cup-2018/submissions/4834449
-を参考にしてみる (予定)．
+#### 例題 2-3-6　最長増加部分列問題
+| title                                                                      | date             | note          |
+| -------------------------------------------------------------------------- | ---------------- | ------------- |
+| [ABC 006 D トランプ挿入ソート](https://atcoder.jp/contests/abc006/tasks/abc006_4) |   |  |
+
+
