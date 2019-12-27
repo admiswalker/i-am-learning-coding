@@ -5,17 +5,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-//---
-
-template <typename T> inline void           sort     (      std::vector<T>&  rhs   ){                            std::sort(rhs.begin(), rhs.end());             }                    // Ascending: 昇順: 0, 1, 2, ...
-template <typename T> inline std::vector<T> sorted   (const std::vector<T>&  rhs_in){ std::vector<T> rhs=rhs_in; std::sort(rhs.begin(), rhs.end()); return rhs; }                    // Ascending: 昇順: 0, 1, 2, ...
-template <typename T> inline std::vector<T> sorted   (      std::vector<T>&& rhs   ){                            std::sort(rhs.begin(), rhs.end()); return rhs; }                    // Ascending: 昇順: 0, 1, 2, ...
-template <typename T> inline void           sort_gr  (      std::vector<T>&  rhs   ){                            std::sort(rhs.begin(), rhs.end(), std::greater<T>());             } // Descending: 降順: 9, 8, 7, ...
-template <typename T> inline std::vector<T> sorted_gr(const std::vector<T>&  rhs_in){ std::vector<T> rhs=rhs_in; std::sort(rhs.begin(), rhs.end(), std::greater<T>()); return rhs; } // Descending: 降順: 9, 8, 7, ...
-template <typename T> inline std::vector<T> sorted_gr(      std::vector<T>&& rhs   ){                            std::sort(rhs.begin(), rhs.end(), std::greater<T>()); return rhs; } // Descending: 降順: 9, 8, 7, ...
-
-//---
-
 bool dps(const vector<int>& vecA, int N, int M, int L, int X){
     
     vector<pair<int, int>> vecPL(N);
@@ -37,9 +26,8 @@ bool dps(const vector<int>& vecA, int N, int M, int L, int X){
             if(place >= M){ place-=M; ++laps; }
             
             dp_min[place] = min(dp_min[place], dp_prev[p]+laps);
-            if(dp_min[L] < X){ return true; }
         }
-//        if(dp_min[L] < X){ return true; }
+        if(dp_min[L] < X){ return true; }
         dp_prev = dp_min;
     }
     return false;
