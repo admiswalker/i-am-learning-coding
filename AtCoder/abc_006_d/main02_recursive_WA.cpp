@@ -3,7 +3,7 @@ using namespace std;
 typedef unsigned int uint;
 
 int dps(const vector<int>& vecA, uint cur){
-    if(cur==vecA.size()){ return 1; }
+    if(cur==vecA.size()){ return 0; }
     
     uint i1=cur+1;
     bool TF1=false;
@@ -20,7 +20,7 @@ int dps(const vector<int>& vecA, uint cur){
     if(TF1==false && TF2==false){ return 0; }
     if(TF1==true  && TF2==false){ return 1; }
     
-    return max(dps(vecA, i1)+1, dps(vecA, i2));
+    return max(dps(vecA, i1)+1, dps(vecA, i2)+1);
 }
 
 int main(){
