@@ -17,8 +17,8 @@ int dps(const vector<int>& vecA, uint cur){
         if(vecA[cur]<vecA[i2]){ TF2=true; break; }
     }
     
-    if(TF1==false && TF2==false){ return 1; }
-    if(TF1==true  && TF2==false){ return 2; }
+    if(TF1==false && TF2==false){ return 0; }
+    if(TF1==true  && TF2==false){ return 1; }
     
     return max(dps(vecA, i1)+1, dps(vecA, i2));
 }
@@ -31,7 +31,7 @@ int main(){
     vector<int> vecA(N);
     for(uint i=0; i<vecA.size(); ++i){ cin >> vecA[i]; }
     
-    int maxLen = dps(vecA, 0);
+    int maxLen = dps(vecA, 0)+1;
     cout << (N-maxLen) << endl;
     
     return 0;
