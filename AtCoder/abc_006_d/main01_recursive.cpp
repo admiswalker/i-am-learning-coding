@@ -30,8 +30,11 @@ int main(){
     int N; cin >> N;
     vector<int> vecA(N);
     for(uint i=0; i<vecA.size(); ++i){ cin >> vecA[i]; }
-    
-    int maxLen = dps(vecA, 0)+1;
+
+    int maxLen=0;
+    for(uint i=0; i<vecA.size(); ++i){
+        maxLen = max(maxLen, dps(vecA, i)+1);
+    }
     cout << (N-maxLen) << endl;
     
     return 0;
