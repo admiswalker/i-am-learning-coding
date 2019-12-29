@@ -3,7 +3,7 @@ using namespace std;
 typedef unsigned int uint;
 
 int dps(const vector<int>& vecA, uint cur){
-    if(cur==vecA.size()){ return 0; }
+    if(cur==vecA.size()){ return 1; }
     
     uint i1=cur+1;
     bool TF1=false;
