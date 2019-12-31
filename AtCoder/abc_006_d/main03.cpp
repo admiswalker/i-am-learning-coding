@@ -1,4 +1,5 @@
 // ref: 蟻本 page. 63~ 65 最長増加部分列問題
+// type 2
 
 #include <bits/stdc++.h>
 using namespace std;
