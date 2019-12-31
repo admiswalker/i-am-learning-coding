@@ -145,8 +145,8 @@ AtCoder 上の類題が提示されていないため pass.
 | [Maximum-Cup 2018 D Many Go Round](https://atcoder.jp/contests/maximum-cup-2018/tasks/maximum_cup_2018_d) | 2019.12.27 |  |
 
 #### 例題 2-3-6　最長増加部分列問題
-| Task                                                                       | Date      | Exec Time | Memory | Algorithm | References |
-| -------------------------------------------------------------------------- | ---------------- | --------:| -----:| --- | ---------- |
-| [ABC 006 D トランプ挿入ソート](https://atcoder.jp/contests/abc006/tasks/abc006_4) | 2019.12.29 | 1396 ms | 512 KB | dp 順 | 蟻本 page. 64 |
-|                                                                                 | 2019.12.31 |  641 ms | 512 KB | dp 逆順 | 蟻本 page. 64-65 |
+| Task                                                                             | Date       | File Name  | Exec Time | Memory | Algorithm | References      |
+| -------------------------------------------------------------------------------- | ---------- | ---------- | ---------:| ------:| --------- | --------------- |
+| [ABC 006 D トランプ挿入ソート](https://atcoder.jp/contests/abc006/tasks/abc006_4) | 2019.12.29 | main01.cpp |   1396 ms | 512 KB | dp 順     | 蟻本 page. 64    |
+|                                                                                  | 2019.12.31 | main03.cpp |    641 ms | 512 KB | dp 逆順   | 蟻本 page. 64-65 |
 
