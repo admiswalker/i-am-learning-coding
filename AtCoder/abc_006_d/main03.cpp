@@ -7,18 +7,17 @@ typedef unsigned int uint;
 int dps(const vector<int>& vecA){
     const uint& N = vecA.size();
     
-    vector<int> dp(vecA.size(), INT_MAX); //dp[0]=vecA[0];
+    vector<int> dp(vecA.size(), INT_MAX);
     
-    for(uint i=0; i<N; ++i){
-        for(uint j=0; j<=i; ++j){
-            if(i==0 || dp[i-1] < vecA[j]){
-                dp[i] = min(dp[i], vecA[j]);
+    for(uint n=0; n<N; ++n){
+        for(uint t=0; t<=n; ++t){
+            if(t==0 || dp[t-1] < vecA[n]){
+                dp[t] = min(dp[t], vecA[n]);
             }
         }
     }
     
     for(uint i=1; i<dp.size(); ++i){
-        printf("i: %d, %d\n", i, dp[i]);
         if(dp[i]==INT_MAX){ return i; }
     }
     return dp.size();
