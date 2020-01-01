@@ -144,7 +144,7 @@ AtCoder 上の類題が提示されていないため pass.
 | -------------------------------------------------------------------------- | ---------------- | ------------- |
 | [Maximum-Cup 2018 D Many Go Round](https://atcoder.jp/contests/maximum-cup-2018/tasks/maximum_cup_2018_d) | 2019.12.27 |  |
 
-#### 例題 2-3-6　最長増加部分列問題
+#### 例題 2-3-6 最長増加部分列問題
 - Task: [ABC 006 D トランプ挿入ソート](https://atcoder.jp/contests/abc006/tasks/abc006_4)
 
   | Date       | File Name  | Exec Time | Memory | Algorithm | References      |
@@ -153,3 +153,16 @@ AtCoder 上の類題が提示されていないため pass.
   | 2019.12.31 | main03.cpp |    641 ms | 512 KB | dp 逆順   | 蟻本 p. 64-65   |
   | 2020.01.01 | main04.cpp |      5 ms | 512 KB | 2 分探査  | 蟻本 p. 65       |
 
+#### 例題 2-3-7 分割数
+- Task: [第4回 ドワンゴからの挑戦状 予選 C - Kill/Death](https://atcoder.jp/contests/dwacon2018-prelims/tasks/dwacon2018_prelims_c)
+
+  | Date       | File Name  | Exec Time | Memory | Algorithm | References      |
+  | ---------- | ---------- | ---------:| ------:| --------- | --------------- |
+  |            |            |        ms |     KB |           |                 |
+
+#### XXX
+- Task: [title](URL)
+
+  | Date       | File Name  | Exec Time | Memory | Algorithm | References      |
+  | ---------- | ---------- | ---------:| ------:| --------- | --------------- |
+  |            |            |        ms |     KB |           |                 |
