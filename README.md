@@ -161,7 +161,8 @@ AtCoder 上の類題が提示されていないため pass.
   |            |            |        ms |     KB |           | [1], [2]        |
   
   [1] 蟻本 p. 66-67  
-  [2] [分割数と、問題まとめ - けんちょんの競プロ精進記録](http://drken1215.hatenablog.com/entry/2018/01/16/222843)
+  [2] [分割数と、問題まとめ - けんちょんの競プロ精進記録](http://drken1215.hatenablog.com/entry/2018/01/16/222843)  
+  [3] [C - Kill/Death: 提出 #3318731 - chocorusk 氏](https://atcoder.jp/contests/dwacon2018-prelims/submissions/3318731)
 
 #### XXX
 - Task: [title](URL)
