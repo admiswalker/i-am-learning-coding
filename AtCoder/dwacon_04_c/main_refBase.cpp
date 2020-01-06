@@ -27,7 +27,7 @@ int main(){
     int sum_a = sum(vecA);
     ct=2;
     cta[0]=1;
-    for(int i=1; i<=N; i++){
+    for(int i=1; i<N; i++){
         if(vecA[i-1]!=vecA[i]){ ct=1; }
         cta[i]=ct;
         ct++;
@@ -36,7 +36,7 @@ int main(){
     int sum_b = sum(vecB);
     ct=2;
     ctb[0]=1;
-    for(int i=1; i<=M; i++){
+    for(int i=1; i<M; i++){
         if(vecB[i-1]!=vecB[i]){ ct=1; }
         ctb[i]=ct;
         ct++;
