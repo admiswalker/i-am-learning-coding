@@ -25,22 +25,20 @@ int main(){
 //    int sa=0, sb=0;
     int ct;
     
-    ct=1;
     int sum_a = sum(vecA);
-    for(int i=1; i<N; i++){
-//    for(int i=1; i<=N; i++){
-//        sum_a += vecA[i];
-        if(vecA[i]!=vecA[i-1]) ct=1;
+    ct=2;
+    cta[0]=1;
+    for(int i=1; i<=N; i++){
+        if(vecA[i-1]!=vecA[i]){ ct=1; }
         cta[i]=ct;
         ct++;
     }
     
-    ct=1;
     int sum_b = sum(vecB);
-    for(int i=1; i<M; i++){
-//    for(int i=1; i<=M; i++){
-//        sb+=vecB[i];
-        if(vecB[i]!=vecB[i-1]) ct=1;
+    ct=2;
+    ctb[0]=1;
+    for(int i=1; i<=M; i++){
+        if(vecB[i-1]!=vecB[i]){ ct=1; }
         ctb[i]=ct;
         ct++;
     }
@@ -48,13 +46,13 @@ int main(){
     int64 dpa[1001]={}, dpb[1001]={};
     dpa[0]=1, dpb[0]=1;
     for(int i=1; i<=N; i++){
-        for(int j=cta[i]; j<=sum_b; j++){
+        for(int j=cta[i-1]; j<=sum_b; j++){
             dpa[j]+=dpa[j-cta[i-1]];
             dpa[j]%=MOD;
         }
     }
     for(int i=1; i<=M; i++){
-        for(int j=ctb[i]; j<=sum_a; j++){
+        for(int j=ctb[i-1]; j<=sum_a; j++){
             dpb[j]+=dpb[j-ctb[i-1]];
             dpb[j]%=MOD;
         }
