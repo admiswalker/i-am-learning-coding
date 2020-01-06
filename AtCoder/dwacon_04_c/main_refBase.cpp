@@ -27,17 +27,18 @@ vector<int> countVecElem(const vector<int>& vecIn){
     return vecCount;
 }
 /*
-int64 dps(){
-    vector<int64> dpa(XXX);//[1001];
-    dpa[0]=1, dpb[0]=1;
+int64 dps(const vector<>){
+    vector<int64> dpa(sum_b+1); dpa[0]=1;
     for(int i=0; i<N; i++){
         for(int j=vecC_a[i]; j<=sum_b; j++){
             dpa[j] += dpa[j-vecC_a[i]];
             dpa[j] %= MOD;
         }
     }
+    return dpa[sum_x];
 }
 //*/
+
 int main(){
     const int64 MOD=1e9+7;
     int N, M;
