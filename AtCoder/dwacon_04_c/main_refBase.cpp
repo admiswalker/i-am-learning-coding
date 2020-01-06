@@ -16,13 +16,12 @@ int main(){
     int N, M;
     cin >> N >> M;
     
-    vector<int> vecA(N); //vecA[0]=-1;
-    vector<int> vecB(M); //vecB[0]=-1;
+    vector<int> vecA(N);
+    vector<int> vecB(M);
     for(uint i=0; i<vecA.size(); ++i){ cin >> vecA[i]; }
     for(uint i=0; i<vecB.size(); ++i){ cin >> vecB[i]; }
     
     int cta[101], ctb[101];
-//    int sa=0, sb=0;
     int ct;
     
     int sum_a = sum(vecA);
@@ -45,15 +44,15 @@ int main(){
     
     int64 dpa[1001]={}, dpb[1001]={};
     dpa[0]=1, dpb[0]=1;
-    for(int i=1; i<=N; i++){
-        for(int j=cta[i-1]; j<=sum_b; j++){
-            dpa[j]+=dpa[j-cta[i-1]];
+    for(int i=0; i<N; i++){
+        for(int j=cta[i]; j<=sum_b; j++){
+            dpa[j]+=dpa[j-cta[i]];
             dpa[j]%=MOD;
         }
     }
-    for(int i=1; i<=M; i++){
-        for(int j=ctb[i-1]; j<=sum_a; j++){
-            dpb[j]+=dpb[j-ctb[i-1]];
+    for(int i=0; i<M; i++){
+        for(int j=ctb[i]; j<=sum_a; j++){
+            dpb[j]+=dpb[j-ctb[i]];
             dpb[j]%=MOD;
         }
     }
