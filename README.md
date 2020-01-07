@@ -156,9 +156,9 @@ AtCoder 上の類題が提示されていないため pass.
 #### 例題 2-3-7 分割数
 - Task: [第4回 ドワンゴからの挑戦状 予選 C - Kill/Death](https://atcoder.jp/contests/dwacon2018-prelims/tasks/dwacon2018_prelims_c)
 
-  | Date       | File Name  | Exec Time | Memory | Algorithm | References      |
-  | ---------- | ---------- | ---------:| ------:| --------- | --------------- |
-  |            |            |        ms |     KB |           | [1], [2]        |
+  | Date       | File Name        | Exec Time | Memory | Algorithm | References      |
+  | ---------- | ---------------- | ---------:| ------:| --------- | --------------- |
+  | 2020.01.07 | main_refBase.cpp |      4 ms | 256 KB | dp        | [1], [2], [3]   |
   
   [1] 蟻本 p. 66-67  
   [2] [分割数と、問題まとめ - けんちょんの競プロ精進記録](http://drken1215.hatenablog.com/entry/2018/01/16/222843)  
