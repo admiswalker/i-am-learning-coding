@@ -26,21 +26,19 @@ vector<int> countVecElem(const vector<int>& vecIn){
     }
     return vecCount;
 }
-/*
-int64 dps(const vector<>){
-    vector<int64> dpa(sum_b+1); dpa[0]=1;
+
+int64 dps(const vector<int>& vecC, int len, int mod){
+    vector<int64> dp(len+1); dp[0]=1;
     for(int i=0; i<N; i++){
-        for(int j=vecC_a[i]; j<=sum_b; j++){
-            dpa[j] += dpa[j-vecC_a[i]];
-            dpa[j] %= MOD;
+        for(int j=vecC[i]; j<=len; j++){
+            dp[j] += dpa[j-vecC[i]];
+            dp[j] %= MOD;
         }
     }
-    return dpa[sum_x];
+    return ;
 }
-//*/
 
 int main(){
-    const int64 MOD=1e9+7;
     int N, M;
     cin >> N >> M;
     
@@ -55,22 +53,11 @@ int main(){
     int sum_b = sum(vecB);
     vector<int> vecC_b = countVecElem(vecB);
     
-    vector<int64> dpa(sum_b+1); dpa[0]=1;
-    for(int i=0; i<N; i++){
-        for(int j=vecC_a[i]; j<=sum_b; j++){
-            dpa[j] += dpa[j-vecC_a[i]];
-            dpa[j] %= MOD;
-        }
-    }
+    const int64 MOD=1e9+7;
+    int64 cmbA = dps(vecC_a, sum_b, mod);
+    int64 cmbA = dps(vecC_b, sum_a, mod);
     
-    vector<int64> dpb(sum_a+1);
-    dpb[0]=1;
-    for(int i=0; i<M; i++){
-        for(int j=vecC_b[i]; j<=sum_a; j++){
-            dpb[j] += dpb[j-vecC_b[i]];
-            dpb[j] %= MOD;
-        }
-    }
-    cout<<dpa[sum_b]*dpb[sum_a]%MOD<<endl;
+    cout << cmbA*cmbB << endl;
+    
     return 0;
 }
