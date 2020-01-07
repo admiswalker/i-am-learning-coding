@@ -27,15 +27,15 @@ vector<int> countVecElem(const vector<int>& vecIn){
     return vecCount;
 }
 
-int64 dps(const vector<int>& vecC, int len, int mod){
-    vector<int64> dp(len+1); dp[0]=1;
-    for(int i=0; i<N; i++){
-        for(int j=vecC[i]; j<=len; j++){
-            dp[j] += dpa[j-vecC[i]];
-            dp[j] %= MOD;
+int64 dps(const vector<int>& vecC, int len, int sum, int mod){
+    vector<int64> dp(sum+1); dp[0]=1;
+    for(int i=0; i<len; i++){
+        for(int j=vecC[i]; j<=sum; j++){
+            dp[j] += dp[j-vecC[i]];
+            dp[j] %= mod;
         }
     }
-    return ;
+    return dp[sum];
 }
 
 int main(){
@@ -53,9 +53,9 @@ int main(){
     int sum_b = sum(vecB);
     vector<int> vecC_b = countVecElem(vecB);
     
-    const int64 MOD=1e9+7;
-    int64 cmbA = dps(vecC_a, sum_b, mod);
-    int64 cmbA = dps(vecC_b, sum_a, mod);
+    const int64 mod=1e9+7;
+    int64 cmbA = dps(vecC_a, N, sum_b, mod);
+    int64 cmbB = dps(vecC_b, M, sum_a, mod);
     
     cout << cmbA*cmbB << endl;
     
