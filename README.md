@@ -146,6 +146,7 @@ AtCoder 上の類題が提示されていないため pass.
 
 #### 例題 2-3-6 最長増加部分列問題
 - Task: [ABC 006 D トランプ挿入ソート](https://atcoder.jp/contests/abc006/tasks/abc006_4)
+- Git dir: [./AtCoder/dwacon_04_c](./AtCoder/abc_006_d)
 
   | Date       | File Name  | Exec Time | Memory | Algorithm | References      |
   | ---------- | ---------- | ---------:| ------:| --------- | --------------- |
@@ -155,7 +156,7 @@ AtCoder 上の類題が提示されていないため pass.
 
 #### 例題 2-3-7 分割数
 - Task: [第4回 ドワンゴからの挑戦状 予選 C - Kill/Death](https://atcoder.jp/contests/dwacon2018-prelims/tasks/dwacon2018_prelims_c)
-- Dir: [./AtCoder/dwacon_04_c](./AtCoder/dwacon_04_c)
+- Git dir: [./AtCoder/dwacon_04_c](./AtCoder/dwacon_04_c)
 
   | Date       | File Name        | Exec Time | Memory | Algorithm | References      |
   | ---------- | ---------------- | ---------:| ------:| --------- | --------------- |
