@@ -140,9 +140,16 @@ AtCoder 上の類題が提示されていないため pass.
 [1] 岩波講座　ソフトウェア科学　３　アルゴリズムとデータ構造　石畑　清（著）
 
 #### 例題 2-3-5 個数制限付き部分和問題
-| Task                                                                       | Date             | Note          |
-| -------------------------------------------------------------------------- | ---------------- | ------------- |
-| [Maximum-Cup 2018 D Many Go Round](https://atcoder.jp/contests/maximum-cup-2018/tasks/maximum_cup_2018_d) | 2019.12.27 |  |
+- Task: [Maximum-Cup 2018 D Many Go Round](https://atcoder.jp/contests/maximum-cup-2018/tasks/maximum_cup_2018_d)
+- Git dir: [./AtCoder/maxc_2018_d](./AtCoder/maxc_2018_d)
+
+  | Date       | File Name        | Exec Time  | Memory   | References    |
+  | ---------- | ---------------- | ----------:| ---------| ------------- |
+  | 2019.12.22 | main00_TLE.cpp   | TLE        | 39424 KB	|               |
+  | 2019.12.27 | main02_merge.cpp |            |          | [1], [2]      |
+  
+  [1] 蝶本 第 2 版 page. 62 個数制限付き部分和問題  
+  [2] https://atcoder.jp/contests/maximum-cup-2018/submissions/4834449
 
 #### 例題 2-3-6 最長増加部分列問題
 - Task: [ABC 006 D トランプ挿入ソート](https://atcoder.jp/contests/abc006/tasks/abc006_4)
