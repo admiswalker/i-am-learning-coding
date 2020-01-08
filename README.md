@@ -173,6 +173,16 @@ AtCoder 上の類題が提示されていないため pass.
   [2] [分割数と、問題まとめ - けんちょんの競プロ精進記録](http://drken1215.hatenablog.com/entry/2018/01/16/222843)  
   [3] [C - Kill/Death: 提出 #3318731 - chocorusk 氏](https://atcoder.jp/contests/dwacon2018-prelims/submissions/3318731)
 
+- Git dir: [./AntsBook/2_3_7](./AntsBook/2_3_7)
+
+  | Date       | File Name        | Algorithm | Note                      |
+  | ---------- | ---------------- | --------- | ------------------------- |
+  | 2020.01.07 | main01.cpp       | dp        | [1] そのまま．(2 次元配列)   |
+  | 2020.01.08 | main02.cpp       | dp        | [1] より改変．(2 次元配列)   |
+  | 2020.01.08 | main03.cpp       | dp        | [1] を 1 次元配列に押し込む  |
+  
+  [1] 蟻本 p. 66-67  
+  
 #### XXX
 - Task: [title](URL)
 
