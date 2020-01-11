@@ -1,7 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int n, m;
+#define MAX_N 1000
+#define MAX_M 1000
+
+int n, m, M;
 int a[MAX_N];
 
 int dp[MAX_N + 1][MAX_M + 1]; // DP テーブル
@@ -11,13 +14,13 @@ void solver(){
     for(int i=0; i<=n; ++i){
         dp[i][0] = 1;
     }
-
-    for(int i=0; i<; ++i){
-        for(int j=0; j<; ++j){
+    
+    for(int i=0; i<n; ++i){
+        for(int j=1; j<=m; ++j){
             if(j-1-a[i] >= 0){
                 dp[i+1][j] = (dp[i+1][j-1] + dp[i][j] - dp[i][j-1-a[i]] + M) % M;
             }else{
-                dp[i+1][j] = (dp[i+1][j-1] + dp[i][j] - dp[i][j]);
+                dp[i+1][j] = (dp[i+1][j-1] + dp[i][j]);
             }
         }
     }
