@@ -183,6 +183,20 @@ AtCoder 上の類題が提示されていないため pass.
   
   [1] 蟻本 p. 66-67  
   
+#### 例題 2-3-8 重複組合せ
+- Task: [ABC 110 D - Factorization](https://atcoder.jp/contests/abc110/tasks/abc110_d)
+- Git dir: [./AtCoder/abc_110_d](./AtCoder/abc_110_d)
+  
+  | Date       | File Name  | Exec Time | Memory | Algorithm | References      |
+  | ---------- | ---------- | ---------:| ------:| --------- | --------------- |
+  |            |            |        ms |     KB |           |                 |
+  
+- Git dir: [./AntsBook/2_3_8](./AntsBook/2_3_8)
+  
+  | Date       | File Name  | Exec Time | Memory | Algorithm | References      |
+  | ---------- | ---------- | ---------:| ------:| --------- | --------------- |
+  |            |            |        ms |     KB |           |                 |
+  
 #### XXX
 - Task: [title](URL)
 
