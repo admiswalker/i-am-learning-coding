@@ -4,11 +4,9 @@
 using namespace std;
 
 void dps(const int n, const int m, const int mod){
-    vector<int> dp(m+1, 0);
-    dp[0] = 1;
-    for(int i=1; i<=m; ++i){
-        dp[i]  = dp[i-1];
-        dp[i] %= mod;
+    vector<int> dp(m+1, 0); dp[0] = 1;
+    
+    for(int i=0; i<m; ++i){
         for(int j=i; j<=n; ++j){
             dp[j] += dp[j-i];
             dp[j] %= mod;
