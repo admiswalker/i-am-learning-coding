@@ -194,9 +194,11 @@ AtCoder 上の類題が提示されていないため pass.
   
 - Git dir: [./AntsBook/2_3_8](./AntsBook/2_3_8)
   
-  | Date       | File Name  | Exec Time | Memory | Algorithm | References      |
-  | ---------- | ---------- | ---------:| ------:| --------- | --------------- |
-  |            |            |        ms |     KB |           |                 |
+  | Date       | File Name        | Algorithm | Note                      |
+  | ---------- | ---------------- | --------- | ------------------------- |
+  | 2020.01.12 | main00_orig.cpp  | dp        | [1] そのまま．(2 次元配列)   |
+  
+  [1] 蟻本 p. 67-68  
   
 #### XXX
 - Task: [title](URL)
