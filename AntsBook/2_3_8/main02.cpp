@@ -10,7 +10,7 @@ void dps(const int n, const int m, const int M, const vector<int>& vecA){
     for(int i=0; i<n; ++i){
         for(int j=1; j<=m; ++j){
             if(j-1-vecA[i] >= 0){
-                dp[j] = (dp[j-1] + dp[j] - dp[j-1-vecA[i]] + M) % M;
+                dp[j] = (dp[j-1] + dp[j] - dp[j-1-vecA[i]]) % M;
             }else{
                 dp[j] = (dp[j-1] + dp[j]);
             }
