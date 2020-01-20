@@ -1,59 +1,77 @@
 #include <bits/stdc++.h>
 using namespace std;
+typedef uint32_t uint;
 typedef uint64_t uint64;
 
+struct fact{
+private:
+public:
+    fact(){ prime=0ull; num=0ull; }
+    fact(const uint64 p_in, const uint64 n_in){ prime=p_in; num=n_in; }
+    ~fact(){}
+    
+    uint64 prime;
+    uint64 num;
+};
 
-uint64 nextMul(const vector<char>& tbl, uint64 mul){
-    for(uint64 i=mul+1; i<tbl.size(); ++i){
-        if(tbl[i]==0){ return i; }
+struct fact divNum(uint64& target, const uint64 divisor){
+    struct fact fa(divisor, 0ull);
+    for(;;){
+        uint64 div = target / divisor;
+        uint64 mod = target - divisor * div;
+        if(mod!=0ull){ break; }
+        target = div;
+        ++fa.num;
     }
-    return INT64_MAX;
+    return fa;
 }
 
-vector<uint64> prime(uint64 limit){
-    vector<char> tbl(limit, 0);
+vector<struct fact> factor(uint64 target){
+    vector<struct fact> vecFact;
     
-    tbl[0] = 1;
-    tbl[1] = 1;
-    for(uint64 mul=2; mul<limit; ){
-        for(uint64 i=2; mul*i<limit; ++i){
-            tbl[mul * i] = 1;
-//            printf("%lu  ", mul * i);
+    struct fact fa2 = divNum(target, 2ull);
+    if(fa2.num!=0ull){ vecFact.push_back(fa2); }
+    
+    for(uint64 divisor=3; divisor<=target; divisor+=2){
+        if(target==1){ break; }
+        
+        struct fact fa = divNum(target, divisor);
+        if(fa.num==0ull){ continue; }
+        
+        vecFact.push_back(fa);
+    }
+    return vecFact;
+}
+
+uint64 nHr(const vector<uint>& vecA, const uint r){
+    const uint& n = vecA.size();
+    vector<vector<uint>> dp(n, vector<uint>(r, 0));
+    dp[0][0] = ;
+    
+    for(uint i=0; i<n; ++i){
+        for(uint i=0; i<; ++i){
+            
         }
-        mul = nextMul(tbl, mul);
     }
     
-    vector<uint64> lhs;
-    for(uint64 i=2; i<limit; ++i){
-        if(tbl[i]==0){ lhs.push_back(i); }
-    }
-    return lhs;
-}
-/*
-vector<pari<uint64,uint64>> factor(const uint64 rhs){
-    vector<uint64> vecTable;
-    vector<pari<uint64,uint64>> ret;
-    for(){
-        ;
-    }
     return ;
 }
-//*/
+
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
     const uint64 mod = 1e9 + 7;
     
-    int N, M;
-    cin >> N >> M;
+    int N, M; cin >> N >> M;
     
-//    vector<uint64> vecPrime = factor(M/2+1);
-    vector<uint64> vecPrime = prime(M/2+1);
-    for(uint64 i=0; i<vecPrime.size(); ++i){
-        printf("%lu  ", vecPrime[i]);
-    }
-    printf("\n");
+    vector<struct fact> vecFact = factor(M);
+//    for(uint64 i=0; i<vecFact.size(); ++i){
+//        printf(" + %lu^%lu", vecFact[i].prime, vecFact[i].num);
+//    }
+//    printf("\n");
+    
+    
     
     return 0;
 }
