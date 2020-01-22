@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
+typedef int64_t int64;
 typedef uint32_t uint;
 typedef uint64_t uint64;
 
@@ -43,18 +44,25 @@ vector<struct fact> factor(uint64 target){
     return vecFact;
 }
 
-uint64 nHr(const vector<uint>& vecA, const uint r){
+uint64 nHr(const vector<uint>& vecA, const uint r, const uint64 mod){
+    
     const uint& n = vecA.size();
-    vector<vector<uint>> dp(n, vector<uint>(r, 0));
-    dp[0][0] = ;
+    vector<vector<uint>> dp(n+1, vector<uint>(r+1, 0));
+    for(uint i=0; i<=n; ++i){
+        dp[i][0] = 1;
+    }
+    printf("1\n");
     
     for(uint i=0; i<n; ++i){
-        for(uint i=0; i<; ++i){
-            
+        for(uint j=1; j<=r; ++j){
+            int64 tmp = j-vecA[i]-1ll;
+            if(tmp>=0){ dp[i+1][j] = (dp[i+1][j-1] + dp[i][j] - dp[i][tmp]) % mod;
+            }   else  { dp[i+1][j] = (dp[i+1][j-1] + dp[i][j]); }
         }
     }
     
-    return ;
+    printf("2\n");
+    return dp[n][r];
 }
 
 int main(){
@@ -71,7 +79,14 @@ int main(){
 //    }
 //    printf("\n");
     
+    vector<uint> vecA(vecFact.size());
+    for(uint i=0; i<vecFact.size(); ++i){
+        printf("%lu  ", vecFact[i].num);
+        vecA[i] = vecFact[i].num;
+    }
+    printf("\n");
     
+    cout << nHr(vecA, N, mod) << endl;
     
     return 0;
 }
