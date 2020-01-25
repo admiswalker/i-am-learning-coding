@@ -69,12 +69,6 @@ int main(){
     int N, M; cin >> N >> M;
     
     vector<struct fact> vecFact = factor(M);
-    printf("%d = ", M);
-    for(uint64 i=0; i<vecFact.size(); ++i){
-        printf("+ %lu^%lu ", vecFact[i].prime, vecFact[i].num);
-    }
-    printf("\n");
-    
     vector<uint> vecA(vecFact.size());
     for(uint i=0; i<vecFact.size(); ++i){
         vecA[i] = vecFact[i].num;
