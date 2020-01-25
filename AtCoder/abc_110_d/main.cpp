@@ -44,23 +44,20 @@ vector<struct fact> factor(uint64 target){
     return vecFact;
 }
 
-uint64 nHr(const vector<uint>& vecA, const uint r, const uint64 mod){
-    
-    const uint& n = vecA.size();
-    vector<vector<uint>> dp(n+1, vector<uint>(r+1, 0));
-    for(uint i=0; i<=n; ++i){
-        dp[i][0] = 1;
-    }
-    
-    for(uint i=0; i<n; ++i){
-        for(uint j=1; j<=r; ++j){
-            int64 tmp = j-vecA[i]-1ll;
-            if(tmp>=0){ dp[i+1][j] = (dp[i+1][j-1] + dp[i][j] - dp[i][tmp]) % mod;
-            }   else  { dp[i+1][j] = (dp[i+1][j-1] + dp[i][j]); }
-        }
-    }
-    
-    return dp[n][r];
+uint64 factorial(const uint64 n){
+    uint64 ret=1ull;
+    for(uint64 i=2ull; i!=(n+1ull); ++i){ ret*=i; }
+    return ret;
+}
+uint64 comb_base(const uint64 n, const uint64 r){
+    uint64 ret=1ull;
+    for(uint64 i=n; i!=n-r; --i){ ret*=i; }
+    return ret / factorial(r);
+}
+uint64 comb(const uint64 n, const uint64 r){
+    if      (n==r ){ return 1ull;
+    }else if(n-r<r){ return comb_base(n, n-r);
+    }else          { return comb_base(n, r  ); }
 }
 
 int main(){
@@ -74,7 +71,7 @@ int main(){
     vector<struct fact> vecFact = factor(M);
     printf("%d = ", M);
     for(uint64 i=0; i<vecFact.size(); ++i){
-        printf(" + %lu^%lu", vecFact[i].prime, vecFact[i].num);
+        printf("+ %lu^%lu ", vecFact[i].prime, vecFact[i].num);
     }
     printf("\n");
     
@@ -83,7 +80,12 @@ int main(){
         vecA[i] = vecFact[i].num;
     }
     
-    cout << nHr(vecA, N, mod) << endl;
+    uint64 ans=1ull;
+    for(uint i=0; i<vecA.size(); ++i){
+        ans *= comb(vecA[i]+N-1, N-1);
+        ans %= mod;
+    }
     
+    cout << ans << endl;
     return 0;
 }
