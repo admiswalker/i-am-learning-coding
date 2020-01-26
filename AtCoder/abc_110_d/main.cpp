@@ -44,35 +44,62 @@ vector<struct fact> factor(uint64 target){
     return vecFact;
 }
 
-uint64 factorial(const uint64 n){
+uint64 factorial_mod(const uint64 n, const uint64 mod){
     uint64 ret=1ull;
-    for(uint64 i=2ull; i!=(n+1ull); ++i){ ret*=i; }
+    for(uint64 i=2ull; i!=(n+1ull); ++i){
+        ret*=i;
+        ret%=mod;
+    }
     return ret;
 }
-uint64 comb_base(const uint64 n, const uint64 r, const uint64 mod){
+uint64 pow_mod(uint64 base, uint64 exp, const uint64 mod){
+    uint64 ret=1ull;
+    for(; exp>0ull; exp>>=1ull){
+        if(exp & 1){
+            ret = ret*base;
+            ret %= mod;
+        }
+        base = base*base;
+        base %= mod;
+    }
+    return ret;
+}
+uint64 comb_mod_base(const uint64 n, const uint64 r, const uint64 mod){
     uint64 ret=1ull;
     for(uint64 i=n; i!=n-r; --i){
         ret *= i;
-//        ret *= i%mod;
-//        ret %= mod;
+        ret %= mod;
     }
-    return ret / factorial(r);
+    return (ret*pow_mod(factorial_mod(r,mod),mod-2,mod)) % mod;
+//    return (ret*factorial_mod(r,mod)) % mod;
 }
-uint64 comb(const uint64 n, const uint64 r, const uint64 mod){
-//    return comb_base(n, r, mod);
-    //*
+uint64 comb_mod(const uint64 n, const uint64 r, const uint64 mod){
+//    return comb_mod_base(n, r, mod);
+    /*
     if      (n==r ){ return 1ull;
-    }else if(n-r<r){ return comb_base(n, n-r, mod);
-    }else          { return comb_base(n, r  , mod); }
+    }else if(n-r<r){ return comb_mod_base(n, n-r, mod);
+    }else          { return comb_mod_base(n, r  , mod); }
     //*/
+    if(n==r){ return 1ull;
+    } else  { return comb_mod_base(n, min(r,n-r), mod);
+    }
 }
 
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
+
     
 //    const uint64 mod = 1e9 + 7;
     const uint64 mod = 1000000007ull;
+    
+//    cout << factorial_mod(4, mod) << endl;
+    
+//    cout << pow_mod(base, exp, mod) << endl;
+//    cout << pow_mod(2ull, 1ull, mod) << endl;
+//    cout << pow_mod(2ull, 2ull, mod) << endl;
+//    cout << pow_mod(2ull, 3ull, mod) << endl;
+//    cout << pow_mod(2ull, 4ull, mod) << endl;
     
     uint64 N, M; cin >> N >> M;
     
@@ -84,15 +111,10 @@ int main(){
     
     uint64 ans=1ull;
     for(uint i=0; i<vecA.size(); ++i){
-        ans *= comb((uint64)vecA[i]+(uint64)N-1ull, (uint64)N-1ull, mod);
-//        ans *= comb((uint64)vecA[i]+(uint64)N-1ull, (uint64)N-1ull, mod) % mod;
-//        ans %= mod;
+        ans *= comb_mod((uint64)vecA[i]+(uint64)N-1ull, (uint64)N-1ull, mod);
+        ans %= mod;
     }
-    ans %= mod;
     
     cout << ans << endl;
     return 0;
 }
-
-// 957870001
-// 958612159
