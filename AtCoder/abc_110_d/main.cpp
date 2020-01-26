@@ -49,37 +49,50 @@ uint64 factorial(const uint64 n){
     for(uint64 i=2ull; i!=(n+1ull); ++i){ ret*=i; }
     return ret;
 }
-uint64 comb_base(const uint64 n, const uint64 r){
+uint64 comb_base(const uint64 n, const uint64 r, const uint64 mod){
     uint64 ret=1ull;
-    for(uint64 i=n; i!=n-r; --i){ ret*=i; }
+    for(uint64 i=n; i!=n-r; --i){
+        ret *= i;
+//        ret *= i%mod;
+//        ret %= mod;
+    }
     return ret / factorial(r);
 }
-uint64 comb(const uint64 n, const uint64 r){
+uint64 comb(const uint64 n, const uint64 r, const uint64 mod){
+//    return comb_base(n, r, mod);
+    //*
     if      (n==r ){ return 1ull;
-    }else if(n-r<r){ return comb_base(n, n-r);
-    }else          { return comb_base(n, r  ); }
+    }else if(n-r<r){ return comb_base(n, n-r, mod);
+    }else          { return comb_base(n, r  , mod); }
+    //*/
 }
 
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    const uint64 mod = 1e9 + 7;
+//    const uint64 mod = 1e9 + 7;
+    const uint64 mod = 1000000007ull;
     
-    int N, M; cin >> N >> M;
+    uint64 N, M; cin >> N >> M;
     
     vector<struct fact> vecFact = factor(M);
-    vector<uint> vecA(vecFact.size());
+    vector<uint64> vecA(vecFact.size());
     for(uint i=0; i<vecFact.size(); ++i){
         vecA[i] = vecFact[i].num;
     }
     
     uint64 ans=1ull;
     for(uint i=0; i<vecA.size(); ++i){
-        ans *= comb(vecA[i]+N-1, N-1);
-        ans %= mod;
+        ans *= comb((uint64)vecA[i]+(uint64)N-1ull, (uint64)N-1ull, mod);
+//        ans *= comb((uint64)vecA[i]+(uint64)N-1ull, (uint64)N-1ull, mod) % mod;
+//        ans %= mod;
     }
+    ans %= mod;
     
     cout << ans << endl;
     return 0;
 }
+
+// 957870001
+// 958612159
