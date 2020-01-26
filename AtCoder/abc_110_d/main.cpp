@@ -1,3 +1,5 @@
+// ref: https://atcoder.jp/contests/abc110/submissions/3251714
+
 #include <bits/stdc++.h>
 using namespace std;
 typedef int64_t int64;
@@ -44,14 +46,6 @@ vector<struct fact> factor(uint64 target){
     return vecFact;
 }
 
-uint64 factorial_mod(const uint64 n, const uint64 mod){
-    uint64 ret=1ull;
-    for(uint64 i=2ull; i!=(n+1ull); ++i){
-        ret*=i;
-        ret%=mod;
-    }
-    return ret;
-}
 uint64 pow_mod(uint64 base, uint64 exp, const uint64 mod){
     uint64 ret=1ull;
     for(; exp>0ull; exp>>=1ull){
@@ -64,18 +58,19 @@ uint64 pow_mod(uint64 base, uint64 exp, const uint64 mod){
     }
     return ret;
 }
-uint64 comb_mod_base(const uint64 n, const uint64 r, const uint64 mod){
-    uint64 ret=1ull;
-    for(uint64 i=n; i!=n-r; --i){
-        ret *= i;
-        ret %= mod;
+uint64 comb_mod(uint64 n, uint64 r, const uint64 mod){
+    if(n==r || n==0ull || r==0ull){ return 1ull; }
+    
+    uint64 p=1ull, q=1ull;
+    r = min(r,n-r);
+    for(uint64 i=1ull; i<=r; ++i){
+        p *= n; --n;
+        p %= mod;
+        
+        q *= i;
+        q %= mod;
     }
-    return (ret*pow_mod(factorial_mod(r,mod),mod-2,mod)) % mod;
-}
-uint64 comb_mod(const uint64 n, const uint64 r, const uint64 mod){
-    if(n==r){ return 1ull;
-    } else  { return comb_mod_base(n, min(r,n-r), mod);
-    }
+    return (p*pow_mod(q,mod-2,mod)) % mod;
 }
 
 int main(){
