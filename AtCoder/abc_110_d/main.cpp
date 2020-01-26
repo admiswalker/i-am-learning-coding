@@ -71,15 +71,8 @@ uint64 comb_mod_base(const uint64 n, const uint64 r, const uint64 mod){
         ret %= mod;
     }
     return (ret*pow_mod(factorial_mod(r,mod),mod-2,mod)) % mod;
-//    return (ret*factorial_mod(r,mod)) % mod;
 }
 uint64 comb_mod(const uint64 n, const uint64 r, const uint64 mod){
-//    return comb_mod_base(n, r, mod);
-    /*
-    if      (n==r ){ return 1ull;
-    }else if(n-r<r){ return comb_mod_base(n, n-r, mod);
-    }else          { return comb_mod_base(n, r  , mod); }
-    //*/
     if(n==r){ return 1ull;
     } else  { return comb_mod_base(n, min(r,n-r), mod);
     }
@@ -88,18 +81,8 @@ uint64 comb_mod(const uint64 n, const uint64 r, const uint64 mod){
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-
     
-//    const uint64 mod = 1e9 + 7;
-    const uint64 mod = 1000000007ull;
-    
-//    cout << factorial_mod(4, mod) << endl;
-    
-//    cout << pow_mod(base, exp, mod) << endl;
-//    cout << pow_mod(2ull, 1ull, mod) << endl;
-//    cout << pow_mod(2ull, 2ull, mod) << endl;
-//    cout << pow_mod(2ull, 3ull, mod) << endl;
-//    cout << pow_mod(2ull, 4ull, mod) << endl;
+    const uint64 mod = 1e9 + 7;
     
     uint64 N, M; cin >> N >> M;
     
