@@ -190,7 +190,9 @@ AtCoder 上の類題が提示されていないため pass.
   
   | Date       | File Name  | Exec Time | Memory | Algorithm | References      |
   | ---------- | ---------- | ---------:| ------:| --------- | --------------- |
-  |            |            |        ms |     KB |           |                 |
+  | 2020.01.27 | main.cpp   |      1 ms | 256 KB |           |                 |
+  
+  [1] [提出 #3251714 - kmjp](https://atcoder.jp/contests/abc110/submissions/3251714)
   
 - Git dir: [./AntsBook/2_3_8](./AntsBook/2_3_8)
   
