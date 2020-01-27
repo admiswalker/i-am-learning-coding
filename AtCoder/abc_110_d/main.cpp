@@ -7,12 +7,10 @@ typedef uint32_t uint;
 typedef uint64_t uint64;
 
 uint64  divNum(uint64& target, const uint64 divisor){
-    uint64 num  =0ull;
+    uint64 num=0ull;
     for(;;){
-        uint64 div = target / divisor;
-        uint64 mod = target - divisor * div;
-        if(mod!=0ull){ break; }
-        target = div;
+        if(target%divisor!=0){ break; }
+        target /= divisor;
         ++num;
     }
     return num;
@@ -22,13 +20,8 @@ tuple<vector<uint64>,vector<uint64>> factor(uint64 target){
     vector<uint64> vecPrime;
     vector<uint64> vecNum;
     
-    uint64 num2 = divNum(target, 2ull);
-    if(num2!=0ull){
-        vecPrime.push_back(2ull);
-        vecNum.push_back(num2);
-    }
-    
-    for(uint64 divisor=3; divisor<=target; divisor+=2){
+    uint64 divisor=2ull;
+    for(; divisor*divisor<=target; ++divisor){
         if(target==1){ break; }
         
         uint64 num = divNum(target, divisor);
@@ -36,6 +29,10 @@ tuple<vector<uint64>,vector<uint64>> factor(uint64 target){
         
         vecPrime.push_back(divisor);
         vecNum.push_back(num);
+    }
+    if(target!=1ull){
+        vecPrime.push_back(divisor);
+        vecNum.push_back(1ull);
     }
     return tie(vecPrime, vecNum);
 }
