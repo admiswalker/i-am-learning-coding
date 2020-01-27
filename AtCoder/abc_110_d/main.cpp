@@ -6,44 +6,38 @@ typedef int64_t int64;
 typedef uint32_t uint;
 typedef uint64_t uint64;
 
-struct fact{
-private:
-public:
-    fact(){ prime=0ull; num=0ull; }
-    fact(const uint64 p_in, const uint64 n_in){ prime=p_in; num=n_in; }
-    ~fact(){}
-    
-    uint64 prime;
-    uint64 num;
-};
-
-struct fact divNum(uint64& target, const uint64 divisor){
-    struct fact fa(divisor, 0ull);
+uint64  divNum(uint64& target, const uint64 divisor){
+    uint64 num  =0ull;
     for(;;){
         uint64 div = target / divisor;
         uint64 mod = target - divisor * div;
         if(mod!=0ull){ break; }
         target = div;
-        ++fa.num;
+        ++num;
     }
-    return fa;
+    return num;
 }
 
-vector<struct fact> factor(uint64 target){
-    vector<struct fact> vecFact;
+tuple<vector<uint64>,vector<uint64>> factor(uint64 target){
+    vector<uint64> vecPrime;
+    vector<uint64> vecNum;
     
-    struct fact fa2 = divNum(target, 2ull);
-    if(fa2.num!=0ull){ vecFact.push_back(fa2); }
+    uint64 num2 = divNum(target, 2ull);
+    if(num2!=0ull){
+        vecPrime.push_back(2ull);
+        vecNum.push_back(num2);
+    }
     
     for(uint64 divisor=3; divisor<=target; divisor+=2){
         if(target==1){ break; }
         
-        struct fact fa = divNum(target, divisor);
-        if(fa.num==0ull){ continue; }
+        uint64 num = divNum(target, divisor);
+        if(num==0ull){ continue; }
         
-        vecFact.push_back(fa);
+        vecPrime.push_back(divisor);
+        vecNum.push_back(num);
     }
-    return vecFact;
+    return tie(vecPrime, vecNum);
 }
 
 uint64 pow_mod(uint64 base, uint64 exp, const uint64 mod){
@@ -81,15 +75,12 @@ int main(){
     
     uint64 N, M; cin >> N >> M;
     
-    vector<struct fact> vecFact = factor(M);
-    vector<uint64> vecA(vecFact.size());
-    for(uint i=0; i<vecFact.size(); ++i){
-        vecA[i] = vecFact[i].num;
-    }
+    vector<uint64> vecPrime, vecNum;
+    tie(vecPrime, vecNum) = factor(M);
     
     uint64 ans=1ull;
-    for(uint i=0; i<vecA.size(); ++i){
-        ans *= comb_mod((uint64)vecA[i]+(uint64)N-1ull, (uint64)N-1ull, mod);
+    for(uint i=0; i<vecNum.size(); ++i){
+        ans *= comb_mod(vecNum[i]+N-1ull, N-1ull, mod);
         ans %= mod;
     }
     
