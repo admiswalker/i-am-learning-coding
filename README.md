@@ -18,7 +18,7 @@
 
 - Making file.
   ```
-  $ echo -e '#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    \n    \n    return 0;\n}' > main.cpp
+  $ echo -e '#include <bits/stdc++.h>\nusing namespace std;\ntypedef uint32_t uint;\ntypedef uint64_t uint64;\n\nint main(){\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    \n    \n    return 0;\n}' > main.cpp
   ```
 
 - Compiling.
