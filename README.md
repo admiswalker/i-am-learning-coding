@@ -231,6 +231,13 @@ AtCoder 上の類題が提示されていないため pass.
   | ---------- | ---------- | ---------:| ------:| ---------- | --------------- |
   | 2020.02.01 | main.cpp   |      1 ms | 256 KB | hash table |                 |
 
+### 例題 2-4-3 食物連鎖 (POJ No.1182)
+- Task: [ATC 001 B Union Find](https://atcoder.jp/contests/atc001/tasks/unionfind_a)
+
+  | Date       | File Name  | Exec Time | Memory | Algorithm | References      |
+  | ---------- | ---------- | ---------:| ------:| --------- | --------------- |
+  |            |            |        ms |     KB |           |                 |
+
 ---
 
 #### XXX
