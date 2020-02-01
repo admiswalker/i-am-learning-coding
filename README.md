@@ -219,9 +219,9 @@ AtCoder 上の類題が提示されていないため pass.
 #### 2-4-1 Expedition (POJ No.2431)
 - Task: [ABC 062 D](https://atcoder.jp/contests/arc074/tasks/arc074_b)
 
-  | Date       | File Name  | Exec Time | Memory | Algorithm | References      |
-  | ---------- | ---------- | ---------:| ------:| --------- | --------------- |
-  |            |            |        ms |     KB |           |                 |
+  | Date       | File Name  | Exec Time |  Memory | Algorithm | References      |
+  | ---------- | ---------- | ---------:|  ------:| --------- | --------------- |
+  | 2020.02.01 | main.cpp   |     54 ms | 4724 KB |           |                 |
 
 ---
 
