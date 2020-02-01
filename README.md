@@ -217,7 +217,7 @@ AtCoder 上の類題が提示されていないため pass.
 
 ### 2-4 データを工夫して記憶する "データ構造"
 #### 2-4-1 Expedition (POJ No.2431)
-- Task: [ABC 062 D](https://atcoder.jp/contests/arc074/tasks/arc074_b)
+- Task: [ABC 074 D](https://atcoder.jp/contests/arc074/tasks/arc074_b)
 
   | Date       | File Name  | Exec Time |  Memory | Algorithm | References      |
   | ---------- | ---------- | ---------:|  ------:| --------- | --------------- |
