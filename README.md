@@ -227,9 +227,9 @@ AtCoder 上の類題が提示されていないため pass.
 - Task: [ABC 085 B](https://atcoder.jp/contests/abc085/tasks/abc085_b): already done.
 - Task: [ABC 091 B](https://atcoder.jp/contests/abc091/tasks/abc091_b)
 
-  | Date       | File Name  | Exec Time | Memory | Algorithm | References      |
-  | ---------- | ---------- | ---------:| ------:| --------- | --------------- |
-  | 2020.02.01 | main.cpp   |      1 ms | 256 KB |           |                 |
+  | Date       | File Name  | Exec Time | Memory | Algorithm  | References      |
+  | ---------- | ---------- | ---------:| ------:| ---------- | --------------- |
+  | 2020.02.01 | main.cpp   |      1 ms | 256 KB | hash table |                 |
 
 ---
 
