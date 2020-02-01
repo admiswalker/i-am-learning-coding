@@ -223,6 +223,13 @@ AtCoder 上の類題が提示されていないため pass.
   | ---------- | ---------- | ---------:|  ------:| --------- | --------------- |
   | 2020.02.01 | main.cpp   |     54 ms | 4724 KB |           |                 |
 
+### 例題 2-4-2 二分探索木 (set, map の練習)
+- Task: [ABC 085 B](https://atcoder.jp/contests/abc085/tasks/abc085_b)
+
+  | Date       | File Name  | Exec Time | Memory | Algorithm | References      |
+  | ---------- | ---------- | ---------:| ------:| --------- | --------------- |
+  |            |            |        ms |     KB |           |                 |
+
 ---
 
 #### XXX
