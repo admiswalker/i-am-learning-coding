@@ -240,6 +240,17 @@ AtCoder 上の類題が提示されていないため pass.
 
 ---
 
+### 2-5 あれもこれも実は "グラフ"
+#### 例題 2-5-1 二部グラフ判定
+- Task: [AtCoder ABC 126 D](https://atcoder.jp/contests/abc126/tasks/abc126_d)
+
+  | Date       | File Name  | Exec Time | Memory  | Algorithm | References      |
+  | ---------- | ---------- | ---------:| -------:| --------- | --------------- |
+  |            |            |        ms |      KB |           |                 |
+
+
+---
+
 #### XXX
 - Task: [title](URL)
 
