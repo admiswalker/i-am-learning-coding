@@ -219,8 +219,8 @@ AtCoder 上の類題が提示されていないため pass.
 #### 2-4-1 Expedition (POJ No.2431)
 - Task: [ABC 074 D](https://atcoder.jp/contests/arc074/tasks/arc074_b)
 
-  | Date       | File Name  | Exec Time |  Memory | Algorithm | References      |
-  | ---------- | ---------- | ---------:|  ------:| --------- | --------------- |
+  | Date       | File Name  | Exec Time | Memory  | Algorithm | References      |
+  | ---------- | ---------- | ---------:| -------:| --------- | --------------- |
   | 2020.02.01 | main.cpp   |     54 ms | 4724 KB |           |                 |
 
 ### 例題 2-4-2 二分探索木 (set, map の練習)
@@ -234,15 +234,15 @@ AtCoder 上の類題が提示されていないため pass.
 ### 例題 2-4-3 食物連鎖 (POJ No.1182)
 - Task: [ATC 001 B Union Find](https://atcoder.jp/contests/atc001/tasks/unionfind_a)
 
-  | Date       | File Name  | Exec Time | Memory | Algorithm | References      |
-  | ---------- | ---------- | ---------:| ------:| --------- | --------------- |
-  |            |            |        ms |     KB |           |                 |
+  | Date       | File Name  | Exec Time | Memory  | Algorithm | References      |
+  | ---------- | ---------- | ---------:| -------:| --------- | --------------- |
+  | 2020.02.03 | main.cpp   |    361 ms | 1280 KB |           |                 |
 
 ---
 
 #### XXX
 - Task: [title](URL)
 
-  | Date       | File Name  | Exec Time | Memory | Algorithm | References      |
-  | ---------- | ---------- | ---------:| ------:| --------- | --------------- |
-  |            |            |        ms |     KB |           |                 |
+  | Date       | File Name  | Exec Time | Memory  | Algorithm | References      |
+  | ---------- | ---------- | ---------:| -------:| --------- | --------------- |
+  |            |            |        ms |      KB |           |                 |
