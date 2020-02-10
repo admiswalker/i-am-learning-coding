@@ -250,6 +250,13 @@ AtCoder 上の類題が提示されていないため pass.
   
   [1] 蟻本 p. 93-94  
 
+#### 例題 2-5-2　Roadblocks (POJ No.3255)
+- Task: [D - Saving Snuuk](https://atcoder.jp/contests/soundhound2018-summer-qual/tasks/soundhound2018_summer_qual_d)
+
+  | Date       | File Name  | Exec Time | Memory  | Algorithm | References      |
+  | ---------- | ---------- | ---------:| -------:| --------- | --------------- |
+  |            |            |        ms |      KB |           |                 |
+
 ---
 
 #### XXX
