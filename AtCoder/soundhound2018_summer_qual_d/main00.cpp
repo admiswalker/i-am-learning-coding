@@ -18,13 +18,12 @@ public:
 };
 
 uint edge2cost(edge val, uint i, uint n){
-    return val.a;
-//    if(i<n){ return val.a;
-//    } else { return val.b; }
+    if(i<n){ return val.a;
+    } else { return val.b; }
 }
 
 vector<uint64> dijkstra(const vector<vector<edge>>& graph, uint s, uint n){
-    vector<uint64> vCost(graph.size(), UINT64_MAX); vCost[s]=0ull; //vCost[0]=0ull;
+    vector<uint64> vCost(graph.size(), UINT64_MAX); vCost[s]=0ull;
     priority_queue<P,vector<P>,greater<P>> que; que.push( P(0,s) );
     
     while(!que.empty()){
@@ -34,11 +33,9 @@ vector<uint64> dijkstra(const vector<vector<edge>>& graph, uint s, uint n){
         if(vCost[idx] < cost){ continue; }
         for(uint i=0; i<graph[idx].size(); ++i){
             edge e = graph[idx][i];
-//            if(vCost[e.to] < vCost[idx] + edge2cost(e,idx,n)){ continue; }
-            if(vCost[e.to] > vCost[idx] + e.a){
-                vCost[e.to] = vCost[idx] + e.a;
-                que.push( P(vCost[e.to], e.to) );
-            }
+            if(vCost[e.to] <= vCost[idx] + edge2cost(e,e.to,n)){ continue; }
+            vCost[e.to] = vCost[idx] + edge2cost(e,e.to,n);
+            que.push( P(vCost[e.to], e.to) );
         }
     }
     return vCost;
@@ -46,7 +43,7 @@ vector<uint64> dijkstra(const vector<vector<edge>>& graph, uint s, uint n){
 vector<vector<uint64>> dijkstra_n(const vector<vector<edge>>& graph, uint s, uint n){
     vector<vector<uint64>> vvCost(n);
     for(uint i=0; i<n; ++i){
-        vvCost[i] = dijkstra(graph, s, i);
+        vvCost[i] = dijkstra(graph, s, n-i-3);
     }
     return vvCost;
 }
@@ -66,22 +63,19 @@ int main(){
         graph[v].push_back( edge(u, a, b) );
     }
     
-//    vector<vector<uint64>> vecCost = dijkstra_n(graph, s, n);
-    /*
+    vector<vector<uint64>> vecCost = dijkstra_n(graph, s, n);
     uint64 prev=vecCost[n-1][t];
+    /*
     for(int i=n-2; i>=0; --i){
         if(prev>vecCost[i][t]){ vecCost[i][t] = prev; }
-    }//*/
-    /*
+    }*/
     for(uint i=0; i<n; ++i){
 //        cout << (uint64)(10e15) - vecCost[i][t] << endl;
         cout << vecCost[i][t] << endl;
-    }//*/
+    }
     
-    vector<uint64> ret = dijkstra(graph, s, n);
-    cout << ret.size() << endl; // needs to be 4.
-    cout << t << endl;
-    cout << ret[t] << endl;
+//    vector<uint64> ret = dijkstra(graph, s, n-3);
+//    cout << ret[t] << endl;
     
     return 0;
 }
