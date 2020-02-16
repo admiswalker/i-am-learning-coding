@@ -18,14 +18,14 @@ vector<uint64> vXY2vCost_u2v(const vector<pair<int,int>>& vXY, const uint u){
 
 uint64 solve_prime(const vector<pair<int,int>>& vXY){
     const uint& N = vXY.size();
-    vector<bool> vUsed(N, false); vUsed[0]=true;
+    vector<bool> vUsed(N, false);
     vector<uint64> vCost_min(N, INT64_MAX); vCost_min[0]=0ull;
     
     uint64 sum_cost=0ull;
     for(;;){
         int minIdx=-1;
         for(uint i=0; i<N; ++i){
-            if(vUsed[i]==-1 || vCost_min[minIdx]<vCost_min[i]){ minIdx=i; }
+            if(!vUsed[i] && (minIdx==-1 || vCost_min[i]<vCost_min[minIdx])){ minIdx=i; }
         }
         if(minIdx==-1){ break; }
         
@@ -52,7 +52,7 @@ int main(){
         vXY[i].second = y;
     }
     
-    uint ret = solve_prime(vXY);
+    uint64 ret = solve_prime(vXY);
     cout << ret << endl;
     
     return 0;
