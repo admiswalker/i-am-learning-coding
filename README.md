@@ -250,7 +250,7 @@ AtCoder 上の類題が提示されていないため pass.
   
   [1] 蟻本 p. 93-94  
 
-#### 例題 2-5-2　Roadblocks (POJ No.3255)
+#### 例題 2-5-2 Roadblocks (POJ No.3255)
 - Task: [D - Saving Snuuk](https://atcoder.jp/contests/soundhound2018-summer-qual/tasks/soundhound2018_summer_qual_d)
 
   | Date       | File Name  | Exec Time |  Memory  | Algorithm | References      |
@@ -259,6 +259,14 @@ AtCoder 上の類題が提示されていないため pass.
   
   [1] 蟻本 p. 96-97  
   メモ：今回の場合は，spfa を使うと早いらしい．が，今回は普通に dijkstra で解いている．必要になったら調べたい．  
+
+#### 例題 2-5-3 Conscription (POJ No.3723)
+- Task: [ABC 065 D Built?](https://atcoder.jp/contests/abc065/tasks/arc076_b)
+
+  | Date       | File Name  | Exec Time | Memory  | Algorithm | References      |
+  | ---------- | ---------- | ---------:| -------:| --------- | --------------- |
+  |            |            |        ms |      KB |           |                 |
+
 
 ---
 
