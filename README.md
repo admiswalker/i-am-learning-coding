@@ -265,7 +265,7 @@ AtCoder 上の類題が提示されていないため pass.
 
   | Date       | File Name  | Exec Time | Memory  | Algorithm | References      |
   | ---------- | ---------- | ---------:| -------:| --------- | --------------- |
-  |            |            |        ms |      KB |           |                 |
+  | 2020.02.16 | main00.cpp |       TLE | 2688 KB |           |                 |
 
 
 ---
