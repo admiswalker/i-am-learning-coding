@@ -253,9 +253,12 @@ AtCoder 上の類題が提示されていないため pass.
 #### 例題 2-5-2　Roadblocks (POJ No.3255)
 - Task: [D - Saving Snuuk](https://atcoder.jp/contests/soundhound2018-summer-qual/tasks/soundhound2018_summer_qual_d)
 
-  | Date       | File Name  | Exec Time | Memory  | Algorithm | References      |
-  | ---------- | ---------- | ---------:| -------:| --------- | --------------- |
-  |            |            |        ms |      KB |           |                 |
+  | Date       | File Name  | Exec Time |  Memory  | Algorithm | References      |
+  | ---------- | ---------- | ---------:|  -------:| --------- | --------------- |
+  | 2020.02.16 | main.cpp   |    285 ms | 19072 KB | dijkstra  | [1]             |
+  
+  [1] 蟻本 p. 96-97  
+  メモ：今回の場合は，spfa を使うと早いらしい．が，今回は普通に dijkstra で解いている．必要になったら調べたい．  
 
 ---
 
