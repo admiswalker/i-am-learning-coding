@@ -10,13 +10,13 @@ struct edge{
 private:
 public:
     edge(){}
-    edge(uint to_in, uint cost_in): to(to_in), cost(cost_in) {}
+    edge(uint64 to_in, uint64 cost_in): to(to_in), cost(cost_in) {}
     ~edge(){}
-    uint to;
-    uint cost;
+    uint64 to;
+    uint64 cost;
 };
 
-vector<uint64> dijkstra(const vector<vector<edge>>& graph, uint s){
+vector<uint64> dijkstra(const vector<vector<edge>>& graph, uint64 s){
     vector<uint64> vCost(graph.size(), UINT64_MAX); vCost[s]=0ull;
     priority_queue<P,vector<P>,greater<P>> que; que.push( P(0,s) );
     
@@ -35,21 +35,16 @@ vector<uint64> dijkstra(const vector<vector<edge>>& graph, uint s){
     return vCost;
 }
 
-uint cost_u2v(const vector<vector<edge>>& graph_a, uint u, uint v){
-    vector<uint64> vCost = dijkstra(graph_a, u);
-    return vCost[v];
-}
-
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    uint n, m, s, t;
+    uint64 n, m, s, t;
     cin >> n >> m >> s >> t; --s; --t;
     
     vector<vector<edge>> graph_a(n), graph_b(n);
-    for(uint i=0; i<m; ++i){
-        uint u, v, a, b;
+    for(uint64 i=0; i<m; ++i){
+        uint64 u, v, a, b;
         cin >> u >> v >> a >> b; --u; --v;
         
         graph_a[u].push_back( edge(v, a) );
@@ -59,13 +54,18 @@ int main(){
         graph_b[v].push_back( edge(u, b) );
     }
     
+    vector<uint64> vCost_a = dijkstra(graph_a, s); // cost of s to i as vCost_a[i].
+    vector<uint64> vCost_b = dijkstra(graph_b, t); // cost of t to i as vCost_b[i].
+    
+    vector<uint64> vCost(n);
+    vCost[n-1] = vCost_a[n-1] + vCost_b[n-1];
+    for(uint i=n-2; i!=UINT_MAX; --i){
+        vCost[i] = vCost_a[i] + vCost_b[i];
+        if(vCost[i] > vCost[i+1]){ vCost[i] = vCost[i+1]; }
+    }
+    
     for(uint i=0; i<n; ++i){
-        uint ret;
-        if(i<){
-            ret = cost_u2v(graph_a, s, t);
-        }else{
-        }
-        cout << ret << endl;
+        cout << (uint64)1e15 - vCost[i] << endl;
     }
     
     return 0;
