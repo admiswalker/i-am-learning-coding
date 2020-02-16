@@ -4,6 +4,17 @@ typedef int64_t int64;
 typedef uint32_t uint;
 typedef uint64_t uint64;
 
+struct vertex{
+private:
+public:
+    vertex(){}
+    vertex(uint idx_in, uint x_in, uint y_in): idx(idx_in), x(x_in) y(y_in) {}
+    ~edge(){}
+    uint idx;
+    uint x;
+    uint y;
+};
+
 struct edge{
 private:
 public:
