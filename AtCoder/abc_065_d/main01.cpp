@@ -10,16 +10,16 @@ public:
     edge(){}
     edge(uint to_in, uint cost_in): to(to_in), cost(cost_in) {}
     ~edge(){}
-    uint to;
-    uint cost;
+    int to;
+    int cost;
 };
 
 uint64 solve_prime(const vector<vector<edge>>& graph){
     const uint& N = graph.size();
     vector<bool> vUsed(N, false);
-    vector<uint> vCost_min(N, UINT_MAX); vCost_min[0]=0;
+    vector<int> vCost_min(N, INT_MAX); vCost_min[0]=0;
     
-    uint64 sum_cost=0ull;
+    int64 sum_cost=0ull;
     for(;;){
         int minIdx=-1;
         for(uint i=0; i<N; ++i){
@@ -44,22 +44,22 @@ public:
     vertex(){}
     vertex(uint idx_in, uint x_in, uint y_in): idx(idx_in), x(x_in), y(y_in) {}
     ~vertex(){}
-    uint idx;
-    uint x;
-    uint y;
+    int idx;
+    int x;
+    int y;
 };
 bool cmp_x(const struct vertex& lhs, const struct vertex& rhs){ return lhs.x < rhs.x; }
 bool cmp_y(const struct vertex& lhs, const struct vertex& rhs){ return lhs.y < rhs.y; }
-uint64 costAB(const struct vertex lhs, const struct vertex rhs){ return min(abs(lhs.x-rhs.x), abs(lhs.y-rhs.y)); }
+int costAB(const struct vertex& lhs, const struct vertex& rhs){ return min(abs(lhs.x-rhs.x), abs(lhs.y-rhs.y)); }
 
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    uint N; cin >> N;
+    int N; cin >> N;
     vector<vertex> vXY(N);
-    for(uint i=0; i<N; ++i){
-        uint x, y; cin >> x >> y;
+    for(int i=0; i<N; ++i){
+        int x, y; cin >> x >> y;
         vXY[i].idx = i;
         vXY[i].x   = x;
         vXY[i].y   = y;
@@ -69,14 +69,14 @@ int main(){
     vector<vertex> vXY_y=vXY; sort(vXY_y.begin(), vXY_y.end(), cmp_y);
     
     vector<vector<edge>> graph(N);
-    for(uint i=0; i<N-1; ++i){
-        uint64 cost_x = costAB(vXY_x[i], vXY_x[i+1]);
-        graph[ vXY_x[i  ].idx ].emplace_back(vXY_x[i+1].idx, cost_x);
-        graph[ vXY_x[i+1].idx ].emplace_back(vXY_x[i  ].idx, cost_x);
+    for(int i=0; i<N-1; ++i){
+        int cost_x = costAB(vXY_x[i], vXY_x[i+1]);
+        graph[ vXY_x[i  ].idx ].push_back( edge(vXY_x[i+1].idx, cost_x) );
+        graph[ vXY_x[i+1].idx ].push_back( edge(vXY_x[i  ].idx, cost_x) );
         
-        uint64 cost_y = costAB(vXY_y[i], vXY_y[i+1]);
-        graph[ vXY_y[i  ].idx ].emplace_back(vXY_y[i+1].idx, cost_y);
-        graph[ vXY_y[i+1].idx ].emplace_back(vXY_y[i  ].idx, cost_y);
+        int cost_y = costAB(vXY_y[i], vXY_y[i+1]);
+        graph[ vXY_y[i  ].idx ].push_back( edge(vXY_y[i+1].idx, cost_y) );
+        graph[ vXY_y[i+1].idx ].push_back( edge(vXY_y[i  ].idx, cost_y) );
     }
     
     cout << solve_prime(graph) << endl;
