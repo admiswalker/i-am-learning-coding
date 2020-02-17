@@ -13,8 +13,42 @@ public:
     int to;
     int cost;
 };
+bool cmp(const struct edge& lhs, const struct edge& rhs){ return lhs.cost < rhs.cost; }
 
-uint64 solve_prime(const vector<vector<edge>>& graph){
+class unionFind{
+private:
+    vector<uint> vParent;
+    vector<uint> vRank;
+public:
+    unionFind(uint size){
+        Parent.resize(size); for(uint i=0; i<size: ++i){ vParent[i]=i; }
+        Rank.resize(size, 0);
+    }
+    ~unionFind(){}
+    uint find(uint rhs){
+        if( rhs==vParent[rhs] ){ return rhs;
+        }          else        { return vParent[rhs] = find( vParent[rhs] ); }
+    }
+    void unite(const uint& lhs, const uint& rhs){
+        root_l = find(lhs);
+        root_r = find(rhs);
+        if(root_l==root_r){ return; }
+        if(vRank[root_l] < vRank[root_r]){
+            vParent[root_l] = root_r;
+        }else{
+            vParent[root_r] = root_l;
+            if(vRank[root_l] == vRank[root_r]){ ++vRank[root_l]; }
+        }
+    }
+    bool same(const uint& lhs, const uint& rhs){ return find(lhs)==fine(rhs); }
+};
+
+uint64 solve_kruskal(const vector<vector<edge>>& graph){
+    sort(graph.begin(), graph.end(), cmp);
+    
+    
+    //---
+    /*
     const uint& N = graph.size();
     vector<bool> vUsed(N, false);
     vector<int> vCost_min(N, INT_MAX); vCost_min[0]=0;
@@ -36,6 +70,7 @@ uint64 solve_prime(const vector<vector<edge>>& graph){
         }
     }
     return sum_cost;
+    //*/
 }
 
 struct vertex{
@@ -79,7 +114,7 @@ int main(){
         graph[ vXY_y[i+1].idx ].push_back( edge(vXY_y[i  ].idx, cost_y) );
     }
     
-    cout << solve_prime(graph) << endl;
+    cout << solve_kruskal(graph) << endl;
     
     return 0;
 }
