@@ -8,9 +8,10 @@ struct edge{
 private:
 public:
     edge(){}
-    edge(uint to_in, uint cost_in): to(to_in), cost(cost_in) {}
+    edge(uint u_in, uint v_in, uint cost_in): u(u_in), v(v_in), cost(cost_in) {}
     ~edge(){}
-    int to;
+    int u; // from
+    int v; // to
     int cost;
 };
 bool cmp(const struct edge& lhs, const struct edge& rhs){ return lhs.cost < rhs.cost; }
@@ -21,56 +22,39 @@ private:
     vector<uint> vRank;
 public:
     unionFind(uint size){
-        Parent.resize(size); for(uint i=0; i<size: ++i){ vParent[i]=i; }
-        Rank.resize(size, 0);
+        vParent.resize(size); for(uint i=0; i<size; ++i){ vParent[i]=i; }
+        vRank.resize(size, 0);
     }
     ~unionFind(){}
+    
     uint find(uint rhs){
-        if( rhs==vParent[rhs] ){ return rhs;
+        if(rhs == vParent[rhs]){ return rhs;
         }          else        { return vParent[rhs] = find( vParent[rhs] ); }
     }
     void unite(const uint& lhs, const uint& rhs){
-        root_l = find(lhs);
-        root_r = find(rhs);
-        if(root_l==root_r){ return; }
-        if(vRank[root_l] < vRank[root_r]){
-            vParent[root_l] = root_r;
-        }else{
-            vParent[root_r] = root_l;
-            if(vRank[root_l] == vRank[root_r]){ ++vRank[root_l]; }
-        }
+        uint root_l = find(lhs);
+        uint root_r = find(rhs);
+        if(root_l == root_r){ return; }
+        
+        if(vRank[root_l] < vRank[root_r]){ vParent[root_l]=root_r;
+        }              else              { vParent[root_r]=root_l; if(vRank[root_l] == vRank[root_r]){ ++vRank[root_l]; } }
     }
-    bool same(const uint& lhs, const uint& rhs){ return find(lhs)==fine(rhs); }
+    bool same(const uint& lhs, const uint& rhs){ return find(lhs)==find(rhs); }
 };
 
-uint64 solve_kruskal(const vector<vector<edge>>& graph){
-    sort(graph.begin(), graph.end(), cmp);
+uint64 solve_kruskal(vector<edge>& vEdge){
+    sort(vEdge.begin(), vEdge.end(), cmp);
     
+    class unionFind uf(vEdge.size());
+    uint64 sum_cost=0ull;
     
-    //---
-    /*
-    const uint& N = graph.size();
-    vector<bool> vUsed(N, false);
-    vector<int> vCost_min(N, INT_MAX); vCost_min[0]=0;
-    
-    int64 sum_cost=0ull;
-    for(;;){
-        int minIdx=-1;
-        for(uint i=0; i<N; ++i){
-            if(!vUsed[i] && (minIdx==-1 || vCost_min[i]<vCost_min[minIdx])){ minIdx=i; }
-        }
-        if(minIdx==-1){ break; }
-        
-        vUsed[minIdx] = true;
-        sum_cost += (uint64)vCost_min[minIdx];
-        
-        for(uint i=0; i<graph[minIdx].size(); ++i){
-            edge e = graph[minIdx][i];
-            vCost_min[e.to] = min(vCost_min[e.to], e.cost);
-        }
+    for(uint i=0; i<vEdge.size(); ++i){
+        struct edge e = vEdge[i];
+        if(uf.same(e.u, e.v)){ continue; }
+        uf.unite(e.u, e.v);
+        sum_cost += e.cost;
     }
     return sum_cost;
-    //*/
 }
 
 struct vertex{
@@ -103,18 +87,18 @@ int main(){
     vector<vertex> vXY_x=vXY; sort(vXY_x.begin(), vXY_x.end(), cmp_x);
     vector<vertex> vXY_y=vXY; sort(vXY_y.begin(), vXY_y.end(), cmp_y);
     
-    vector<vector<edge>> graph(N);
+    vector<edge> vEdge(4*N); vEdge.resize(0);
     for(int i=0; i<N-1; ++i){
         int cost_x = costAB(vXY_x[i], vXY_x[i+1]);
-        graph[ vXY_x[i  ].idx ].push_back( edge(vXY_x[i+1].idx, cost_x) );
-        graph[ vXY_x[i+1].idx ].push_back( edge(vXY_x[i  ].idx, cost_x) );
+        vEdge.push_back( edge(vXY_x[i  ].idx, vXY_x[i+1].idx, cost_x) );
+        vEdge.push_back( edge(vXY_x[i+1].idx, vXY_x[i  ].idx, cost_x) );
         
         int cost_y = costAB(vXY_y[i], vXY_y[i+1]);
-        graph[ vXY_y[i  ].idx ].push_back( edge(vXY_y[i+1].idx, cost_y) );
-        graph[ vXY_y[i+1].idx ].push_back( edge(vXY_y[i  ].idx, cost_y) );
+        vEdge.push_back( edge(vXY_y[i  ].idx, vXY_y[i+1].idx, cost_y) );
+        vEdge.push_back( edge(vXY_y[i+1].idx, vXY_y[i  ].idx, cost_y) );
     }
     
-    cout << solve_kruskal(graph) << endl;
+    cout << solve_kruskal(vEdge) << endl;
     
     return 0;
 }
