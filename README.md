@@ -263,14 +263,15 @@ AtCoder 上の類題が提示されていないため pass.
 #### 例題 2-5-3 Conscription (POJ No.3723)
 - Task: [ABC 065 D Built?](https://atcoder.jp/contests/abc065/tasks/arc076_b)
 
-  | Date       | File Name  | Exec Time | Memory  | Algorithm | References      |
-  | ---------- | ---------- | ---------:| -------:| --------- | --------------- |
-  | 2020.02.16 | main00.cpp |       TLE | 2688 KB | プリム法   | [1]             |
-  |            | main01.cpp |           |      KB |           | [2]             |
+  | Date       | File Name  | Exec Time | Memory   | Algorithm             | References      | Note |
+  | ---------- | ---------- | ---------:| --------:| --------------------- | --------------- | ----- |
+  | 2020.02.16 | main00.cpp |       TLE |       KB | プリム法 O(n^2)        | [1]             | 辺の数が O(n^2) のため，合計 O(n^4) で論外． |
+  | 2020.02.18 | main01.cpp |       TLE |       KB | プリム法 O(n^2)        | [1][2]          | O(n^2) では許してくれなかった． |
+  | 2020.02.19 | main02.cpp |      90ms | 11648 KB | クラスカル法 O(n log n) | [1][2]          | O(n log n) なら AC． |
   
   [1] 蟻本 p. 100-101  
   [2] AtCoder 社の解説 > それぞれ x と y でソートした隣接 2 辺を辺とすれば良い．を元に実装．  
-
+  
 ---
 
 #### XXX
