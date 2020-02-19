@@ -271,7 +271,14 @@ AtCoder 上の類題が提示されていないため pass.
   
   [1] 蟻本 p. 100-101  
   [2] AtCoder 社の解説 > それぞれ x と y でソートした隣接 2 辺を辺とすれば良い．を元に実装．  
-  
+
+#### 例題 2-5-4 Layout (POJ No.3169)
+- Task: [ABC 061 D Score Attack](https://atcoder.jp/contests/abc061/tasks/abc061_d)
+
+  | Date       | File Name  | Exec Time | Memory  | Algorithm | References      |
+  | ---------- | ---------- | ---------:| -------:| --------- | --------------- |
+  |            |            |        ms |      KB |           |                 |
+
 ---
 
 #### XXX
