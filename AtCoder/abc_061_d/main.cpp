@@ -33,11 +33,12 @@ vector<int64> bellmanFord(bool& cycleTF_out, const uint V, const uint E, const v
     
     for(uint vi=0; vi<V; ++vi){
         bool isUpdate = false;
-        for(uint ei=0; ei<V; ++ei){
+        for(uint ei=0; ei<E; ++ei){
             const struct edge& e = vEdge[ei];
             
-            if(vCost[e.v] <= vCost[e.v] + e.cost){ continue; }
-            vCost[e.v] = vCost[e.v] + e.cost;
+            if(vCost[e.v] <= vCost[e.u] + e.cost){ continue; }
+            vCost[e.v] = vCost[e.u] + e.cost;
+            isUpdate = true;
             
             if(vi==V_m1){ cycleTF_out=true; break; }
         }
@@ -62,8 +63,8 @@ int main(){
     
     bool cycleTF; vector<int64> vCost = bellmanFord(cycleTF, V, E, vEdge, 0);
     if(cycleTF){ cout << "inf" << endl; return 0; }
-    
     neg_ow(vCost);
+    
     cout << vCost[V-1] << endl;
     
     return 0;
