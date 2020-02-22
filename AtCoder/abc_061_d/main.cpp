@@ -26,9 +26,9 @@ void neg_ow(vector<int64>& vRhs){
     }
 }
 
-vector<int64> bellmanFord(bool& cycleTF_out, const uint V, const uint E, const vector<edge>& vEdge, const uint start){
+vector<int64> bellmanFord(bool& cycleTF_out, const uint V, const uint E, const vector<edge>& vEdge, const uint begin){
     cycleTF_out = false;
-    vector<int64> vCost(V); for(uint i=0; i<V; ++i){ vCost[i]=INT64_MAX; } vCost[start]=0ll;
+    vector<int64> vCost(V); for(uint i=0; i<V; ++i){ vCost[i]=INT64_MAX; } vCost[begin]=0ll;
     uint V_m1 = V-1;
     
     for(uint vi=0; vi<V; ++vi){
@@ -36,6 +36,7 @@ vector<int64> bellmanFord(bool& cycleTF_out, const uint V, const uint E, const v
         for(uint ei=0; ei<E; ++ei){
             const struct edge& e = vEdge[ei];
             
+            if(vCost[e.u]==INT64_MAX){ continue; }
             if(vCost[e.v] <= vCost[e.u] + e.cost){ continue; }
             vCost[e.v] = vCost[e.u] + e.cost;
             isUpdate = true;
