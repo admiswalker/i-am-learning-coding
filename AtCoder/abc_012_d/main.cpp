@@ -9,6 +9,7 @@ void warshallFloyd(vector<vector<int64>>& mCost){
     for(uint i=0; i<N; ++i){
         for(uint p=0; p<N; ++p){
             for(uint q=0; q<N; ++q){
+                if(mCost[p][i]==INT64_MAX || mCost[i][q]==INT64_MAX){ continue; }
                 mCost[p][q] = min(mCost[p][q], mCost[p][i] + mCost[i][q]);
             }
         }
@@ -18,13 +19,13 @@ void warshallFloyd(vector<vector<int64>>& mCost){
 template<typename T>
 T min(const vector<T>& vRhs){
     T ret = vRhs[0];
-    for(uint i=1; i<vRhs.size(); ++i){ if(vRhs[i]<ret){ ret=vRhs[i]; }; }
+    for(uint i=1; i<vRhs.size(); ++i){ if(vRhs[i]<ret){ ret=vRhs[i]; } }
     return ret;
 }
 template<typename T>
 T max(const vector<T>& vRhs){
     T ret = vRhs[0];
-    for(uint i=1; i<vRhs.size(); ++i){ if(vRhs[i]>ret){ ret=vRhs[i]; }; }
+    for(uint i=1; i<vRhs.size(); ++i){ if(vRhs[i]>ret){ ret=vRhs[i]; } }
     return ret;
 }
 
