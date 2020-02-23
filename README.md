@@ -277,7 +277,10 @@ AtCoder 上の類題が提示されていないため pass.
 
   | Date       | File Name  | Exec Time | Memory  | Algorithm | References      |
   | ---------- | ---------- | ---------:| -------:| --------- | --------------- |
-  |            |            |        ms |      KB |           |                 |
+  | 2020.02.23 | main.cpp   |      5 ms |  256 KB | ベルマンフォード法 | [1][2]    |
+  
+  [1] 蟻本 p. 95-96  
+  [2] [AtCoder解説](https://img.atcoder.jp/abc061/editorial.pdf)  
 
 ---
 
