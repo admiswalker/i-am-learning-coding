@@ -1,3 +1,5 @@
+// https://atcoder.jp/contests/abc061/submissions/1285827
+
 #include <bits/stdc++.h>
 using namespace std;
 typedef int64_t int64;
@@ -42,7 +44,10 @@ vector<int64> bellmanFord(bool& cycleTF_out, const uint V, const uint E, const v
             isUpdate = true;
         }
         if(!isUpdate){ break; }
-        if(vi==V_m1){ cycleTF_out=true; break; }
+        if(vi==V_m1){
+            if(vCost[V_m1]==INT64_MAX){ cycleTF_out=true; }
+            break;
+        }
     }
     return vCost;
 }
