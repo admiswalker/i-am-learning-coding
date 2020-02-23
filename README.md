@@ -281,6 +281,7 @@ AtCoder 上の類題が提示されていないため pass.
   
   [1] 蟻本 p. 95-96  
   [2] [AtCoder解説](https://img.atcoder.jp/abc061/editorial.pdf)  
+  メモ：単に負の閉路がグラフ上あるかどうかではなく，負の閉路が求める経路上に有るかどうか，の確認が大切．  
 
 #### 例題 2-5-5 Warshall-Floyd を使う問題
 - Task: [ABC 012 D バスと避けられない運命](https://atcoder.jp/contests/abc012/tasks/abc012_4)
