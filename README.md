@@ -297,6 +297,16 @@ AtCoder 上の類題が提示されていないため pass.
 
 ---
 
+### 2-6 数学的な問題を解くコツ
+#### 例題 2-6-1 線分上の格子点の個数
+- Task: [ABC 070 C Multiple Clocks](https://atcoder.jp/contests/abc070/tasks/abc070_c)
+
+  | Date       | File Name  | Exec Time | Memory  | Algorithm | References      |
+  | ---------- | ---------- | ---------:| -------:| --------- | --------------- |
+  |            |            |        ms |      KB |           |                 |
+
+---
+
 #### XXX
 - Task: [title](URL)
 
