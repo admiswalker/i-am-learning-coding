@@ -11,18 +11,18 @@ struct edge{
 
 vector<uint64> dijkstra(const vector<vector<edge>>& vvEdge, const uint begin){
     const uint& N = vvEdge.size();
-    vector<uint64> vCost(N); for(uint i=0; i<N; ++i){ vCost[i]=INT64_MAX; } vCost[begin]=0ll;
+    vector<uint64> vCost(N); for(uint i=0; i<N; ++i){ vCost[i]=UINT64_MAX; } vCost[begin]=0ull;
     
-    priority_queue<pair<uint,uint>, vector<pair<uint,uint>>, greater<pair<uint,uint>>> que;
-    que.push( pair<uint,uint>{begin, 0} );
+    priority_queue<pair<uint64,uint>, vector<pair<uint64,uint>>, greater<pair<uint64,uint>>> que;
+    que.push( pair<uint64,uint>{0, begin} );
     
-    for(;;){
-        pair<uint,uint> p = que.top(); que.pop();
-        const uint& cost = p.first;
-        const uint& idx  = p.second;
+    while(!que.empty()){
+        pair<uint64,uint> p = que.top(); que.pop();
+        const uint64& cost = p.first;
+        const uint  & idx  = p.second;
         if(vCost[idx]<cost){ continue; }
-        for(uint to=0; to<vvEdge[idx].size(); ++to){
-            struct edge e = vvEdge[idx][to];
+        for(uint i=0; i<vvEdge[idx].size(); ++i){
+            const struct edge& e = vvEdge[idx][i];
             if( vCost[e.to] <= vCost[idx] + e.cost ){ continue; }
             vCost[e.to] = vCost[idx] + e.cost;
             que.push( {vCost[e.to], e.to} );
@@ -53,6 +53,7 @@ int main(){
     for(uint i=0; i<M; ++i){
         uint a, b, c; cin >> a >> b >> c; --a; --b;
         vvEdge[a].push_back( {b, c} );
+        vvEdge[b].push_back( {a, c} );
     }
     
     vector<uint64> vCost_max(N);
