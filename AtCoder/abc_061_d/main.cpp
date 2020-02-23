@@ -46,9 +46,9 @@ void bellmanFord(vector<bool>& vCycle, vector<int64>& vCost, const uint V, const
             if(vi!=V_m1){ continue; }
             vCycle[e.u] = true;
             vCycle[e.v] = true;
-            return;
         }
         if(!isUpdate){ return; }
+        if(vi==V_m1){ return; }
     }
     return;
 }
