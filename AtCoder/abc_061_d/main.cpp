@@ -1,4 +1,4 @@
-// https://atcoder.jp/contests/abc061/submissions/1285827
+// https://img.atcoder.jp/abc061/editorial.pdf
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -28,9 +28,9 @@ void neg_ow(vector<int64>& vRhs){
     }
 }
 
-vector<int64> bellmanFord(bool& cycleTF_out, const uint V, const uint E, const vector<edge>& vEdge, const uint begin){
-    cycleTF_out = false;
-    vector<int64> vCost(V); for(uint i=0; i<V; ++i){ vCost[i]=INT64_MAX; } vCost[begin]=0ll;
+void bellmanFord(vector<bool>& vCycle, vector<int64>& vCost, const uint V, const uint E, const vector<edge>& vEdge, const uint begin){
+    vCycle.resize(V); for(uint i=0; i<V; ++i){ vCycle[i]=false; }
+    vCost.resize(V); for(uint i=0; i<V; ++i){ vCost[i]=INT64_MAX; } vCost[begin]=0ll;
     uint V_m1 = V-1;
     
     for(uint vi=0;; ++vi){
@@ -42,14 +42,15 @@ vector<int64> bellmanFord(bool& cycleTF_out, const uint V, const uint E, const v
             if(vCost[e.v] <= vCost[e.u] + e.cost){ continue; }
             vCost[e.v] = vCost[e.u] + e.cost;
             isUpdate = true;
+            
+            if(vi!=V_m1){ continue; }
+            vCycle[e.u] = true;
+            vCycle[e.v] = true;
+            return;
         }
-        if(!isUpdate){ break; }
-        if(vi==V_m1){
-            if(vCost[V_m1]==INT64_MAX){ cycleTF_out=true; } // ループのあるなしではなく，1 -> N の経路上にループがあるかどうかが問題なのでは．．．
-            break;
-        }
+        if(!isUpdate){ return; }
     }
-    return vCost;
+    return;
 }
 
 int main(){
@@ -66,8 +67,9 @@ int main(){
     }
     negCost_ow(vEdge);
     
-    bool cycleTF; vector<int64> vCost = bellmanFord(cycleTF, V, E, vEdge, 0);
-    if(cycleTF){ cout << "inf" << endl; return 0; }
+    vector<bool> vCycle; vector<int64> vCost;
+    bellmanFord(vCycle, vCost, V, E, vEdge, 0);
+    if(vCycle[V-1]){ cout << "inf" << endl; return 0; }
     neg_ow(vCost);
     
     cout << vCost[V-1] << endl;
