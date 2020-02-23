@@ -45,7 +45,7 @@ vector<int64> bellmanFord(bool& cycleTF_out, const uint V, const uint E, const v
         }
         if(!isUpdate){ break; }
         if(vi==V_m1){
-            if(vCost[V_m1]==INT64_MAX){ cycleTF_out=true; }
+            if(vCost[V_m1]==INT64_MAX){ cycleTF_out=true; } // ループのあるなしではなく，1 -> N の経路上にループがあるかどうかが問題なのでは．．．
             break;
         }
     }
