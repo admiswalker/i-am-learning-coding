@@ -286,9 +286,11 @@ AtCoder 上の類題が提示されていないため pass.
 #### 例題 2-5-5 Warshall-Floyd を使う問題
 - Task: [ABC 012 D バスと避けられない運命](https://atcoder.jp/contests/abc012/tasks/abc012_4)
 
-  | Date       | File Name  | Exec Time | Memory  | Algorithm | References      |
-  | ---------- | ---------- | ---------:| -------:| --------- | --------------- |
-  |            |            |        ms |      KB |           |                 |
+  | Date       | File Name  | Exec Time | Memory  | Algorithm | References      | Note            |
+  | ---------- | ---------- | ---------:| -------:| --------- | --------------- | --------------- |
+  | 2020.02.23 | main.cpp   |     47 ms | 1024 KB | ワーシャル-フロイド法 (Warshall–Floyd Algorithm) | [1] | 蟻本の INF は INT_MAX より小さい値である．そのため，INT_MAX で同じ実装するとオーバーフローするため注意． |
+  
+  [1] 蟻本 p. 99  
 
 ---
 
