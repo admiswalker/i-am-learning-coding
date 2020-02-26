@@ -327,7 +327,7 @@ AtCoder 上の類題が提示されていないため pass.
 
   | Date       | File Name  | Exec Time | Memory  | Algorithm | References      |
   | ---------- | ---------- | ---------:| -------:| --------- | --------------- |
-  |            |            |        ms |      KB |           |                 |
+  | 2020.02.26 | main.cpp   |      2 ms |  256 KB | エラストテネスの篩 |                 |
 
 ---
 
