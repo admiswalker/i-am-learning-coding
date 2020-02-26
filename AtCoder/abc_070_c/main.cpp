@@ -3,14 +3,13 @@ using namespace std;
 typedef int64_t int64;
 typedef uint32_t uint;
 typedef uint64_t uint64;
-typedef __uint128_t uint128;
 
-uint128 gcd(uint128 a, uint128 b){ // greatest common divisor
+uint64 gcd(uint64 a, uint64 b){ // greatest common divisor
     if(b==0){ return a; }
     return gcd(b, a%b);
 }
-uint128 lcd(uint128 a, uint128 b){ // least common multiple
-    return (a*b) / gcd(a, b);
+uint64 lcm(uint64 a, uint64 b){ // least common multiple
+    return a / gcd(a, b) * b;
 }
 
 int main(){
@@ -23,9 +22,9 @@ int main(){
         cin >> vT[i];
     }
     
-    uint64 ret = lcd(vT[0], vT[1]);
-    for(uint i=2; i<N; ++i){
-        ret = lcd(ret, vT[i]);
+    uint64 ret = 1ull;
+    for(uint i=0; i<N; ++i){
+        ret = lcm(ret, vT[i]);
     }
     cout << ret << endl;
     
