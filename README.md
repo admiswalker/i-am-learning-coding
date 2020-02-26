@@ -311,6 +311,7 @@ AtCoder 上の類題が提示されていないため pass.
   | Date       | File Name  | Exec Time | Memory  | Algorithm | References      |
   | ---------- | ---------- | ---------:| -------:| --------- | --------------- |
   |            |            |        ms |      KB |           |                 |
+  
   pass
 
 ---
