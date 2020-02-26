@@ -314,6 +314,13 @@ AtCoder 上の類題が提示されていないため pass.
   
   pass
 
+#### 例題 2-6-3 素数判定
+- Task: [ARC 017 A 素数、コンテスト、素数](https://atcoder.jp/contests/arc017/tasks/arc017_1)
+
+  | Date       | File Name  | Exec Time | Memory  | Algorithm | References      |
+  | ---------- | ---------- | ---------:| -------:| --------- | --------------- |
+  |            |            |        ms |      KB |           |                 |
+
 ---
 
 #### XXX
