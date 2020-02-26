@@ -323,6 +323,7 @@ AtCoder 上の類題が提示されていないため pass.
 
 ### 例題 2-6-4 素数の個数
 - Task: [天下一プログラマーコンテスト2012 予選C A 与えられた数より小さい素数の個数について](https://atcoder.jp/contests/tenka1-2012-qualc/tasks/tenka1_2012_9)
+- Git dir: [./AtCoder/tenka1_2012_qualc_a](./AtCoder/tenka1_2012_qualc_a)
 
   | Date       | File Name  | Exec Time | Memory  | Algorithm | References      |
   | ---------- | ---------- | ---------:| -------:| --------- | --------------- |
@@ -332,6 +333,7 @@ AtCoder 上の類題が提示されていないため pass.
 
 #### XXX
 - Task: [title](URL)
+- Git dir: [./AtCoder/XXXXXX](./AtCoder/xxx_000_x)
 
   | Date       | File Name  | Exec Time | Memory  | Algorithm | References      |
   | ---------- | ---------- | ---------:| -------:| --------- | --------------- |
