@@ -321,13 +321,22 @@ AtCoder 上の類題が提示されていないため pass.
   | ---------- | ---------- | ---------:| -------:| --------- | --------------- |
   | 2020.02.26 | main.cpp   |      1 ms |  424 KB | 試し割り   |                 |
 
-### 例題 2-6-4 素数の個数
+#### 例題 2-6-4 素数の個数
 - Task: [天下一プログラマーコンテスト2012 予選C A 与えられた数より小さい素数の個数について](https://atcoder.jp/contests/tenka1-2012-qualc/tasks/tenka1_2012_9)
 - Git dir: [./AtCoder/tenka1_2012_qualc_a](./AtCoder/tenka1_2012_qualc_a)
 
   | Date       | File Name  | Exec Time | Memory  | Algorithm | References      |
   | ---------- | ---------- | ---------:| -------:| --------- | --------------- |
   | 2020.02.26 | main.cpp   |      2 ms |  256 KB | エラストテネスの篩 |                 |
+  
+  
+#### 例題 2-6-5 区間内の素数の個数
+- Task: [JAG Practice Contest for ACM-ICPC Asia Regional 2017 C Prime-Factor Prime](https://atcoder.jp/contests/jag2017autumn/tasks/jag2017autumn_c?lang=ja)
+- Git dir: [./AtCoder/jag2017autumn_c](./AtCoder/jag2017autumn_c)
+
+  | Date       | File Name  | Exec Time | Memory  | Algorithm | References      |
+  | ---------- | ---------- | ---------:| -------:| --------- | --------------- |
+  |            |            |        ms |      KB |           |                 |
 
 ---
 
