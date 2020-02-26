@@ -303,7 +303,14 @@ AtCoder 上の類題が提示されていないため pass.
 
   | Date       | File Name  | Exec Time | Memory  | Algorithm | References      |
   | ---------- | ---------- | ---------:| -------:| --------- | --------------- |
-  | 2020.02.26 | main.cpp   |      1 ms |  256 KB | ユークリッドの互除法 |                 |
+  | 2020.02.26 | main.cpp   |      1 ms |  256 KB | ユークリッドの互除法 |         |
+
+#### 例題 2-6-2 双六
+- Task: [ARC 067 E Grouping](https://atcoder.jp/contests/arc067/tasks/arc067_c)
+
+  | Date       | File Name  | Exec Time | Memory  | Algorithm | References      |
+  | ---------- | ---------- | ---------:| -------:| --------- | --------------- |
+  |            |            |        ms |      KB |           |                 |
 
 ---
 
