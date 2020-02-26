@@ -311,11 +311,29 @@ AtCoder 上の類題が提示されていないため pass.
   | Date       | File Name  | Exec Time | Memory  | Algorithm | References      |
   | ---------- | ---------- | ---------:| -------:| --------- | --------------- |
   |            |            |        ms |      KB |           |                 |
+  
+  pass
+
+#### 例題 2-6-3 素数判定
+- Task: [ARC 017 A 素数、コンテスト、素数](https://atcoder.jp/contests/arc017/tasks/arc017_1)
+
+  | Date       | File Name  | Exec Time | Memory  | Algorithm | References      |
+  | ---------- | ---------- | ---------:| -------:| --------- | --------------- |
+  | 2020.02.26 | main.cpp   |      1 ms |  424 KB | 試し割り   |                 |
+
+### 例題 2-6-4 素数の個数
+- Task: [天下一プログラマーコンテスト2012 予選C A 与えられた数より小さい素数の個数について](https://atcoder.jp/contests/tenka1-2012-qualc/tasks/tenka1_2012_9)
+- Git dir: [./AtCoder/tenka1_2012_qualc_a](./AtCoder/tenka1_2012_qualc_a)
+
+  | Date       | File Name  | Exec Time | Memory  | Algorithm | References      |
+  | ---------- | ---------- | ---------:| -------:| --------- | --------------- |
+  |            |            |        ms |      KB |           |                 |
 
 ---
 
 #### XXX
 - Task: [title](URL)
+- Git dir: [./AtCoder/XXXXXX](./AtCoder/xxx_000_x)
 
   | Date       | File Name  | Exec Time | Memory  | Algorithm | References      |
   | ---------- | ---------- | ---------:| -------:| --------- | --------------- |
