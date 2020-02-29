@@ -59,20 +59,13 @@ int main(){
     uint l, r; cin >> l >> r;
     vector<bool> pTable; vector<uint> vPrime;
     tie(pTable, vPrime) = sieve( sqrt(r) );
-    //*
+    
     uint ans=0;
     for(uint i=l; i<=r; ++i){
         vector<fact> vFact = factor(vPrime, i);
-//        cout << i << " " << sum(vFact) << endl;
         if(isPrime(pTable, sum(vFact) )){ ++ans; }
     }
     cout << ans << endl;
-    //*/
-    /*
-    vector<fact> vFact = factor(vPrime, 10);
-    for(uint i=0; i<vFact.size(); ++i){
-        cout << vFact[i].prime << " " << vFact[i].num << endl;
-    }
-    //*/
+    
     return 0;
 }
