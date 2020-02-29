@@ -22,7 +22,6 @@ struct fact{
 };
 vector<fact> factor(const vector<uint>& vPrime, uint n){
     vector<fact> vFactor;
-    uint n_prev = n;
     for(uint pi=0; pi<vPrime.size(); ++pi){
         uint p=0;
         for(uint i=0;; ++i){
@@ -35,7 +34,7 @@ vector<fact> factor(const vector<uint>& vPrime, uint n){
         }
         if(n==1){ break; }
     }
-    if(n==n_prev){
+    if(n!=1){
         vFactor.push_back( {n, 1} );
     }
     return vFactor; 
@@ -60,13 +59,20 @@ int main(){
     uint l, r; cin >> l >> r;
     vector<bool> pTable; vector<uint> vPrime;
     tie(pTable, vPrime) = sieve( sqrt(r) );
-    
+    //*
     uint ans=0;
     for(uint i=l; i<=r; ++i){
         vector<fact> vFact = factor(vPrime, i);
+//        cout << i << " " << sum(vFact) << endl;
         if(isPrime(pTable, sum(vFact) )){ ++ans; }
     }
     cout << ans << endl;
-    
+    //*/
+    /*
+    vector<fact> vFact = factor(vPrime, 10);
+    for(uint i=0; i<vFact.size(); ++i){
+        cout << vFact[i].prime << " " << vFact[i].num << endl;
+    }
+    //*/
     return 0;
 }
