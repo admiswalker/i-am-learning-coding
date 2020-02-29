@@ -4,22 +4,46 @@ typedef int64_t int64;
 typedef uint32_t uint;
 typedef uint64_t uint64;
 
-uint max(const uint lhs, const uint rhs){ return (lhs>rhs) ? lhs : rhs; }
-uint countTrue(const vector<bool>& vRhs){
-    uint num=0; for(uint i=0; i<vRhs.size(); ++i){ if(vRhs[i]){++num;} } return num;
+pair<vector<bool>, vector<uint>> sieve(const uint n){
+    const uint n_p1 = n+1;
+    vector<bool> pTable(n_p1, true); pTable[0]=false; pTable[1]=false;
+    vector<uint> vPrime;
+    for(uint ti=2; ti<n_p1; ++ti){
+        if(!pTable[ti]){ continue; }
+        vPrime.push_back( ti );
+        for(uint i=ti*2; i<n_p1; i+=ti){ pTable[i]=false; }
+    }
+    return {pTable, vPrime};
 }
 
-uint sieve_num_lr(const uint l, const uint r){
-    const uint n=r-l+1;
-    const uint rR = sqrt(r)+0.5;
-    vector<bool> pTable   (rR+1, true); pTable[0]=false; pTable[1]=false;
-    vector<bool> pTable_lr( n+1, true);
-    for(uint ti=2; ti<=rR; ++ti){
-        if(!pTable[ti]){ continue; }
-        for(uint i=ti*2; i<rR+1; i+=ti){ pTable[i]=false; }
-        for(uint i=((l-1)/ti + 1)*ti; i<r+1; i+=ti){ pTable_lr[i-l]=false; }
+struct fact{
+    uint prime;
+    uint num;
+};
+vector<fact> factor(const vector<uint>& vPrime, uint n){
+    vector<fact> vFactor;
+    uint n_prev = n;
+    for(uint pi=0; pi<vPrime.size(); ++pi){
+        uint p=0;
+        for(uint i=0;; ++i){
+            if(n%vPrime[pi]!=0){ break; }
+            n /= vPrime[pi];
+            ++p;
+        }
+        if(p!=0){
+            vFactor.push_back( {vPrime[pi], p} );
+        }
+        if(n==1){ break; }
     }
-    return countTrue(pTable_lr);
+    if(n==n_prev){
+        vFactor.push_back( {n, 1} );
+    }
+    return vFactor; 
+}
+
+bool isPrime(const vector<bool>& pTable, uint n){
+    if(n>pTable.size()){ return false; }
+    return pTable[n];
 }
 
 int main(){
@@ -27,8 +51,22 @@ int main(){
     cin.tie(NULL);
     
     uint l, r; cin >> l >> r;
-    uint ret = sieve_num_lr(l, r);
-    cout << ret << endl;
-    
+    vector<bool> pTable; vector<uint> vPrime;
+    tie(pTable, vPrime) = sieve( sqrt(r) );
+    //*
+    uint ans=0;
+    for(uint i=l; i<=r; ++i){
+        vector<fact> vFact = factor(vPrime, i);
+        cout << i << " " << vFact.size() << endl;
+        if(isPrime(pTable, vFact.size())){ ++ans; }
+    }
+    cout << ans << endl;
+    //*/
+    /*
+    vector<fact> vFact = factor(vPrime, 6);
+    for(uint i=0; i<vFact.size(); ++i){
+        cout << vFact[i].prime << " " << vFact[i].num << endl;
+    }
+    //*/
     return 0;
 }
