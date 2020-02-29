@@ -40,6 +40,13 @@ vector<fact> factor(const vector<uint>& vPrime, uint n){
     }
     return vFactor; 
 }
+uint sum(const vector<fact>& vFact){
+    uint n=0;
+    for(uint i=0; i<vFact.size(); ++i){
+        n += vFact[i].num;
+    }
+    return n;
+}
 
 bool isPrime(const vector<bool>& pTable, uint n){
     if(n>pTable.size()){ return false; }
@@ -53,20 +60,13 @@ int main(){
     uint l, r; cin >> l >> r;
     vector<bool> pTable; vector<uint> vPrime;
     tie(pTable, vPrime) = sieve( sqrt(r) );
-    //*
+    
     uint ans=0;
     for(uint i=l; i<=r; ++i){
         vector<fact> vFact = factor(vPrime, i);
-        cout << i << " " << vFact.size() << endl;
-        if(isPrime(pTable, vFact.size())){ ++ans; }
+        if(isPrime(pTable, sum(vFact) )){ ++ans; }
     }
     cout << ans << endl;
-    //*/
-    /*
-    vector<fact> vFact = factor(vPrime, 6);
-    for(uint i=0; i<vFact.size(); ++i){
-        cout << vFact[i].prime << " " << vFact[i].num << endl;
-    }
-    //*/
+    
     return 0;
 }
