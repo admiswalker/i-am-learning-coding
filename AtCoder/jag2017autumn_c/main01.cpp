@@ -1,4 +1,4 @@
-// https://atcoder.jp/contests/jag2017autumn/submissions/3144664
+// ref: https://atcoder.jp/contests/jag2017autumn/submissions/3144664
 #include <bits/stdc++.h>
 using namespace std;
 typedef int64_t int64;
@@ -8,6 +8,7 @@ typedef uint64_t uint64;
 uint max(const uint lhs, const uint rhs){ return lhs>rhs ? lhs:rhs; }
 
 uint sieve_interval(const uint a, const uint b){
+<<<<<<< HEAD
     const uint b_p1  =b+1;
     const uint b_p1_r=sqrt(b_p1)+0.5;
     const uint ab_p1 =b-a+1;
@@ -18,15 +19,30 @@ uint sieve_interval(const uint a, const uint b){
     vector<uint> vCnt(ab_p1, 0);
     
     for(uint ti=2; ti<b_p1_r; ++ti){
+=======
+    const uint ab_p1 = b-a+1;
+    vector<bool> pTbl(b, true); pTbl[0]=false; pTbl[1]=false; // prime table
+    vector<uint> vNum(ab_p1); for(uint i=0; i<vNum.size(); ++i){ vNum[i]=a+i; }
+    vector<uint> vCnt(ab_p1, 0);
+    
+    for(uint ti=2; ti*ti<b; ++ti){
+>>>>>>> 070ac377588273b58c5d7c6c0c7f03e9c3d9b211
         if(!pTbl[ti]){ continue; }
         
-        for(uint i=ti*2; i<b_p1_r; i+=ti){ pTbl[i]=false; }
+        for(uint i=ti*2; i*i<b; i+=ti){ pTbl[i]=false; }
         
+<<<<<<< HEAD
         uint tmp = ti;
         while(tmp<b_p1){
             for(uint i=tmp*((a-1)/tmp+1); i<b_p1; i+=tmp){
 //            for(uint i = tmp * max(2, (a+tmp-1)/tmp); i<b_p1; i+=tmp){
 //                pTbl_ab[i-a]=false;
+=======
+        uint ti_tmp = ti;
+        while(ti_tmp<b){
+            for(uint i=ti_tmp*((a-1)/ti_tmp+1); i<b; i+=ti_tmp){
+//            for(uint i=ti_tmp * max((uint)2, (a+ti_tmp-1)/ti_tmp); i<b; i+=ti_tmp){
+>>>>>>> 070ac377588273b58c5d7c6c0c7f03e9c3d9b211
                 vNum[i-a] /= ti;
                 ++vCnt[i-a];
             }
@@ -41,6 +57,7 @@ uint sieve_interval(const uint a, const uint b){
     }
     return numPFP;
 }
+<<<<<<< HEAD
 /*
 uint sieve_interval(const uint a, const uint b){
     const uint b_p1  =b+1;
@@ -125,13 +142,15 @@ bool isPrime(const vector<bool>& pTable, uint n){
     return pTable[n];
 }
 //*/
+=======
+>>>>>>> 070ac377588273b58c5d7c6c0c7f03e9c3d9b211
 
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
     uint l, r; cin >> l >> r;
-    uint numPFP = sieve_interval(l, r);
+    uint numPFP = sieve_interval(l, r+1);
     cout << numPFP << endl;
     
     return 0;
