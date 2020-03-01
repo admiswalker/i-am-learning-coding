@@ -5,6 +5,8 @@ typedef int64_t int64;
 typedef uint32_t uint;
 typedef uint64_t uint64;
 
+uint max(const uint lhs, const uint rhs){ return lhs>rhs ? lhs:rhs; }
+
 uint sieve_interval(const uint a, const uint b){
     const uint ab_p1 = b-a+1;
     vector<bool> pTbl(b, true); pTbl[0]=false; pTbl[1]=false; // prime table
@@ -15,11 +17,11 @@ uint sieve_interval(const uint a, const uint b){
         if(!pTbl[ti]){ continue; }
         
         for(uint i=ti*2; i*i<b; i+=ti){ pTbl[i]=false; }
-        printf("ti: %u\n", ti);
         
         uint ti_tmp = ti;
         while(ti_tmp<b){
             for(uint i=ti_tmp*((a-1)/ti_tmp+1); i<b; i+=ti_tmp){
+//            for(uint i=ti_tmp * max((uint)2, (a+ti_tmp-1)/ti_tmp); i<b; i+=ti_tmp){
                 vNum[i-a] /= ti;
                 ++vCnt[i-a];
             }
