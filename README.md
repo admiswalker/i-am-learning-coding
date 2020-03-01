@@ -342,7 +342,7 @@ AtCoder 上の類題が提示されていないため pass.
   | 2020.03.01 | main03.cpp |        WA |      KB |           | [1][2][3]．バグっている．原因が分からない．(main01.cpp と同じバグり方)． |
   
   [1] 蟻本 p. 113  
-  [2] (submissions 3144664 - izumo)[https://atcoder.jp/contests/jag2017autumn/submissions/3144664]
+  [2] (submissions 3144664 - izumo)[https://atcoder.jp/contests/jag2017autumn/submissions/3144664]  
   [3] (submissions 10394423 - Rubikun)[https://atcoder.jp/contests/jag2017autumn/submissions/10394423]
   
 ---
