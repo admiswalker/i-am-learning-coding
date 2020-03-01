@@ -12,8 +12,7 @@ uint sieve_interval(const uint a, const uint b){
     const uint b_p1_r=sqrt(b_p1)+0.5;
     const uint ab_p1 =b-a+1;
     
-    vector<bool> pTbl   (b_p1,  true); pTbl[0]=false; pTbl[1]=false; // prime table
-    vector<bool> pTbl_ab(ab_p1, true);                               // prime table
+    vector<bool> pTbl(b_p1_r,  true); pTbl[0]=false; pTbl[1]=false; // prime table
     
     vector<uint> vNum(ab_p1); for(uint i=0; i<vNum.size(); ++i){ vNum[i]=a+i; }
     vector<uint> vCnt(ab_p1, 0);
@@ -25,9 +24,9 @@ uint sieve_interval(const uint a, const uint b){
         
         uint tmp = ti;
         while(tmp<b_p1){
-//            for(uint i=tmp*((a-1)/tmp+1); i<b_p1; i+=tmp){
-            for(uint i = tmp * max(2, (a+tmp-1)/tmp); i<b_p1; i+=tmp){
-                pTbl_ab[i-a]=false;
+            for(uint i=tmp*((a-1)/tmp+1); i<b_p1; i+=tmp){
+//            for(uint i = tmp * max(2, (a+tmp-1)/tmp); i<b_p1; i+=tmp){
+//                pTbl_ab[i-a]=false;
                 vNum[i-a] /= ti;
                 ++vCnt[i-a];
             }
@@ -42,7 +41,43 @@ uint sieve_interval(const uint a, const uint b){
     }
     return numPFP;
 }
-
+/*
+uint sieve_interval(const uint a, const uint b){
+    const uint b_p1  =b+1;
+    const uint b_p1_r=sqrt(b_p1)+0.5;
+    const uint ab_p1 =b-a+1;
+    
+    vector<bool> pTbl   (b_p1_r,  true); pTbl[0]=false; pTbl[1]=false; // prime table
+//    vector<bool> pTbl_ab(ab_p1, true);                               // prime table
+    
+    vector<uint> vNum(ab_p1); for(uint i=0; i<vNum.size(); ++i){ vNum[i]=a+i; }
+    vector<uint> vCnt(ab_p1, 0);
+    
+    for(uint ti=2; ti<b_p1_r; ++ti){
+        if(!pTbl[ti]){ continue; }
+        
+        for(uint i=ti*2; i<b_p1_r; i+=ti){ pTbl[i]=false; }
+        
+        uint tmp = ti;
+        while(tmp<b_p1){
+//            for(uint i=tmp*((a-1)/tmp+1); i<b_p1; i+=tmp){
+            for(uint i = tmp * max(2, (a+tmp-1)/tmp); i<b_p1; i+=tmp){
+//                pTbl_ab[i-a]=false;
+                vNum[i-a] /= ti;
+                ++vCnt[i-a];
+            }
+            tmp *= ti;
+        }
+    }
+    
+    uint numPFP=0;
+    for(uint i=0; i<vCnt.size(); ++i){
+        if(vNum[i]!=1){ ++vCnt[i]; }
+        if(pTbl[ vCnt[i] ]){ ++numPFP; }
+    }
+    return numPFP;
+}
+//*/
 /*
 pair<vector<bool>, vector<uint>> sieve(const uint n){
     const uint n_p1 = n+1;
