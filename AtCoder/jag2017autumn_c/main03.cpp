@@ -66,20 +66,30 @@ int main(){
     tie(pTbl, vPrime) = sieve( sqrt(r) );
     
     uint n=r-l+1;
-//    vector<uint> vNum(n); for(uint i=0; i<n; ++i){ vNum[i]=l+i; }
     vector<uint> vNum(n); for(uint i=l; i<=r; ++i){ vNum[i-l]=i; }
-    vector<uint> vCnt(n);
+    vector<uint> vCnt(n, 0);
     for(uint pi=0; pi<vPrime.size(); ++pi){
         uint prime = vPrime[pi];
-        uint begin = ((l-1)/prime+1) * prime;
-//        for(uint i=begin; i-l<n; i+=prime){
-        
-        for(uint i=begin; i<=r; i+=prime){
-            while(vNum[i-l]%prime==0){
+        /*
+        uint tmp = prime;
+        while(tmp<=r){
+            uint begin = ((l-1)/tmp+1) * tmp;
+            
+            for(uint i=begin; i<=r; i+=tmp){
                 vNum[i-l] /= prime;
                 ++vCnt[i-l];
             }
-        }
+            tmp *= prime;
+        }//*/
+        uint tmp=prime;
+        while(tmp<=r){
+//            for(uint j=max(2ll, (l+tmp-1)/tmp)*tmp; j<=r; j+=tmp){
+            for(uint j=((l+tmp-1)/tmp)*tmp; j<=r; j+=tmp){
+                ++vCnt[j-l];
+                vNum[j-l]/=prime;
+            }
+            tmp*=prime;
+        }        
     }
     
     uint numPFP=0;
@@ -87,9 +97,6 @@ int main(){
         if(vNum[i]!=1){ ++vCnt[i]; }
         if(pTbl[ vCnt[i] ]){ ++numPFP; }
     }
-//    return numPFP;
-    
-//    uint numPFP = sieve_interval(l, r);
     cout << numPFP << endl;
     
     return 0;
