@@ -344,7 +344,15 @@ AtCoder 上の類題が提示されていないため pass.
   [1] 蟻本 p. 113  
   [2] [submissions 3144664 - izumo](https://atcoder.jp/contests/jag2017autumn/submissions/3144664)  
   [3] [submissions 10394423 - Rubikun](https://atcoder.jp/contests/jag2017autumn/submissions/10394423)
-  
+
+#### Carmichael Numbers (Uva No.10006)
+- Task: [JOI 2007 春合宿 fermat フェルマー方程式](https://atcoder.jp/contests/joisc2007/tasks/joisc2007_fermat): [問題文](https://www.ioi-jp.org/camp/2007/2007-sp-tasks/2007-sp-day2_21.pdf)
+- Git dir: [./AtCoder/joisc2007_fermat](./AtCoder/joisc2007_fermat)
+
+  | Date       | File Name  | Exec Time | Memory  | Algorithm | References      |
+  | ---------- | ---------- | ---------:| -------:| --------- | --------------- |
+  |            |            |        ms |      KB |           |                 |
+
 ---
 
 #### XXX
