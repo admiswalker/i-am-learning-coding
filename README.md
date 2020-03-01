@@ -336,8 +336,15 @@ AtCoder 上の類題が提示されていないため pass.
 
   | Date       | File Name  | Exec Time | Memory  | Algorithm | References      |
   | ---------- | ---------- | ---------:| -------:| --------- | --------------- |
-  |            |            |        ms |      KB |           |                 |
-
+  | 2020.03.01 | main00.cpp |       TLE |      KB |           |                 |
+  | 2020.03.01 | main01.cpp |        WA |      KB |           | [1][2]．バグっている．原因が分からない． |
+  | 2020.03.01 | main02.cpp |     51 ms | 8192 KB |           | [1][3]             |
+  | 2020.03.01 | main03.cpp |        WA |      KB |           | [1][2][3]．バグっている．原因が分からない．(main01.cpp と同じバグり方)． |
+  
+  [1] 蟻本 p. 113  
+  [2] (submissions 3144664 - izumo)[https://atcoder.jp/contests/jag2017autumn/submissions/3144664]
+  [3] (submissions 10394423 - Rubikun)[https://atcoder.jp/contests/jag2017autumn/submissions/10394423]
+  
 ---
 
 #### XXX
