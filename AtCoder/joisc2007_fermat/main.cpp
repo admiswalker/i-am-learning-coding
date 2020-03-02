@@ -24,14 +24,20 @@ int main(){
     for(uint i=0; i<p; ++i){ vXYZ[i] = pow_mod(i, n, p); }
     
     unordered_map<uint64, uint64> hashT(p);
-    for(uint i=0; i<p; ++i){ hashT[vXYZ[i]] = vXYZ[i]; }
+    for(uint i=0; i<p; ++i){
+        if(hashT.find(vXYZ[i])==hashT.end()){
+            hashT[vXYZ[i]] = 1;
+        }else{
+            ++hashT[vXYZ[i]];
+        }
+    }
     
     uint64 num=0;
     for(uint x=0; x<p; ++x){
         for(uint y=0; y<p; ++y){
             uint64 tmp = (vXYZ[x] + vXYZ[y]) % p;
             if(hashT.find(tmp)==hashT.end()){ continue; }
-            ++num;
+            num += hashT[tmp];
         }
     }
     cout << num << endl;
