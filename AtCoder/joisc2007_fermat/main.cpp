@@ -1,4 +1,4 @@
-// https://atcoder.jp/contests/joisc2007/submissions/10364807
+//ref: https://atcoder.jp/contests/joisc2007/submissions/10364807
 #include <bits/stdc++.h>
 using namespace std;
 typedef int64_t int64;
@@ -34,13 +34,23 @@ int main(){
     }
     
     uint64 num=0;
+//    for(uint x=0; x<p; ++x){
+//        for(uint y=0; y<p; ++y){
     for(uint x=0; x<p; ++x){
-        for(uint y=0; y<p; ++y){
+        for(uint y=0; y<x; ++y){
             uint64 tmp = (vXYZ[x] + vXYZ[y]) % p;
             if(hashT.find(tmp)==hashT.end()){ continue; }
-            num += hashT[tmp];
+            num += hashT[tmp]*2;
+//            num += hashT[tmp];
         }
     }
+    
+    for(uint xy=0; xy<p; ++xy){
+        uint64 tmp = (vXYZ[xy] + vXYZ[xy]) % p;
+        if(hashT.find(tmp)==hashT.end()){ continue; }
+        num += hashT[tmp];
+    }
+    
     cout << num << endl;
     
     return 0;
