@@ -28,14 +28,16 @@ int main(){
     for(uint x=0; x<p; ++x){
         if(vCnt[x]==0){ continue; }
         for(uint y=0; y<x; ++y){
-            uint z = (x + y) % p;
+//            uint z = (x + y) % p;
+            uint z = x + y; if(z>=p){ z-=p; }
             num += vCnt[x] * vCnt[y] * vCnt[z];
         }
     }
     num *= 2;
     
     for(uint xy=0; xy<p; ++xy){
-        uint z = (xy + xy)%p;
+//        uint z = (xy + xy)%p;
+        uint z = 2*xy; if(z>=p){ z-=p; }
         num += vCnt[xy] * vCnt[xy] * vCnt[z];
     }
     
