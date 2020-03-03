@@ -1,3 +1,4 @@
+// https://atcoder.jp/contests/joisc2007/submissions/10364807
 #include <bits/stdc++.h>
 using namespace std;
 typedef int64_t int64;
