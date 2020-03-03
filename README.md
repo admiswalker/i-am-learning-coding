@@ -349,9 +349,14 @@ AtCoder 上の類題が提示されていないため pass.
 - Task: [JOI 2007 春合宿 fermat フェルマー方程式](https://atcoder.jp/contests/joisc2007/tasks/joisc2007_fermat): [問題文](https://www.ioi-jp.org/camp/2007/2007-sp-tasks/2007-sp-day2_21.pdf)
 - Git dir: [./AtCoder/joisc2007_fermat](./AtCoder/joisc2007_fermat)
 
-  | Date       | File Name  | Exec Time | Memory  | Algorithm | References      |
-  | ---------- | ---------- | ---------:| -------:| --------- | --------------- |
-  |            |            |        ms |      KB |           |                 |
+  | Date       | File Name  | Exec Time | Memory  | Algorithm | References      | Note   |
+  | ---------- | ---------- | ---------:| -------:| --------- | --------------- | ------ |
+  | 2020.03.03 | main00.cpp |       TLE |      KB | 繰り返し二乗法, hash table | [1][2] | いくら O(1) とはいえ，hash table も配列アクセスと比べると遅いらしい．(ループサイズは同じでも TLE なので)．       |
+  | 2020.03.04 | main01.cpp |     72 ms |  256 KB | 繰り返し二乗法             | [1][2] |         |
+  | 2020.03.04 | main01.cpp |     29 ms |  256 KB | 繰り返し二乗法             | [1][2] | % を if(x>=mod){x-=mod;} に書き換え．       |
+  
+  [1] 蟻本 p. 114 - 116  
+  [2] [submissions 10364807 - startcpp](https://atcoder.jp/contests/joisc2007/submissions/10364807)
 
 ---
 
