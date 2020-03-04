@@ -1,3 +1,4 @@
+// ref: https://atcoder.jp/contests/abc100/submissions/10524878
 #include <bits/stdc++.h>
 using namespace std;
 typedef int64_t int64;
@@ -9,7 +10,8 @@ int main(){
     cin.tie(NULL);
     
     int d, n; cin >> d >> n;
-    cout << pow(100,d) * n << endl;
+    if(n==100){ n=101; }
+    cout << (uint64)pow(100,d) * n << endl;
     
     return 0;
 }
