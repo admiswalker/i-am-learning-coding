@@ -1,3 +1,4 @@
+// ref: https://img.atcoder.jp/abc100/editorial.pdf
 #include <bits/stdc++.h>
 using namespace std;
 typedef int64_t int64;
@@ -31,7 +32,7 @@ int main(){
             vec[i] = sign_x*vXYZ[i].x + sign_y*vXYZ[i].y + sign_z*vXYZ[i].z;
         }
         sort(vec.begin(), vec.end(), greater<int64>());
-        int64 sum = accumulate(&vec[0], &vec[0]+M, 0);
+        int64 sum = accumulate(&vec[0], &vec[0]+M, 0ll);
         maxn = max(maxn, sum);
     }
     cout << maxn << endl;
