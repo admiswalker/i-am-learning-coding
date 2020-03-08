@@ -41,8 +41,8 @@ int main(){
         vA[i] = a-(i+1);
     }
     
-    int64 max=v_max(vA);
     int64 min=v_min(vA);
+    int64 max=v_max(vA);
     /*
     int64 min_sad=sad(vA, minn);
     for(int64 i=min+1; i<=max; ++i){
@@ -64,7 +64,13 @@ int main(){
             max = mid;
         }
     }
-    cout << sadVal_prev << endl;
+    int64 sad_min = sad(vA, min);
+    int64 sad_max = sad(vA, max);
+    if(sad_min<sad_max){
+        cout << sad_min << endl;
+    }else{
+        cout << sad_max << endl;
+    }
     
     return 0;
 }
