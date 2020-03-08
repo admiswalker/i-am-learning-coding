@@ -5,7 +5,7 @@ typedef uint32_t uint;
 typedef uint64_t uint64;
 
 template<typename T>
-T max(const vector<T>& vec){
+T v_max(const vector<T>& vec){
     T max=vec[0];
     for(uint i=1; i<vec.size(); ++i){
         if(vec[i]>max){ max=vec[i]; }
@@ -13,7 +13,7 @@ T max(const vector<T>& vec){
     return max;
 }
 template<typename T>
-T min(const vector<T>& vec){
+T v_min(const vector<T>& vec){
     T min=vec[0];
     for(uint i=1; i<vec.size(); ++i){
         if(vec[i]<min){ min=vec[i]; }
@@ -41,14 +41,30 @@ int main(){
         vA[i] = a-(i+1);
     }
     
-    int64 maxn=max(vA);
-    int64 minn=min(vA);
+    int64 max=v_max(vA);
+    int64 min=v_min(vA);
+    /*
     int64 min_sad=sad(vA, minn);
-    for(int64 i=minn+1; i<=maxn; ++i){
+    for(int64 i=min+1; i<=max; ++i){
         int64 tmp=sad(vA, i);
         if(tmp < min_sad){ min_sad=tmp; }
     }
     cout << min_sad << endl;
+    //*/
+    
+    // binary search
+    int64 sadVal_prev=sad(vA, min);
+    while(max-min>1){
+        int64 mid = (max+min)/2;
+        int64 sadVal=sad(vA, mid);
+        if(sadVal<sadVal_prev){
+            min = mid;
+            sadVal_prev = sadVal;
+        }else{
+            max = mid;
+        }
+    }
+    cout << sadVal_prev << endl;
     
     return 0;
 }
