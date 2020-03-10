@@ -33,44 +33,22 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    int N; cin >> N;
+    uint N; cin >> N;
     
     vector<int> vA(N);
-    for(int i=0; i<N; ++i){
+    for(uint i=0; i<N; ++i){
         int a; cin >> a;
         vA[i] = a-(i+1);
     }
     
-    int64 min=v_min(vA);
-    int64 max=v_max(vA);
-    /*
-    int64 min_sad=sad(vA, minn);
-    for(int64 i=min+1; i<=max; ++i){
-        int64 tmp=sad(vA, i);
-        if(tmp < min_sad){ min_sad=tmp; }
+    sort(vA.begin(), vA.end());
+    int median = vA[N/2];
+
+    int64 sum=0;
+    for(uint i=0; i<N; ++i){
+        sum += abs(vA[i]-median);
     }
-    cout << min_sad << endl;
-    //*/
-    
-    // binary search
-    int64 sadVal_prev=sad(vA, min);
-    while(max-min>1){
-        int64 mid = (max+min)/2;
-        int64 sadVal=sad(vA, mid);
-        if(sadVal<sadVal_prev){
-            min = mid;
-            sadVal_prev = sadVal;
-        }else{
-            max = mid;
-        }
-    }
-    int64 sad_min = sad(vA, min);
-    int64 sad_max = sad(vA, max);
-    if(sad_min<sad_max){
-        cout << sad_min << endl;
-    }else{
-        cout << sad_max << endl;
-    }
+    cout << sum << endl;
     
     return 0;
 }
