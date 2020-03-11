@@ -17,8 +17,8 @@ tuple<int64, int64> split2two(const vector<int64>& vSum, const int* vA, const in
         }
     }
     
-    int64 sumL = accumulate(&vA[0], &vA[minIdxL+1], 0ll);
-    int64 sumR = accumulate(&vA[minIdxL+1], &vA[N], 0ll);
+    int64 sumL = vSum[minIdxL];
+    int64 sumR = sum - vSum[minIdxL];
     return tie(sumL, sumR);
 }
 
