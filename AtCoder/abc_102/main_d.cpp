@@ -7,26 +7,27 @@ typedef uint64_t uint64;
 tuple<vector<int>, vector<int>> split2two(const vector<int>& vA){
     const int N = vA.size();
     
-    vector<int64> sumL(N, 0ll); sumL[0]=vA[0];
-    for(int i=1; i<N; ++i){ sumL[i]=sumL[i-1]+vA[i]; }
-    
-    vector<int64> sumR(N, 0ll); sumR[N-1]=vA[N-1];
-    for(int i=N-2; i>=0; --i){ sumR[i]=sumR[i+1]+vA[i]; }
+    int64 sum=0ll; sum=vA[0];
+    vector<int64> vSum(N); vSum[0]=vA[0];
+    for(int i=1; i<N; ++i){
+        sum += vA[i];
+        vSum[i] = vSum[i-1]+vA[i];
+    }
     
     int64 min=INT64_MAX;
     uint minIdxL=0;
     for(int i=0; i<N-1; ++i){
-        int64 diff = abs(sumL[i]-sumR[i+1]);
+        int64 diff = abs(vSum[i]-(sum-vSum[i]));
         if(diff<min){
             min = diff;
             minIdxL = i;
         }
     }
     
-    vector<int> vFront(minIdxL+1);
-    vector<int> vRear (N-minIdxL);
+    vector<int> vFront(   minIdxL+1 );
+    vector<int> vRear (N-(minIdxL+1));
     copy(&vA[0], &vA[minIdxL+1], vFront.begin());
-    copy(&vA[minIdxL+1], &vA[N], vRear.begin()  );
+    copy(&vA[minIdxL+1], &vA[N], vRear.begin());
     
     return tie(vFront, vRear);
 }
@@ -41,6 +42,8 @@ int main(){
     
     vector<int> vF, vR;
     tie(vF, vR) = split2two(vA);
+    cout << vF.size() << endl;
+    cout << vR.size() << endl;
     
     vector<int> vFF, vFR;
     tie(vFF, vFR) = split2two(vF);
@@ -72,3 +75,17 @@ int main(){
     //*/
     return 0;
 }
+
+
+/*
+
+10
+10  71  84  33   6  47  23  25  52  64
+10  81 165 198 204 251 274
+               217 211 164 141 116  64
+                  |
+10  71  84  33   6| 47  23  25  52  64
+10  81 165 198 204| 47  70  95  
+       123  39   6|        211 116  64
+
+*/
