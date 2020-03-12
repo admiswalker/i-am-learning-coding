@@ -4,29 +4,24 @@ typedef int64_t int64;
 typedef uint32_t uint;
 typedef uint64_t uint64;
 
-tuple<int64, int64> split2two(const vector<int64>& vSum, const int* vA, const int N){
-    int64 sum=vSum[N-1];
-    
-    int64 min=INT64_MAX;
-    uint minIdxL=0;
-    for(int i=0; i<N-1; ++i){
-        int64 diff = abs(vSum[i]-(sum-vSum[i]));
-        if(diff<min){
-            min = diff;
-            minIdxL = i;
-        }
-    }
-    
-    int64 sumL = vSum[minIdxL];
-    int64 sumR = sum - vSum[minIdxL];
-    return tie(sumL, sumR);
-}
-
 vector<int64> gen_vSum(const vector<int>& vA){
     const int N = vA.size();
     vector<int64> vSum(N); vSum[0]=vA[0];
     for(int i=1; i<N; ++i){ vSum[i] = vSum[i-1]+vA[i]; }
     return vSum;
+}
+
+int64 min(int64 i1, int64 i2, int64 i3, int64 i4){
+    if(i2<i1){ i1=i2; }
+    if(i4<i3){ i3=i4; }
+    if(i3<i1){ i1=i3; }
+    return i1;
+}
+int64 max(int64 i1, int64 i2, int64 i3, int64 i4){
+    if(i2>i1){ i1=i2; }
+    if(i4>i3){ i3=i4; }
+    if(i3>i1){ i1=i3; }
+    return i1;
 }
 
 int main(){
@@ -35,27 +30,50 @@ int main(){
     
     uint N; cin >> N;
     vector<int> vA(N); for(uint i=0; i<N; ++i){ cin>>vA[i]; }
-    vector<int> vA_re=vA; reverse(vA_re.begin(), vA_re.end());
+    vector<int64> vSum = gen_vSum(vA);
     
-    vector<int64> vSum    = gen_vSum(vA   );
-    vector<int64> vSum_re = gen_vSum(vA_re);
-    
-    int64 min=INT64_MAX;
-    for(uint c=2; c<N-2; ++c){ // c: center
-        int64 sumLL, sumLR;
-        tie(sumLL, sumLR) = split2two(vSum, &vA[0], c); // [0, c) // size==c
+    int64 ans_min=INT64_MAX;
+    uint li=0;
+    uint ri=2;
+    for(uint c=1; c<N-2; ++c){ // c: center
         
-        int64 sumRL, sumRR;
-        tie(sumRL, sumRR) = split2two(vSum_re, &vA_re[0], N-c); // [0, N-c) // size==N-c
+        int64 minPQ = INT64_MAX;
+        for(; li<c; ++li){
+            int64 P = vSum[li];
+            int64 Q = vSum[c] - vSum[li];
+            int64 diff = abs(P-Q);
+            if(diff<minPQ){ minPQ = diff; continue; }
+            break;
+        }
+        --li;
         
-        vector<int64> vPQRS = {sumLL, sumLR, sumRL, sumRR};
-        int64 minVal = *min_element(vPQRS.begin(), vPQRS.end());
-        int64 maxVal = *max_element(vPQRS.begin(), vPQRS.end());
-        if(maxVal-minVal<min){
-            min = maxVal-minVal;
+        int64 minRS = INT64_MAX;
+        if(ri<=c){ ri=c+1; }
+        for(; ri<N; ++ri){
+            int64 R = vSum[ri] - vSum[c];
+            int64 S = vSum[N-1] - vSum[ri];
+            int64 diff = abs(R-S);
+            if(diff<minRS){ minRS = diff; continue; }
+            break;
+        }
+        --ri;
+        
+        int64 P = vSum[li];
+        int64 Q = vSum[c] - vSum[li];
+        int64 R = vSum[ri] - vSum[c];
+        int64 S = vSum[N-1] - vSum[ri];
+        int64 minVal = min(P, Q, R, S);
+        int64 maxVal = max(P, Q, R, S);
+        if(maxVal-minVal<ans_min){
+            ans_min = maxVal-minVal;
         }
     }
-    cout << min << endl;
+    cout << ans_min << endl;
     
     return 0;
 }
+
+/*
+4
+1 2 3 4
+*/
