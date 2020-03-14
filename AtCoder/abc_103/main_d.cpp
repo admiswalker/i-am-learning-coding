@@ -5,20 +5,18 @@ typedef uint32_t uint;
 typedef uint64_t uint64;
 
 bool isConnect(const vector<pair<int,int>>& vNC, uint& idx_inOut, const int a, const int b){
-    ;
     for(uint i=0; i<vNC.size(); ++i){
         const int f = vNC[i].first;
         const int s = vNC[i].second;
-        if(a<=f && f<=b){ idx_inOut=i; return true; }
-        if(a<=s && s<=b){ idx_inOut=i; return true; }
+        if(a<s && b>f){ idx_inOut=i; return true; }
     }
     return false;
 }
 void shrink(vector<pair<int,int>>& vNC, const uint idx, const int a, const int b){
     int& f = vNC[idx].first;
     int& s = vNC[idx].second;
-    if(a<=f && f<=b){ f=a; }
-    if(a<=s && s<=b){ s=b; }
+    f = max(f, a);
+    s = min(s, b);
 }
 
 int main(){
