@@ -12,7 +12,7 @@ int min(const vector<int>& v){
     return ret;
 }
 
-int gcd(int u, int v){
+int64 gcd(int64 u, int64 v){
     while(u!=0&&v!=0){
         u = u%v;
         swap(u, v);
@@ -38,14 +38,16 @@ int main(){
     
     int min_m1 = min(vA) - 1;
     
-    int64 lcmn;
-    for(uint i=1; i<N; ++i){
-        int64 gcdn = gcd(vA[i], vA[i-1]);
-        lcmn = vA[i-1]/gcdn*vA[i];
+    int64 lcmn=1ll;
+    for(uint i=0; i<N; ++i){
+        int64 gcdn = gcd(lcmn, vA[i]);
+        lcmn = lcmn/gcdn*vA[i];
     }
+    cout << min_m1 << endl;
+    cout << lcmn << endl;
     
     int64 ans=0ll;
-    for(int mod=min_m1; mod<lcmn; ++mod){
+    for(int64 mod=min_m1; mod<lcmn; ++mod){
         ans = fn(vA, mod);
     }
     cout << ans << endl;
