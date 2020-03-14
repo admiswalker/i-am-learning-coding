@@ -24,10 +24,17 @@ int main(){
     cin.tie(NULL);
     
     uint N, M; cin >> N >> M;
+    vector<pair<int,int>> vA(M); // not connected
     vector<pair<int,int>> vNC; // not connected
-    
     for(uint i=0; i<M; ++i){
         int a, b; cin >> a >> b;
+        vA[i] = {a, b};
+    }
+    sort(vA.begin(), vA.end());
+    
+    for(uint i=0; i<M; ++i){
+        int a = vA[i].first;
+        int b = vA[i].second;
         uint idx;
         if(isConnect(vNC, idx, a, b)){
             shrink(vNC, idx, a, b);
@@ -42,7 +49,7 @@ int main(){
 }
 
 /*
-// この実装では下記のケースでバグる．
+// ソートしない場合，下記ケースでバグる．
 in
 9 6
 7 9
