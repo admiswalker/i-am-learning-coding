@@ -6,6 +6,7 @@
 // https://www.slideshare.net/iwiwi/ss-3578491
 // https://www.slideshare.net/hcpc_hokudai/binary-indexed-tree
 
+#define _GLIBCXX_DEBUG
 #include <bits/stdc++.h>
 using namespace std;
 typedef int64_t int64;
@@ -53,7 +54,7 @@ public:
 };
 template<typename T>
 void BIT<T>::add(int i, T val){
-    for(; i<=(int)vBit.size(); i+=i&-i){ vBit[i] += val; }
+    for(; i<(int)vBit.size(); i+=i&-i){ vBit[i] += val; }
 }
 template<typename T>
 T BIT<T>::sum(int i){
@@ -85,13 +86,13 @@ int main(){
 //    ios_base::sync_with_stdio(false);
 //    cin.tie(NULL);
     
-    uint N; cin >> N;
-    vector<int> vA(N); for(uint i=0; i<N; ++i){ cin >> vA[i]; }
+    int64 N; cin >> N;
+    vector<int> vA(N); for(int i=0; i<N; ++i){ cin >> vA[i]; }
     
-    int low=0, high=INT_MAX;
     const int bias=N+1;
+    int low=0, high=INT_MAX;
     while(high-low>1){
-        int mid = (high+low)/2;
+        int64 mid = (high+low)/2;
         
         int64 num=0, sum=0;
         BIT<int64> bit(N*2+1); bit.add(sum+bias, 1);
@@ -103,8 +104,7 @@ int main(){
         }
         
         if(num > (N+1)*N/2/2){ high = mid;
-        }        else        { low  = mid;
-        }
+        }        else        { low  = mid; }
     }
     cout << high << endl;
     
