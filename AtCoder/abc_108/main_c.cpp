@@ -33,6 +33,14 @@ inline void print(const std::vector<std::vector<T>>& rhs){
 
 //---
 
+int64 powi(int64 base, int64 num){
+    int64 ret=1;
+    for(uint i=0; i<num; ++i){
+        ret *= base;
+    }
+    return ret;
+}
+
 int main(){
 //    ios_base::sync_with_stdio(false);
 //    cin.tie(NULL);
@@ -42,12 +50,12 @@ int main(){
     int64 mulNum=0ll;
     for(int i=K; i<=N; i+=K){ ++mulNum; }
     
-    if(K%2!=0){ cout << pow(mulNum, 3) << endl; return 0; }
+    if(K%2!=0){ cout << powi(mulNum, 3) << endl; return 0; }
     
     int64 Kdiv2 = K/2;
     int64 mulNum2=0ll;
     for(int i=Kdiv2; i<=N; i+=K){ ++mulNum2; }
     
-    cout << pow(mulNum, 3) + pow(mulNum2, 3) << endl;
+    cout << powi(mulNum, 3) + powi(mulNum2, 3) << endl;
     return 0;
 }
