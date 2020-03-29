@@ -39,26 +39,15 @@ int main(){
     
     int64 N, K; cin >> N >> K;
     
-    vector<int64> vDivs;
-    for(int i=1; i*K<=2*N; ++i){
-        vDivs.push_back(K*i);
-    }
+    int64 mulNum=0ll;
+    for(int i=K; i<=N; i+=K){ ++mulNum; }
     
-    int64 same=0, nsame=0;
-    for(uint i=0; i<vDivs.size(); ++i){
-        int64 div = vDivs[i];
-        if(div%2==0){
-            ++same;
-            if(div-1<=N){
-                printn(div);
-                nsame += (div+1)/2-1;
-            }
-        }
-    }
-    printn(same);
-    printn(nsame);
-    cout << same + nsame*6 << endl;
+    if(K%2!=0){ cout << pow(mulNum, 3) << endl; return 0; }
     
+    int64 Kdiv2 = K/2;
+    int64 mulNum2=0ll;
+    for(int i=Kdiv2; i<=N; i+=K){ ++mulNum2; }
+    
+    cout << pow(mulNum, 3) + pow(mulNum2, 3) << endl;
     return 0;
 }
-
