@@ -42,11 +42,11 @@ int main(){
     int L; cin >> L;
     
     int N=0, pow2n=1; while(pow2n<=L){ pow2n*=2; ++N; } // max(N) taht satisfies 2^n <=L.
-    int M = (N-1)*2 + popcount(L)-1;
+    int M = (N-1)*2 + __builtin_popcount(L)-1;
     cout << N << ' ' << M << endl;
     
     // filling [0, 2^n]
-    for(uint i=0; i<N; ++i){
+    for(int i=0; i<N-1; ++i){
         cout << (i+1) << ' ' << (i+2) << ' ' <<   0    << endl;
         cout << (i+1) << ' ' << (i+2) << ' ' << (1<<i) << endl;
     }
@@ -54,43 +54,12 @@ int main(){
     // filling (2^n, L]
     int sum = 1<<(N-1);
     int cur = 1<<(N-2);
-    for(uint i=N-2; i>=0; --i){
+    for(int i=N-2; i>=0; --i){
         if(L & cur){
             cout << i+1 << ' ' << N << ' ' << sum << endl;
             sum += cur;
         }
         cur>>=1;
-    }
-    
-    int cur = 1<<(N-1);
-    for(uint i=N-2; i>=0; --i){
-        if(L & (1<<i)){
-            ;
-        }
-    }
-    
-    int restL = L - 1<<(N-1); // restL = L - 2^N = L - 1<<(N-1)
-    int n=N-1;
-    while(restL!=0){
-        restL;
-        int N=0, pow2n=1; while(pow2n<=restL){ pow2n*=2; ++N; } // max(N) taht satisfies 2^n <=L.
-        
-        if(){}
-        ;
-    }
-    
-    int l = L;
-    for(uint i=0; i<N; ++i){
-        if(l<=0){ break; }
-        if(l & 1){
-            ret*b;
-            cout <<  << endl;
-        }
-        l *= l;
-        l >>= 1;
-    }
-    for(uint i=0; i<; ++i){
-        if(){ ; }
     }
     
     return 0;
