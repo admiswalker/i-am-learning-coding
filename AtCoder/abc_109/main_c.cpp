@@ -53,18 +53,15 @@ int main(){
     for(int i=0; i<N; ++i){ cin >> vX[i]; }
     
     if(N==1){ cout << abs(vX[0]-X) << endl; return 0; }
+
+    vX.push_back(X);
+    sort(vX.begin(), vX.end());
     
     int64 gcd_val=gcd(vX[1]-vX[0], vX[2]-vX[1]);
     for(int i=3; i<N; ++i){
         gcd_val = gcd(vX[i]-vX[i-1], gcd_val);
     }
-    
-    int64 min_diff = INT64_MAX;
-    for(int i=0; i<N; ++i){
-        min_diff = min(abs(vX[i] - X), min_diff); // do not mention about time complexity
-    }
-    
-    cout << gcd(gcd_val, min_diff) << endl;
+    cout << gcd_val << endl;
     
     return 0;
 }
