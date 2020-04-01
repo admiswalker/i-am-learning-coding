@@ -34,8 +34,8 @@ inline void print(const std::vector<std::vector<T>>& rhs){
 //---
 
 int main(){
-//    ios_base::sync_with_stdio(false);
-//    cin.tie(NULL);
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
     
     int H, W; cin >> H >> W;
     vector<int> vA(H*W);
@@ -74,46 +74,4 @@ int main(){
         cout << vS[i] << endl;
     }
     return 0;
-    
-    /*
-    int H, W; cin >> H >> W;
-    vector<int> vA(H*W);
-    for(int h=0; h<H; ++h){
-        vector<int> vW(W);
-        for(int w=0; w<W; ++w){ cin>>vW[w]; }
-//        if(h%2==0){ reverse(vW.beign(), vW.end()); }
-        
-        if(h%2!=0){
-            for(int w=0; w<W; ++w){
-                if(vW[w]%2==0){ continue; }
-                cout << h << ' ' << w << ' ' << h << ' ' << w << endl;
-            }
-        }else{
-            for(int w=W-1; w>=0; w){
-                if(vW[w]%2==0){ continue; }
-                cout << h << endl;
-            }
-        }
-    }
-    //*/
-    /*
-    int H, W; cin >> H >> W;
-    vector<int> vA(H*W);
-    for(int h=0; h<H; ++h){
-        for(int w=0; w<W; ++w){
-            int a; cin >> a;
-            vA[W*h + w] = a;
-        }
-        reverse(&vA[W*h + 0], &vA[W*h + W]);
-    }
-    
-    for(int i=0; i<H*W; ++i){
-        if(vA[i]%2==0){
-        }
-    }
-    
-    int ans=0;
-    
-    cout << ans << endl;
-    //*/
 }
