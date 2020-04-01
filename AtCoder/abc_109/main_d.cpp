@@ -42,29 +42,38 @@ int main(){
     vector<int> vH_idx(H*W);
     vector<int> vW_idx(H*W);
     for(int h=0; h<H; ++h){
+        int a;
         for(int w=0; w<W; ++w){
-            int a; cin >> a;
+            cin >> a;
             vA    [W*h + w] = a;
-            vH_idx[W*h + w] = h;
-            vW_idx[W*h + w] = w;
+            vH_idx[W*h + w] = h+1;
+            vW_idx[W*h + w] = w+1;
         }
+        
+        if(h%2==0){ continue; }
         reverse(&    vA[W*h + 0], &    vA[W*h + W]);
         reverse(&vH_idx[W*h + 0], &vH_idx[W*h + W]);
         reverse(&vW_idx[W*h + 0], &vW_idx[W*h + W]);
     }
     
+    vector<string> vS;
     for(int i=0; i<H*W-1; ++i){
         if(vA[i]%2==0){ continue; }
-        int hIdx = vH_idx[i];
-        int wIdx = vW_idx[i];
-        int hIdx_next = vH_idx[i+1];
-        int wIdx_next = vW_idx[i+1];
-        cout << h << ' ' << w << ' ' << h++ << ' ' << w++ << endl;
+        ++vA[i+1];
+        int h = vH_idx[i];
+        int w = vW_idx[i];
+        int h_next = vH_idx[i+1];
+        int w_next = vW_idx[i+1];
+//        cout << h << ' ' << w << ' ' << h_next << ' ' << w_next << endl;
+        string buf = to_string(h) + ' ' + to_string(w) + ' ' + to_string(h_next) + ' ' + to_string(w_next);
+        vS.push_back( buf );
     }
     
-    int ans=0;
-    
-    cout << ans << endl;
+    cout << vS.size() << endl;
+    for(uint i=0; i<vS.size(); ++i){
+        cout << vS[i] << endl;
+    }
+    return 0;
     
     /*
     int H, W; cin >> H >> W;
@@ -107,5 +116,4 @@ int main(){
     
     cout << ans << endl;
     //*/
-    return 0;
 }
