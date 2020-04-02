@@ -1,4 +1,4 @@
-//#define _GLIBCXX_DEBUG
+#define _GLIBCXX_DEBUG
 #include <bits/stdc++.h>
 using namespace std;
 typedef int64_t int64;
@@ -39,27 +39,40 @@ int main(){
     
     string S; cin >> S;
     string T; cin >> T;
-    uint N = S.size();
     
-    vector<pair<int, vector<int>>> vAZ_s( 'z'-'a'+1 );
-    vector<pair<int, vector<int>>> vAZ_t( 'z'-'a'+1 );
-    for(uint i=0; i<N; ++i){ vAZ_s[i].first = -1; }
-    for(uint i=0; i<N; ++i){ vAZ_t[i].first = -1; }
+    uint vN = 'z'-'a'+1;
+    vector<pair<int, vector<int>>> vAZ_s( vN );
+    vector<pair<int, vector<int>>> vAZ_t( vN );
+    for(uint i=0; i<vN; ++i){ vAZ_s[i].first = -1; }
+    for(uint i=0; i<vN; ++i){ vAZ_t[i].first = -1; }
     
-    for(uint i=0; i<N; ++i){
+    uint sN = S.size();
+    for(uint i=0; i<sN; ++i){
         int idx = S[i]-'a';
-        if(vAZ_s[idx].first==-1){ vAZ_s[idx].first = idx;
-        }          else         { vAZ_s[idx].second.push_back( idx ); }
+        if(vAZ_s[idx].first==-1){ vAZ_s[idx].first = i;
+        }          else         { vAZ_s[idx].second.push_back( i ); }
     }
-    for(uint i=0; i<N; ++i){
+    for(uint i=0; i<sN; ++i){
         int idx = T[i]-'a';
-        if(vAZ_t[idx].first==-1){ vAZ_t[idx].first = idx;
-        }          else         { vAZ_t[idx].second.push_back( idx ); }
+        if(vAZ_t[idx].first==-1){ vAZ_t[idx].first = i;
+        }          else         { vAZ_t[idx].second.push_back( i ); }
     }
     sort(vAZ_s.begin(), vAZ_s.end());
     sort(vAZ_t.begin(), vAZ_t.end());
+    /*
+    // for dbg
+    for(uint i=0; i<vN; ++i){
+        printn(vAZ_s[i].first);
+        printn(vAZ_s[i].second);
+    }
+    printf("\n");
+    for(uint i=0; i<vN; ++i){
+        printn(vAZ_t[i].first);
+        printn(vAZ_t[i].second);
+    }
+    //*/
     
-    for(uint i=0; i<N; ++i){
+    for(uint i=0; i<vN; ++i){
         if(vAZ_s[i].first != vAZ_t[i].first){ cout << "No" << endl; return 0; }
         
         if(vAZ_s[i].second.size() != vAZ_t[i].second.size()){ cout << "No" << endl; return 0; }
