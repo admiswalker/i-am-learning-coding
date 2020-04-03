@@ -33,35 +33,47 @@ inline void print(const std::vector<std::vector<T>>& rhs){
 
 //---
 
+template<typename T>
+vector<pair<int, T>> continuousLen(const vector<T>& v){
+    
+    vector<pair<int, T>> vRet; vRet.push_back(make_pair(1, v[0]));
+    T prev = v[0];
+    for(uint i=1; i<v.size(); ++i){
+        if(prev!=v[i]){ vRet.push_back(make_pair(1, v[i])); prev=v[i]; continue; }
+        ++(vRet[vRet.size()-1].first);
+    }
+    sort(vRet.begin(), vRet.end());
+    return vRet;
+}
+
 int main(){
-//    ios_base::sync_with_stdio(false);
-//    cin.tie(NULL);
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
     
     int n; cin >> n;
     int nd2 = n/2; // n div 2
     
-    map<int,int> cnt_v;
-    for(uint i=0; i<(uint)n; ++i){
-        int v; cin >> v;
-        auto itr = cnt_v.find( v );
-        if(itr!=cnt_v.end()){ ++itr->second;
-        }        else       { cnt_v.insert( make_pair(v, 1) ); }
+    vector<int> vO(nd2); // odd
+    vector<int> vE(nd2); // even
+    for(int i=0; i<nd2; ++i){
+        cin >> vO[i];
+        cin >> vE[i];
     }
+    sort(vO.begin(), vO.end());
+    sort(vE.begin(), vE.end());
     
-    vector<int> vNum;
-    for(auto itr=cnt_v.begin(); itr!=cnt_v.end(); ++itr){
-        vNum.push_back(itr->second);
+    vector<pair<int, int>> vCL_o = continuousLen(vO);
+    vector<pair<int, int>> vCL_e = continuousLen(vE);
+    
+    int len_o = vCL_o[0].first;
+    int len_e = vCL_e[0].first;
+    int val_o = vCL_o[0].second;
+    int val_e = vCL_e[0].second;
+    if(val_o == val_e){
+        if(vCL_o.size()==1 && len_o < len_e){ len_o = vCL_o[1].first; }
+        if(vCL_e.size()==1 && len_o >=len_e){ len_e = vCL_e[1].first; }
     }
-    
-    // minus nd2
-    for(uint i=0; i<vNum.size(); ++i){ vNum[i] = abs(vNum[i]-nd2); }
-    sort(vNum.begin(), vNum.end());
-    printn(vNum);
-    
-    int ans;
-    if      ( vNum.size()==1 ){ ans = vNum[0];
-    }           else          { ans = vNum[0]+vNum[1]; }
-    cout << ans << endl;
+    cout << n - len_o - len_e << endl;
     
     return 0;
 }
