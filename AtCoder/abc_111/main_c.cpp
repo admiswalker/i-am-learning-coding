@@ -34,8 +34,8 @@ inline void print(const std::vector<std::vector<T>>& rhs){
 //---
 
 int main(){
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+//    ios_base::sync_with_stdio(false);
+//    cin.tie(NULL);
     
     int n; cin >> n;
     int nd2 = n/2; // n div 2
@@ -56,10 +56,10 @@ int main(){
     // minus nd2
     for(uint i=0; i<vNum.size(); ++i){ vNum[i] = abs(vNum[i]-nd2); }
     sort(vNum.begin(), vNum.end());
+    printn(vNum);
     
     int ans;
-    if      ( vNum.size()==1 ){ ans = nd2;
-    }else if( vNum.size()==2 ){ ans = vNum[0];
+    if      ( vNum.size()==1 ){ ans = vNum[0];
     }           else          { ans = vNum[0]+vNum[1]; }
     cout << ans << endl;
     
