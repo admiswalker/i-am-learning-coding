@@ -42,13 +42,13 @@ vector<pair<int, T>> continuousLen(const vector<T>& v){
         if(prev!=v[i]){ vRet.push_back(make_pair(1, v[i])); prev=v[i]; continue; }
         ++(vRet[vRet.size()-1].first);
     }
-    sort(vRet.begin(), vRet.end());
+    sort(vRet.begin(), vRet.end(), greater<pair<int,T>>());
     return vRet;
 }
 
 int main(){
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+//    ios_base::sync_with_stdio(false);
+//    cin.tie(NULL);
     
     int n; cin >> n;
     int nd2 = n/2; // n div 2
@@ -67,13 +67,25 @@ int main(){
     
     int len_o = vCL_o[0].first;
     int len_e = vCL_e[0].first;
+    int len_o1 = vCL_o[1].first;
+    int len_e1 = vCL_e[1].first;
     int val_o = vCL_o[0].second;
     int val_e = vCL_e[0].second;
-    if(val_o == val_e){
-        if(vCL_o.size()==1 && len_o < len_e){ len_o = vCL_o[1].first; }
-        if(vCL_e.size()==1 && len_o >=len_e){ len_e = vCL_e[1].first; }
+    int ans;
+    if(val_o != val_e){
+        ans = n - len_o - len_e;
+    }else{
+        int ans1 = n - len_o1 - len_e;
+        int ans2 = n - len_o  - len_e1;
+        ans = min(ans1, ans2);
     }
-    cout << n - len_o - len_e << endl;
+    cout << ans << endl;
     
     return 0;
 }
+
+/*
+6
+1 1 1 2 2 2
+2
+*/
