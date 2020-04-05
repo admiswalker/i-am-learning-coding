@@ -63,12 +63,12 @@ int main(){
         int yt = vXY[i].y;
         int xs=0, ys=0; // s: sum
         for(uint di=0; di<vD.size(); ++di){
-            if(abs(xt - xs) > abs(yt - ys)){
-                if(xt-xs>=0){ xs+=vD[i]; cout << 'R';
-                }    else   { xs-=vD[i]; cout << 'L'; }
+            if(abs(xt-xs) > abs(yt-ys)){
+                if(xt-xs>=0){ xs+=vD[di]; cout << 'R';
+                }    else   { xs-=vD[di]; cout << 'L'; }
             }else{
-                if(yt-ys>=0){ ys+=vD[i]; cout << 'R';
-                }    else   { ys-=vD[i]; cout << 'L'; }
+                if(yt-ys>=0){ ys+=vD[di]; cout << 'U';
+                }    else   { ys-=vD[di]; cout << 'D'; }
             }
         }
     }
