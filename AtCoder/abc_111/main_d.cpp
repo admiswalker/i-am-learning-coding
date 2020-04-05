@@ -54,7 +54,7 @@ int main(){
         if(mod2!=mod2_tmp){ cout << -1 << endl; return 0; }
     }
     
-    vector<int> vD; for(int i=5; i>=0; --i){ vD.push_back( 1<<i ); }
+    vector<int> vD; for(int i=30; i>=0; --i){ vD.push_back( 1<<i ); }
     if(mod2==0){ vD.push_back(1); }
     cout << vD.size() << endl; for(uint i=0; i<vD.size(); ++i){ cout << vD[i] << ' '; } cout << endl;
     
@@ -76,4 +76,3 @@ int main(){
     
     return 0;
 }
-
