@@ -1,3 +1,5 @@
+// ref: https://img.atcoder.jp/abc112/editorial.pdf
+
 //#define _GLIBCXX_DEBUG
 #include <bits/stdc++.h>
 using namespace std;
@@ -40,20 +42,32 @@ inline void print(const std::vector<std::pair<TR,TL>>& rhs){
 
 //---
 
+int height(int H, int x, int cx, int y, int cy){
+    return abs() + abs();
+}
+
+bool isSameH(const vector<int>& vH, int xi, int yi){
+    
+    
+    return ;
+}
+
 int main(){
 //    ios_base::sync_with_stdio(false);
 //    cin.tie(NULL);
     
-    uint N, T; cin >> N >> T;
-    vector<pair<int,int>> vCT(N); for(uint i=0; i<N; ++i){ cin >> vCT[i].first >> vCT[i].second; }
-    sort(vCT.begin(), vCT.end());
+    int N; cin >> N;
+    vector<int> vX(N), vY(N), vH(N);
+    for(uint i=0; i<N; ++i){ cin >> vX[i] >> vY[i] >> vH[i]; }
     
-    uint i=0;
-    for(; i<N; ++i){
-        if(vCT[i].second<=(int)T){ break; }
+    uint xi=0, yi=0;
+    for(; xi<=100; ++xi){
+        for(; yi<=100; ++yi){
+            if( isSameH(vH, xi, yi) ){ break; }
+        }
     }
-    if(i!=N){ cout << vCT[i].first << endl;
-    }  else { cout << "TLE" << endl; }
+    
+    cout << xi << yi << HHHHHH << endl;
     
     return 0;
 }
