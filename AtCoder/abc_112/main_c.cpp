@@ -47,8 +47,8 @@ int height(int H, int x, int cx, int y, int cy){
 //    return H-abs(x-cx)-abs(y-cy);
 }
 
-bool isSameH(const vector<int>& vX, const vector<int>& vY, const vector<int>& vH, int cx, int cy, int ch){
-//    int htmp = vH[0] - height(100, vX[0], cx, vY[0], cy);
+bool isSameH(int cx, int cy, int ch,
+             const vector<int>& vX, const vector<int>& vY, const vector<int>& vH){
     for(uint i=1; i<vH.size(); ++i){
         int htmp =  height(ch, vX[i], cx, vY[i], cy);
         if(htmp != vH[i]){ return false; }
@@ -60,7 +60,7 @@ void solver(int& cx, int& cy, int& ch,
     for(; cx<=100; ++cx){
         for(; cy<=100; ++cy){
             for(; ch<=100; ++ch){
-                if( isSameH(vX, vY, vH, cx, cy, ch) ){ printf("break\n"); return; }
+                if( isSameH(cx, cy, ch, vX, vY, vH) ){ printf("break\n"); return; }
             }
         }
     }
@@ -76,8 +76,7 @@ int main(){
     vector<int> vX(N), vY(N), vH(N);
     for(uint i=0; i<N; ++i){ cin >> vX[i] >> vY[i] >> vH[i]; }
     
-    int cx=0, cy=0, ch=0;
-    solver(cx, cy, ch, vX, vY, vH);
+    int cx=0, cy=0, ch=0; solver(cx, cy, ch, vX, vY, vH);
     cout << cx << ' ' << cy << ' ' << ch << endl;
     
     return 0;
