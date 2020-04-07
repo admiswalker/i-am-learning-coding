@@ -49,31 +49,32 @@ int height(int H, int x, int cx, int y, int cy){
 
 bool isSameH(int cx, int cy, int ch,
              const vector<int>& vX, const vector<int>& vY, const vector<int>& vH){
+
+    int prev = vH[0] + height(0, vX[0], cx, vY[0], cy);
+    printn( prev );
     for(uint i=0; i<vH.size(); ++i){
-        int htmp = height(0, vX[i], cx, vY[i], cy);
-//        printn(vH[i]+htmp);
-//        printn(cx);
-//        printn(cy);
-        if(htmp != vH[i]){ return false; }
-//        int htmp =  height(ch, vX[i], cx, vY[i], cy);
-//        if(htmp != vH[i]){ return false; }
+        int htmp = vH[i] + height(0, vX[i], cx, vY[i], cy);
+        printn( htmp );
+        if(htmp!=prev){ return false; }
     }
     return true;
 }
-void solver(int& cx, int& cy, int& ch, 
-            const vector<int>& vX, const vector<int>& vY, const vector<int>& vH){
-    for(; cx<=100; ++cx){
-        for(; cy<=100; ++cy){
+tuple<int, int, int> solver(const vector<int>& vX, const vector<int>& vY, const vector<int>& vH){
+//    for(int cx=0; cx<=100; ++cx){
+//        for(int cy=0; cy<=100; ++cy){
+    for(int cx=0; cx<=5; ++cx){
+        for(int cy=0; cy<=5; ++cy){
             printf("cx, cy = %d %d\n", cx, cy);
-//            if( isSameH(cx, cy, ch, vX, vY, vH) ){ printf("break\n"); return; }
+            int ch=0;
+            if( isSameH(cx, cy, ch, vX, vY, vH) ){ printf("break\n"); return make_tuple(cx, cy, ch); }
             
 //            for(; ch<=100; ++ch){
-//                if( isSameH(cx, cy, ch, vX, vY, vH) ){ printf("break\n"); return; }
+//                if( isSameH(cx, cy, ch, vX, vY, vH) ){ printf("break\n"); return make_tuple(cx, cy, ch); }
 //            }
         }
     }
     printf("imh\n");
-    return;
+    return make_tuple(-1, -1, -1);
 }
 
 int main(){
@@ -84,7 +85,8 @@ int main(){
     vector<int> vX(N), vY(N), vH(N);
     for(uint i=0; i<N; ++i){ cin >> vX[i] >> vY[i] >> vH[i]; }
     
-    int cx=0, cy=0, ch=0; solver(cx, cy, ch, vX, vY, vH);
+    int cx=0, cy=0, ch=0;
+    make_tuple(cx, cy, ch) = solver(vX, vY, vH);
     cout << cx << ' ' << cy << ' ' << ch << endl;
     
     return 0;
