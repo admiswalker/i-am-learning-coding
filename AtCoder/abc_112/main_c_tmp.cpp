@@ -42,35 +42,38 @@ inline void print(const std::vector<std::pair<TR,TL>>& rhs){
 
 //---
 
-//     vH[i] = ch-abs(vX[i]-cx)-abs(vY[i]-cy)
-// <=> vH[i] = ch-abs(vX[i]-cx)-abs(vY[i]-cy)
-// <=> vH[i]     +abs(vX[i]-cx)+abs(vY[i]-cy) = ch
-// <=> ch = vH[i]+abs(vX[i]-cx)+abs(vY[i]-cy)
-
-tuple<bool,int> isSameH(int cx, int cy,
-             const vector<int>& vX, const vector<int>& vY, const vector<int>& vH){
-    int ch;
-    for(uint i=0; i<vH.size(); ++i){
-        if(vH[i]<=0){ continue; }
-        ch = max(vH[i]+abs(vX[i]-cx)+abs(vY[i]-cy), 0);
-        break;
-    }
-    
-    for(uint i=0; i<vH.size(); ++i){
-        int htmp = max(ch-abs(vX[i]-cx)-abs(vY[i]-cy), 0);
-        if(vH[i]!=htmp){ return make_pair(false, ch); }
-    }
-    return make_pair(true, ch);
+int height(int H, int x, int cx, int y, int cy){
+//    return max(H-abs(x-cx)-abs(y-cy), 0);
+    return H-abs(x-cx)-abs(y-cy);
 }
-tuple<int, int, int> solver(const vector<int>& vX, const vector<int>& vY, const vector<int>& vH){
-    for(int cx=0; cx<=100; ++cx){
-        for(int cy=0; cy<=100; ++cy){
-            bool TF; int ch;
-            tie(TF, ch) = isSameH(cx, cy, vX, vY, vH);
-            if( TF ){ return make_tuple(cx, cy, ch); }
+
+bool isSameH(int cx, int cy,
+             const vector<int>& vX, const vector<int>& vY, const vector<int>& vH){
+    int ch=0;
+    int prev = vH[0] - height(ch, vX[0], cx, vY[0], cy);
+    printn( prev );
+    for(uint i=0; i<vH.size(); ++i){
+        int htmp = vH[i] - height(ch, vX[i], cx, vY[i], cy);
+        printn( htmp );
+        if(htmp!=prev){ return false; }
+    }
+    return true;
+}
+tuple<int, int> solver(const vector<int>& vX, const vector<int>& vY, const vector<int>& vH){
+//    for(int cx=0; cx<=100; ++cx){
+//        for(int cy=0; cy<=100; ++cy){
+    for(int cx=0; cx<=5; ++cx){
+        for(int cy=0; cy<=5; ++cy){
+            printf("cx, cy = %d %d\n", cx, cy);
+            if( isSameH(cx, cy, vX, vY, vH) ){ printf("break\n"); return make_tuple(cx, cy); }
+            
+//            for(; ch<=100; ++ch){
+//                if( isSameH(cx, cy, ch, vX, vY, vH) ){ printf("break\n"); return make_tuple(cx, cy, ch); }
+//            }
         }
     }
-    return make_tuple(-1, -1, -1);
+    printf("imh\n");
+    return make_tuple(-1, -1);
 }
 
 int main(){
@@ -81,8 +84,30 @@ int main(){
     vector<int> vX(N), vY(N), vH(N);
     for(uint i=0; i<N; ++i){ cin >> vX[i] >> vY[i] >> vH[i]; }
     
-    int cx=0, cy=0, ch=0;
-    tie(cx, cy, ch) = solver(vX, vY, vH);
+    for(uint xi=0; xi<N; ++xi){
+        for(uint yi=0; yi<N; ++yi){
+            for(uint hi=0; hi<N; ++hi){
+                int prev = hi - heigh(h, );
+            }
+            ;
+        }
+    }
+    
+    int cx=0, cy=0;
+    tie(cx, cy) = solver(vX, vY, vH);
+    printn(cx);
+    printn(cy);
+    /*
+    uint hi=0;
+    for(; hi<=100; ++hi){
+        hi; // search hi
+        int ch=height(vH[0], vX[0], cx, vY[0], cy);
+        if(ch == vH[0]){
+        }
+    }
+    //*/
+//    int h_fidd = vH[0] - height(vH[0], vX[0], cx, vY[0], cy);
+    int ch = vH[0] + height(vH[0], vX[0], cx, vY[0], cy);
     cout << cx << ' ' << cy << ' ' << ch << endl;
     
     return 0;
