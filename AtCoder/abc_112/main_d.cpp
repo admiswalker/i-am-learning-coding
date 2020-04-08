@@ -41,14 +41,28 @@ inline void print(const std::vector<std::pair<TR,TL>>& rhs){
 //---
 
 vector<pair<int,int>> factor(int M){
-    vector<pair<int,int>> vNP;
-    for(int div=2; div*div<=M; ++div){
-        if(M%div!=0){ continue; }
-        
-        int num=1; M/=div; while(M%div!=0){ M/=div; ++num; }
-        vNP.push_back( pair<int,int>(div, num) );
+    vector<pair<int,int>> vPN;
+    int div=2;
+    while(M!=1){
+        int num=0; while(M%div==0){ M/=div; ++num; }
+        if(num!=0){ vPN.push_back( {div, num} ); }
+        ++div;
     }
-    return vNP;
+    return vPN;
+}
+
+int powi(int b, uint e){
+    int ret=1;
+    for(uint i=0; i<e; ++i){ ret *= b; }
+    return ret;
+}
+
+int div_n(const vector<pair<int,int>>& vPN, int n){
+    int divisor=1;
+    for(uint i=0; i<vPN.size(); ++i){
+        divisor *= powi(vPN[i].first, n);
+    }
+    return divisor;
 }
 
 int main(){
@@ -56,13 +70,40 @@ int main(){
 //    cin.tie(NULL);
     
     int N, M; cin >> N >> M;
-    if(M%N==0){ cout << M/N << endl; return 0; }
     
-    vector<pair<int,int>> vNP = factor(M);
-    for(uint i=vNP.size()-1; i>=0; ++i){
-        if(M/vNP[i].first >= N){ cout << vNP[i].first << endl; return 0; }
+    vector<pair<int,int>> vPN = factor(M);
+    
+    int maxn=INT_MAX;
+    for(uint i=0; i<vPN.size(); ++i){ maxn = min(maxn, vPN[i].second); }
+    
+    // search maxn
+    while( (int)(M / div_n(vPN, maxn)) < N ){ --maxn; }
+    if(maxn>=2){
+        cout << div_n(vPN, maxn) << endl;
+        return 0;
+    }
+    
+    for(uint i=vPN.size()-1; i>=0; --i){
+        if(M/vPN[i].first >= N){ cout << vPN[i].first << endl; return 0; }
     }
     cout << 1 << endl;
     
+    
+//    while( (int)(N / vPN.size()) < maxn ){ --maxn; }
+//    printn(maxn);
+    
+//    int ans=1;
+//    for(uint i=0; i<vPN.size(); ++i){ ans *= vPN[i].first; }
+//    cout << powi(ans, maxn) << endl;
+    
+    /*
+    if(M%N==0){ cout << M/N << endl; return 0; }
+    
+    vector<pair<int,int>> vPN = factor(M);
+    for(uint i=vPN.size()-1; i>=0; --i){
+        if(M/vPN[i].first >= N){ cout << vPN[i].first << endl; return 0; }
+    }
+    cout << 1 << endl;
+    //*/
     return 0;
 }
