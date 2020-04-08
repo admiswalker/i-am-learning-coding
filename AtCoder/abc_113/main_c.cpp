@@ -40,6 +40,25 @@ inline void print(const std::vector<std::pair<TR,TL>>& rhs){
 
 //---
 
+string ssprintf(const char* format, ...){
+    va_list args;
+    va_start(args, format);
+    char* buf;
+#ifdef _WIN32
+    int len = _vscprintf(format, args)+1;
+    buf = (char*)malloc(len * sizeof(char));
+    vsprintf_s(buf, len, format, args);
+#else
+    if(vasprintf(&buf, format, args) == -1){
+        return std::string("");
+    }
+#endif
+    std::string ret = buf;
+    free(buf);
+    va_end(args);
+    return ret;
+}
+
 int main(){
 //    ios_base::sync_with_stdio(false);
 //    cin.tie(NULL);
@@ -57,21 +76,21 @@ int main(){
     }
     
     unordered_map<string, string> ht;
-    for(uint pi=0; i<vPY_s.size(); ++pi){
+    for(uint pi=0; pi<vPY_s.size(); ++pi){
         for(uint yi=0; yi<vPY_s[pi].size(); ++yi){
             int P = pi+1;
             int Y = vPY_s[pi][yi];
-            string key = ("%06d%06d", P, Y   ); // input
-            string val = ("%06d%06d", P, yi+1); // output
+            string key = ssprintf("%06d%06d", P, Y   ); // input
+            string val = ssprintf("%06d%06d", P, yi+1); // output
             ht[key] = val;
         }
     }
     
-    for(uint pi=0; i<vPY.size(); ++pi){
+    for(uint pi=0; pi<vPY.size(); ++pi){
         for(uint yi=0; yi<vPY[pi].size(); ++yi){
             int P = pi+1;
             int Y = vPY[pi][yi];
-            string key = ("%06d%06d", P, Y);
+            string key = ssprintf("%06d%06d", P, Y);
             cout << ht[key] << endl;
         }
     }
