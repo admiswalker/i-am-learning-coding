@@ -64,35 +64,34 @@ int main(){
 //    cin.tie(NULL);
     
     uint N, M; cin >> N >> M;
-    vector<vector<int>> vPY(N);
+    vector<pair<int, int>> vPY(M);
+    vector<vector<int>> vvPY(N);
     for(uint i=0; i<M; ++i){
         int P, Y; cin >> P >> Y;
-        vPY[P-1].push_back( Y );
+        vvPY[P-1].push_back( Y );
+        vPY[i].first  = P;
+        vPY[i].second = Y;
     }
-    
-    vector<vector<int>> vPY_s = vPY;
-    for(uint i=0; i<vPY_s.size(); ++i){
-        sort(vPY_s[i].begin(), vPY_s[i].end());
+    for(uint i=0; i<vvPY.size(); ++i){
+        sort(vvPY[i].begin(), vvPY[i].end());
     }
     
     unordered_map<string, string> ht;
-    for(uint pi=0; pi<vPY_s.size(); ++pi){
-        for(uint yi=0; yi<vPY_s[pi].size(); ++yi){
+    for(uint pi=0; pi<vvPY.size(); ++pi){
+        for(uint yi=0; yi<vvPY[pi].size(); ++yi){
             int P = pi+1;
-            int Y = vPY_s[pi][yi];
+            int Y = vvPY[pi][yi];
             string key = ssprintf("%06d%06d", P, Y   ); // input
             string val = ssprintf("%06d%06d", P, yi+1); // output
             ht[key] = val;
         }
     }
     
-    for(uint pi=0; pi<vPY.size(); ++pi){
-        for(uint yi=0; yi<vPY[pi].size(); ++yi){
-            int P = pi+1;
-            int Y = vPY[pi][yi];
-            string key = ssprintf("%06d%06d", P, Y);
-            cout << ht[key] << endl;
-        }
+    for(uint i=0; i<vPY.size(); ++i){
+        int P = vPY[i].first;
+        int Y = vPY[i].second;
+        string key = ssprintf("%06d%06d", P, Y);
+        cout << ht[key] << endl;
     }
     
     return 0;
