@@ -1,4 +1,7 @@
-#define _GLIBCXX_DEBUG
+// ref: https://img.atcoder.jp/abc112/editorial.pdf
+// ref: https://drken1215.hatenablog.com/entry/2018/11/06/120600
+
+//#define _GLIBCXX_DEBUG
 #include <bits/stdc++.h>
 using namespace std;
 typedef int64_t int64;
@@ -40,29 +43,16 @@ inline void print(const std::vector<std::pair<TR,TL>>& rhs){
 
 //---
 
-vector<pair<int,int>> factor(int M){
-    vector<pair<int,int>> vPN;
-    int div=2;
-    while(M!=1){
-        int num=0; while(M%div==0){ M/=div; ++num; }
-        if(num!=0){ vPN.push_back( {div, num} ); }
-        ++div;
+vector<int> divisors(int n){
+    vector<int> divs;
+    for(int i=1; i*i<n; ++i){
+        if(n%i!=0){ continue; }
+        
+        divs.push_back(i);
+        int tmp = n/i; if(tmp!=i){ divs.push_back(tmp); }
     }
-    return vPN;
-}
-
-int powi(int b, uint e){
-    int ret=1;
-    for(uint i=0; i<e; ++i){ ret *= b; }
-    return ret;
-}
-
-int div_n(const vector<pair<int,int>>& vPN, int n){
-    int divisor=1;
-    for(uint i=0; i<vPN.size(); ++i){
-        divisor *= powi(vPN[i].first, n);
-    }
-    return divisor;
+    sort(divs.begin(), divs.end(), greater<int>());
+    return divs;
 }
 
 int main(){
@@ -71,39 +61,13 @@ int main(){
     
     int N, M; cin >> N >> M;
     
-    vector<pair<int,int>> vPN = factor(M);
+    vector<int> divs = divisors(M);
     
-    int maxn=INT_MAX;
-    for(uint i=0; i<vPN.size(); ++i){ maxn = min(maxn, vPN[i].second); }
-    
-    // search maxn
-    while( (int)(M / div_n(vPN, maxn)) < N ){ --maxn; }
-    if(maxn>=2){
-        cout << div_n(vPN, maxn) << endl;
-        return 0;
+    int ans=1;
+    for(uint i=0; i<divs.size(); ++i){
+        if( divs[i] <= M/N ){ ans=divs[i]; break; }
     }
+    cout << ans << endl;
     
-    for(uint i=vPN.size()-1; i>=0; --i){
-        if(M/vPN[i].first >= N){ cout << vPN[i].first << endl; return 0; }
-    }
-    cout << 1 << endl;
-    
-    
-//    while( (int)(N / vPN.size()) < maxn ){ --maxn; }
-//    printn(maxn);
-    
-//    int ans=1;
-//    for(uint i=0; i<vPN.size(); ++i){ ans *= vPN[i].first; }
-//    cout << powi(ans, maxn) << endl;
-    
-    /*
-    if(M%N==0){ cout << M/N << endl; return 0; }
-    
-    vector<pair<int,int>> vPN = factor(M);
-    for(uint i=vPN.size()-1; i>=0; --i){
-        if(M/vPN[i].first >= N){ cout << vPN[i].first << endl; return 0; }
-    }
-    cout << 1 << endl;
-    //*/
     return 0;
 }
