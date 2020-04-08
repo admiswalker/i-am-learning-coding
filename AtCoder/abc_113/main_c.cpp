@@ -44,15 +44,37 @@ int main(){
 //    ios_base::sync_with_stdio(false);
 //    cin.tie(NULL);
     
-    int N, M; cin >> N >> M;
-    vector<vector<int>> vT(N);
-    for(int i=0; i<N; ++i){
+    uint N, M; cin >> N >> M;
+    vector<vector<int>> vPY(N);
+    for(uint i=0; i<M; ++i){
         int P, Y; cin >> P >> Y;
-        
+        vPY[P-1].push_back( Y );
     }
-    sort(vT.begin(), vT.end());
     
-    cout <<  << endl;
+    vector<vector<int>> vPY_s = vPY;
+    for(uint i=0; i<vPY_s.size(); ++i){
+        sort(vPY_s[i].begin(), vPY_s[i].end());
+    }
+    
+    unordered_map<string, string> ht;
+    for(uint pi=0; i<vPY_s.size(); ++pi){
+        for(uint yi=0; yi<vPY_s[pi].size(); ++yi){
+            int P = pi+1;
+            int Y = vPY_s[pi][yi];
+            string key = ("%06d%06d", P, Y   ); // input
+            string val = ("%06d%06d", P, yi+1); // output
+            ht[key] = val;
+        }
+    }
+    
+    for(uint pi=0; i<vPY.size(); ++pi){
+        for(uint yi=0; yi<vPY[pi].size(); ++yi){
+            int P = pi+1;
+            int Y = vPY[pi][yi];
+            string key = ("%06d%06d", P, Y);
+            cout << ht[key] << endl;
+        }
+    }
     
     return 0;
 }
