@@ -45,13 +45,14 @@ int main(){
 //    cin.tie(NULL);
     
     uint N, M; cin >> N >> M;
-    vector<pair<int, int>> vPY(M);
+    vector<int> vP(M);
+    vector<int> vY(M);
     vector<vector<int>> vvPY(N);
     for(uint i=0; i<M; ++i){
         int P, Y; cin >> P >> Y;
+        vP[i] = P;
+        vY[i] = Y;
         vvPY[P-1].push_back( Y );
-        vPY[i].first  = P;
-        vPY[i].second = Y;
     }
     for(uint i=0; i<vvPY.size(); ++i){
         sort(vvPY[i].begin(), vvPY[i].end());
@@ -68,9 +69,9 @@ int main(){
         }
     }
     
-    for(uint i=0; i<vPY.size(); ++i){
-        int P = vPY[i].first;
-        int Y = vPY[i].second;
+    for(uint i=0; i<M; ++i){
+        int P = vP[i];
+        int Y = vY[i];
         int64 key = 1000000ll*(int64)P + (int64)Y;
         printf("%012ld\n", (int64)ht[key]);
     }
