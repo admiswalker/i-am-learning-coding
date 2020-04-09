@@ -47,36 +47,27 @@ int main(){
 //    cin.tie(NULL);
     
     uint N, M; cin >> N >> M;
-    /*
-    vector<pair<int, int>> vPY(M);
+    
+    vector<int> vP(M), vY(M);
     vector<vector<int>> vvPY(N);
     for(uint i=0; i<M; ++i){
-        int P, Y; cin >> P >> Y;
-        vvPY[P-1].push_back( Y );
-        vPY[i].first  = P;
-        vPY[i].second = Y;
-    }
-    for(uint i=0; i<vvPY.size(); ++i){
-        sort(vvPY[i].begin(), vvPY[i].end());
+        int p, y; cin >> p >> y; --p;
+        vP[i] = p;
+        vY[i] = y;
+        vvPY[p].push_back(y);
     }
     
-    unordered_map<string, string> ht;
     for(uint pi=0; pi<vvPY.size(); ++pi){
-        for(uint yi=0; yi<vvPY[pi].size(); ++yi){
-            int P = pi+1;
-            int Y = vvPY[pi][yi];
-            string key = ssprintf("%06d%06d", P, Y   ); // input
-            string val = ssprintf("%06d%06d", P, yi+1); // output
-            ht[key] = val;
-        }
+        sort(vvPY[pi].begin(), vvPY[pi].end());
+        
+        vvPY[pi].erase( unique(vvPY[pi].begin(), vvPY[pi].end()), vvPY[pi].end() );
     }
     
-    for(uint i=0; i<vPY.size(); ++i){
-        int P = vPY[i].first;
-        int Y = vPY[i].second;
-        string key = ssprintf("%06d%06d", P, Y);
-        cout << ht[key] << endl;
+    for(uint i=0; i<M; ++i){
+        int pi = vP[i];
+        int idx = lower_bound(vvPY[pi].begin(), vvPY[pi].end(), vY[i]) - vvPY[pi].begin();
+        printf("%06d%06d\n", pi+1, idx+1);
     }
-    */
+    
     return 0;
 }
