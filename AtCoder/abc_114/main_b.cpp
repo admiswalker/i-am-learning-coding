@@ -46,15 +46,9 @@ int main(){
     
     string s; cin >> s;
     int ans=INT_MAX;
-    int begin=0, end=3;
-    for(; end<=(int)s.size();){
-        int tmp=0;
-        for(int i=begin; i<end-1; ++i){ tmp += s[i]-'0'; tmp*=10; }
-        tmp += s[end-1]-'0';
+    for(uint b=0; b<=s.size()-3; ++b){ // b: begin
+        int tmp = 100*(s[b+0]-'0') + 10*(s[b+1]-'0') + (s[b+2]-'0');
         ans = min(ans, abs(tmp-753));
-        
-        ++begin;
-        ++end;
     }
     cout << ans << endl;
     
