@@ -47,22 +47,31 @@ inline void print(const std::vector<std::pair<TR,TL>>& rhs){
 int main(){
 //    ios_base::sync_with_stdio(false);
 //    cin.tie(NULL);
+    const int mod = 1000000007;
     
     int H, W, K; cin >> H >> W >> K;
     vector<vector<int>> dp(H+1, vector<int>(W, 0)); dp[0][0] = 1;
     
-    for(uint hi=0; hi<H; ++hi){
-        for(uint wi=0; wi<W; ++wi){
-            for(uint ls=0; ls< 1<<(W-1); ++ls){ // lines: ls
+    for(int hi=0; hi<H; ++hi){
+        for(int wi=0; wi<W; ++wi){
+            for(int ls=0; ls< 1<<(W-1); ++ls){ // lines: ls
                 
-                // check if the two horizontal lines are connected.
-                bool isConnected=false;
-                for(uint i=0; i<W-2; ++i){
-                    if(ls){
-                    }
-                    
+                bool isConnected=false; // check if the two horizontal lines are connected.
+                for(int i=0; i<W-2; ++i){
+                    if( (ls>>i)&1 && (ls>>(i+1))&1 ){ isConnected=true; break; }
                 }
                 if(isConnected){ continue; }
+                
+                if( wi>=1 && (ls>>(wi-1))&1 ){
+                    dp[hi+1][wi-1] += dp[hi][wi];
+                    dp[hi+1][wi-1] %= mod;
+                }else if( wi<=W-2 && (ls>>wi)&1 ){
+                    dp[hi+1][wi+1] += dp[hi][wi];
+                    dp[hi+1][wi+1] %= mod;
+                }else{
+                    dp[hi+1][wi+0] += dp[hi][wi];
+                    dp[hi+1][wi+0] %= mod;
+                }
             }
         }
     }
