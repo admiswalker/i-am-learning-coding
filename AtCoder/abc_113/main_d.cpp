@@ -1,3 +1,7 @@
+// ref: https://img.atcoder.jp/abc113/editorial.pdf
+// ref: https://atcoder.jp/contests/abc113/submissions/3540482
+
+
 //#define _GLIBCXX_DEBUG
 #include <bits/stdc++.h>
 using namespace std;
@@ -44,38 +48,25 @@ int main(){
 //    ios_base::sync_with_stdio(false);
 //    cin.tie(NULL);
     
-    uint N, M; cin >> N >> M;
-    vector<int> vP(M);
-    vector<int> vY(M);
-    vector<vector<int>> vvPY(N);
-    for(uint i=0; i<M; ++i){
-        int P, Y; cin >> P >> Y;
-        vP[i] = P;
-        vY[i] = Y;
-        vvPY[P-1].push_back( Y );
-    }
-    for(uint i=0; i<vvPY.size(); ++i){
-        sort(vvPY[i].begin(), vvPY[i].end());
-    }
+    int H, W, K; cin >> H >> W >> K;
+    vector<vector<int>> dp(H+1, vector<int>(W, 0)); dp[0][0] = 1;
     
-    unordered_map<int64, int64> ht;
-    for(uint pi=0; pi<vvPY.size(); ++pi){
-        for(uint yi=0; yi<vvPY[pi].size(); ++yi){
-            int P = pi+1;
-            int Y = vvPY[pi][yi];
-            int64 key = 1000000ll*(int64)P + (int64)Y;      // input
-            int64 val = 1000000ll*(int64)P + (int64)yi+1ll; // output
-            ht[key] = val;
+    for(uint hi=0; hi<H; ++hi){
+        for(uint wi=0; wi<W; ++wi){
+            for(uint ls=0; ls< 1<<(W-1); ++ls){ // lines: ls
+                
+                // check if the two horizontal lines are connected.
+                bool isConnected=false;
+                for(uint i=0; i<W-2; ++i){
+                    if(ls){
+                    }
+                    
+                }
+                if(isConnected){ continue; }
+            }
         }
     }
-    
-    for(uint i=0; i<M; ++i){
-        int P = vP[i];
-        int Y = vY[i];
-        int64 key = 1000000ll*(int64)P + (int64)Y;
-        printf("%012lld\n", (int64)ht[key]);
-    }
+    cout << dp[H][K-1] << endl;
     
     return 0;
 }
- 
