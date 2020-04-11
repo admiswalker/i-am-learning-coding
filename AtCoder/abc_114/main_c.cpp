@@ -1,3 +1,5 @@
+// ref: https://img.atcoder.jp/abc114/editorial.pdf
+
 //#define _GLIBCXX_DEBUG
 #include <bits/stdc++.h>
 using namespace std;
@@ -40,17 +42,32 @@ inline void print(const std::vector<std::pair<TR,TL>>& rhs){
 
 //---
 
+bool isInc(string s, char c){
+    for(uint i=0; i<s.size(); ++i){
+        if(s[i]==c){ return true; }
+    }
+    return false;
+}
+
+int solver(string s, int64 N){
+    if(stoll(s)>N){ return 0; }
+    
+    int ret=0;
+    if( isInc(s, '7') && isInc(s, '5') && isInc(s, '3') ){ ++ret; }
+
+    ret += solver(s+'7', N);
+    ret += solver(s+'5', N);
+    ret += solver(s+'3', N);
+    
+    return ret;
+}
+
 int main(){
 //    ios_base::sync_with_stdio(false);
 //    cin.tie(NULL);
     
-    string s; cin >> s;
-    int ans=INT_MAX;
-    for(uint b=0; b<=s.size()-3; ++b){ // b: begin
-        int tmp = 100*(s[b+0]-'0') + 10*(s[b+1]-'0') + (s[b+2]-'0');
-        ans = min(ans, abs(tmp-753));
-    }
-    cout << ans << endl;
+    int N; cin >> N;
+    cout << solver(string("0"), N) << endl;
     
     return 0;
 }
