@@ -43,36 +43,6 @@ inline void print(const std::vector<std::pair<TR,TL>>& rhs){
 
 //---
 
-/*
-int64 solver(int64 L, int64& curNum, int64 X){ // cur: current
-    int64 numPate=0ll;
-    if(curNum>=X){ return numPate; }
-    if(L==0ll){
-        ++curNum; ++numPate; // P
-        return numPate;
-    }
-    
-    ++curNum;            if(curNum>=X){ return numPate; } // B
-    int64 buf = solver(L-1, curNum, X);
-    numPate += buf;      if(curNum>=X){ return numPate; } // L-1
-    ++curNum; ++numPate; if(curNum>=X){ return numPate; } // P
-    numPate += buf;      if(curNum>=X){ return numPate; } // L-1
-    ++curNum;            if(curNum>=X){ return numPate; } // B
-    
-    return numPate;
-}
-
-int main(){
-    int N; int64 X; cin >> N >> X;
-    
-    int64 curNum=0ll;
-    cout << solver(N, curNum, X) << endl;
-    
-    return 0;
-}
-//*/
-
-//*
 int64 pow2(int n){ return (1ll << (n-1)); }
 
 int64 rec(int n, int64 x){
@@ -91,5 +61,4 @@ int main(){
     
     return 0;
 }
-//*/
 
