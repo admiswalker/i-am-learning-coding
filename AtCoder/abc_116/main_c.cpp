@@ -40,8 +40,34 @@ inline void print(const std::vector<std::pair<TR,TL>>& rhs){
 
 //---
 
-int64 fn_even(int64 a_prev){ return a_prev / 2;     }
-int64 fn_odd (int64 a_prev){ return 3 * a_prev + 1; }
+vector<vector<int>> split(vector<int>& vP){
+    vector<vector<int>> vvNew;
+    
+    uint i=0;
+    while(i<vP[i].size()){
+        while(i<vP[i].size() && vP[i]==0){ ++i; } // pass empty
+        
+        vector<int> vNew;
+        while( vP[i]!=0 ){ vNew.push_back( vP[i] ); ++i; } // copy
+        vvNew.push_back( vNew );
+    }
+    return vvNew;
+}
+vector<vector<int>> split(vector<vector<int>>& vvP){
+    vector<int> vvNew;
+    for(uint vi=0; vi<vvP.size(); ++vi){
+        vector<vector<int>> vvTmp = split(vector<int>& vP);
+        
+        for(uint i=0; i<vvTmp.size(); ++i){
+            vvNew.push_back( move(vvTmp[i]) );
+        }
+    }
+    return vvNew;
+}
+
+void minus_min(vector<int> & vvP){
+    return ;
+}
 
 int main(){
 //    ios_base::sync_with_stdio(false);
@@ -50,14 +76,16 @@ int main(){
     int N; cin >> N;
     vector<int> vH(N);
     for(uint k=1; k<=N; ++k){ int tmp; cin>>tmp; vH[k]=k-tmp; }
-
-    vector<struct bem> vBEM = split(vBEM);
+    
+    vector<struct pm> vPM = split(vPM);
     
     int64 cnt=0;
-    while(vBEM.size()!=0){
-        vBEM = minus_min(vBEM);
-        vBEM = split(vBEM);
-        ++cnt;
+    while(vPM.size()!=0){
+        vvPN = minus_min(vPM);
+        vvPN = split(vvPN);
+        for(){
+            cnt += XXXXXXXXXXXXX;
+        }
     }
     cout << cnt << endl;
     
