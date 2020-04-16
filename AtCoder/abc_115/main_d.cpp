@@ -1,4 +1,5 @@
 // ref: https://img.atcoder.jp/abc115/editorial.pdf
+// ref: https://drken1215.hatenablog.com/entry/2019/05/13/114600
 
 //#define _GLIBCXX_DEBUG
 #include <bits/stdc++.h>
@@ -42,6 +43,7 @@ inline void print(const std::vector<std::pair<TR,TL>>& rhs){
 
 //---
 
+/*
 int64 solver(int64 L, int64& curNum, int64 X){ // cur: current
     int64 numPate=0ll;
     if(curNum>=X){ return numPate; }
@@ -50,26 +52,44 @@ int64 solver(int64 L, int64& curNum, int64 X){ // cur: current
         return numPate;
     }
     
-    ++curNum;                          if(curNum>=X){ return numPate; } // B
-    numPate += solver(L-1, curNum, X); if(curNum>=X){ return numPate; } // L-1
-    ++curNum; ++numPate;               if(curNum>=X){ return numPate; } // P
-    numPate += solver(L-1, curNum, X); if(curNum>=X){ return numPate; } // L-1
-    ++curNum;                          if(curNum>=X){ return numPate; } // B
+    ++curNum;            if(curNum>=X){ return numPate; } // B
+    int64 buf = solver(L-1, curNum, X);
+    numPate += buf;      if(curNum>=X){ return numPate; } // L-1
+    ++curNum; ++numPate; if(curNum>=X){ return numPate; } // P
+    numPate += buf;      if(curNum>=X){ return numPate; } // L-1
+    ++curNum;            if(curNum>=X){ return numPate; } // B
     
     return numPate;
 }
 
 int main(){
-//    ios_base::sync_with_stdio(false);
-//    cin.tie(NULL);
-    
-    uint N, X; cin >> N >> X;
+    int N; int64 X; cin >> N >> X;
     
     int64 curNum=0ll;
     cout << solver(N, curNum, X) << endl;
     
     return 0;
 }
-// 2160549382716056
-// 
+//*/
+
+//*
+int64 pow2(int n){ return (1ll << (n-1)); }
+
+int64 rec(int n, int64 x){
+    if(n==0){ return (x<=0 ? 0:1); }
+    
+    int64 len     = pow2(n+2) - 3;
+    int64 numPate = pow2(n+1) - 1;
+    
+    if(x<=len+1){ return rec(n-1, x-1);
+    }    else   { return numPate + 1 + rec(n-1, x-1-(len+1)); }
+}
+
+int main(){
+    int N; int64 X; cin >> N >> X;
+    cout << rec(N, X) << endl;
+    
+    return 0;
+}
+//*/
 
