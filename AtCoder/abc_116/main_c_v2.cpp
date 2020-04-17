@@ -48,6 +48,31 @@ int main(){
     for(uint i=0; i<N; ++i){ cin>>vH[i]; }
     
     int64 cnt=0ll;
+    for(;;){
+        if(*max_element(vH.begin(), vH.end())==0){ break; }
+        
+        for(uint i=0;;){
+            bool isUpdate=false;
+            while( i<vH.size() && vH[i]==0 ){ ++i; } // skip empty
+            while( i<vH.size() && vH[i]!=0 ){ --vH[i]; ++i; isUpdate=true; }
+            if(isUpdate){ ++cnt; }
+            
+            if(i==vH.size()){ break; }
+        }
+    }
+    cout << cnt << endl;
+    
+    return 0;
+}
+/*
+TLE
+
+int main(){
+    uint N; cin >> N;
+    vector<int> vH(N);
+    for(uint i=0; i<N; ++i){ cin>>vH[i]; }
+    
+    int64 cnt=0ll;
     for(uint i=0;;){
         while( i<vH.size() && vH[i]==0 ){ ++i; } // pass empty
         if(i==vH.size()){ i=0; continue; }
@@ -64,3 +89,4 @@ int main(){
     
     return 0;
 }
+//*/
