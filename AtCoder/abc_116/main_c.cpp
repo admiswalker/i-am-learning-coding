@@ -58,54 +58,39 @@ vector<vector<int>> split(const vector<vector<int>>& vvP){
     for(uint vi=0; vi<vvP.size(); ++vi){
         vector<vector<int>> vvTmp = split( vvP[vi] );
         
+        /*
+        vvNew.reserve(vvNew.size() + vvTmp.size());
+        std::copy(vvTmp.begin(), vvTmp.end(), std::back_inserter(vvNew));
+        //*/
         for(uint i=0; i<vvTmp.size(); ++i){
-            if( vvTmp[i].size()==0 ){ continue; }
+            if( vvTmp[i].size()==0 ){ continue; } // rm empty
             vvNew.push_back( move(vvTmp[i]) );
         }
     }
     return vvNew;
 }
 
-int min(const vector<int>& vP){
-    int minVal=vP[0];
-    for(uint i=1; i<vP.size(); ++i){
-        minVal = min(minVal, vP[i]);
-    }
-    return minVal;
-}
-/*
-void minus_min(vector<int>& vP){
-    int minVal = min(vP);
-    for(uint i=0; i<vP.size(); ++i){ vP[i] -= minVal; }
-}
-void minus_min(vector<vector<int>>& vvP){
-    for(uint i=0; i<vvP.size(); ++i){ minus_min( vvP[i] ); }
-}
-*/
-
 int main(){
 //    ios_base::sync_with_stdio(false);
 //    cin.tie(NULL);
     
     uint N; cin >> N;
-    vector<int> vH(N);
-    for(uint i=0; i<N; ++i){ int tmp; cin>>tmp; vH[i]=i+1-tmp; }
-    printn(vH);
+    vector<vector<int>> vvP(1, vector<int>(N));
+    for(uint i=0; i<N; ++i){ cin>>vvP[0][i]; }
     
-    vector<vector<int>> vvP = split(vH);
-    printn(vvP);
-    
-    int64 cnt=0;
+    int64 cnt=0ll;
     while(vvP.size()!=0){
-        vvP = split( vvP );
-        printn(vvP);
-        
         for(uint vi=0; vi<vvP.size(); ++vi){
-            int minVal = min( vvP[vi] );
+            vector<int>& vP = vvP[vi];
+//            if( vP.size()==0 ){ continue; } // rm empty
+            
+            int minVal = *std::min_element(vP.begin(), vP.end());
             cnt += minVal;
             
-            for(uint i=0; i<vvP[vi].size(); ++i){ vvP[vi][i] -= minVal; }
+            for(uint i=0; i<vP.size(); ++i){ vP[i] -= minVal; }
         }
+        
+        vvP = split( vvP );
     }
     cout << cnt << endl;
     
