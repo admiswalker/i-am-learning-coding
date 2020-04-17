@@ -42,6 +42,52 @@ inline void print(const std::vector<std::pair<TR,TL>>& rhs){
 
 //---
 
+int main() {
+    uint N; cin >> N;
+    vector<int> vH(N);
+    for(uint i=0; i<N; ++i){ cin>>vH[i]; }
+    
+    int cnt = 0;
+    for(;;){
+        if(*max_element(vH.begin(), vH.end()) == 0){ break; }
+        
+        for(uint i=0; i<N; ++i){
+            if(vH[i]==0){ continue; }
+            ++cnt;
+            while(i<N && vH[i]!=0){ --vH[i]; ++i; }
+        }
+    }
+    cout << cnt << endl;
+}
+
+/*
+AC
+
+int main(){
+    uint N; cin >> N;
+    vector<int> vH(N);
+    for(uint i=0; i<N; ++i){ cin>>vH[i]; }
+    
+    int64 cnt=0ll;
+    for(uint i=0;;){
+        bool isUpdate=false;
+        while( i<vH.size() && vH[i]==0 ){ ++i; } // skip empty
+        while( i<vH.size() && vH[i]!=0 ){ --vH[i]; ++i; isUpdate=true; }
+        if(isUpdate){ ++cnt; }
+        
+        if(i==vH.size()){
+            if(!isUpdate && *max_element(vH.begin(), vH.end())==0){ break; }
+            i=0;
+        }
+    }
+    cout << cnt << endl;
+    
+    return 0;
+}
+//*/
+/*
+AC
+
 int main(){
     uint N; cin >> N;
     vector<int> vH(N);
@@ -64,6 +110,7 @@ int main(){
     
     return 0;
 }
+//*/
 /*
 TLE
 
