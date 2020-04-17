@@ -1,4 +1,4 @@
-//#define _GLIBCXX_DEBUG
+#define _GLIBCXX_DEBUG
 #include <bits/stdc++.h>
 using namespace std;
 typedef int64_t int64;
@@ -40,51 +40,71 @@ inline void print(const std::vector<std::pair<TR,TL>>& rhs){
 
 //---
 
-vector<vector<int>> split(vector<int>& vP){
+vector<vector<int>> split(const vector<int>& vP){
     vector<vector<int>> vvNew;
     
     uint i=0;
-    while(i<vP[i].size()){
-        while(i<vP[i].size() && vP[i]==0){ ++i; } // pass empty
+    while(i<vP.size()){
+        while(i<vP.size() && vP[i]==0){ ++i; } // pass empty
         
         vector<int> vNew;
-        while( vP[i]!=0 ){ vNew.push_back( vP[i] ); ++i; } // copy
-        vvNew.push_back( vNew );
+        while(i<vP.size() && vP[i]!=0 ){ vNew.push_back( vP[i] ); ++i; } // copy
+        vvNew.push_back( move(vNew) );
     }
     return vvNew;
 }
-vector<vector<int>> split(vector<vector<int>>& vvP){
-    vector<int> vvNew;
+vector<vector<int>> split(const vector<vector<int>>& vvP){
+    vector<vector<int>> vvNew;
     for(uint vi=0; vi<vvP.size(); ++vi){
-        vector<vector<int>> vvTmp = split(vector<int>& vP);
+        vector<vector<int>> vvTmp = split( vvP[vi] );
         
         for(uint i=0; i<vvTmp.size(); ++i){
+            if( vvTmp[i].size()==0 ){ continue; }
             vvNew.push_back( move(vvTmp[i]) );
         }
     }
     return vvNew;
 }
 
-void minus_min(vector<int> & vvP){
-    return ;
+int min(const vector<int>& vP){
+    int minVal=vP[0];
+    for(uint i=1; i<vP.size(); ++i){
+        minVal = min(minVal, vP[i]);
+    }
+    return minVal;
 }
+/*
+void minus_min(vector<int>& vP){
+    int minVal = min(vP);
+    for(uint i=0; i<vP.size(); ++i){ vP[i] -= minVal; }
+}
+void minus_min(vector<vector<int>>& vvP){
+    for(uint i=0; i<vvP.size(); ++i){ minus_min( vvP[i] ); }
+}
+*/
 
 int main(){
 //    ios_base::sync_with_stdio(false);
 //    cin.tie(NULL);
     
-    int N; cin >> N;
+    uint N; cin >> N;
     vector<int> vH(N);
-    for(uint k=1; k<=N; ++k){ int tmp; cin>>tmp; vH[k]=k-tmp; }
+    for(uint i=0; i<N; ++i){ int tmp; cin>>tmp; vH[i]=i+1-tmp; }
+    printn(vH);
     
-    vector<struct pm> vPM = split(vPM);
+    vector<vector<int>> vvP = split(vH);
+    printn(vvP);
     
     int64 cnt=0;
-    while(vPM.size()!=0){
-        vvPN = minus_min(vPM);
-        vvPN = split(vvPN);
-        for(){
-            cnt += XXXXXXXXXXXXX;
+    while(vvP.size()!=0){
+        vvP = split( vvP );
+        printn(vvP);
+        
+        for(uint vi=0; vi<vvP.size(); ++vi){
+            int minVal = min( vvP[vi] );
+            cnt += minVal;
+            
+            for(uint i=0; i<vvP[vi].size(); ++i){ vvP[vi][i] -= minVal; }
         }
     }
     cout << cnt << endl;
