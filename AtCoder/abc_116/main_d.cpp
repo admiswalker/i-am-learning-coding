@@ -40,20 +40,52 @@ inline void print(const std::vector<std::pair<TR,TL>>& rhs){
 
 //---
 
-int64 fn_even(int64 a_prev){ return a_prev / 2;     }
-int64 fn_odd (int64 a_prev){ return 3 * a_prev + 1; }
+struct td{
+    int t;
+    int d;
+};
+
+bool cmp_d   (struct td& lhs, struct td& rhs){ return lhs.d < rhs.d; }
+bool cmp_gr_d(struct td& lhs, struct td& rhs){ return lhs.d > rhs.d; }
 
 int main(){
 //    ios_base::sync_with_stdio(false);
 //    cin.tie(NULL);
     
     uint N, K; cin >> N >> K;
-    vector<pair<int, int>> vTD(N);
-    for(){
-    }
-
+    vector<struct td> vTD(N); for(uint i=0; i<N; ++i){ cin >> vTD[i].t >> vTD[i].d; }
+    sort(vTD.begin(), vTD.end(), cmp_gr_d);
     
-    cout <<  << endl;
+    unordered_map<int, int> htUN; // a hash table for counting number of used types
+    vector<struct td> vTD_rm;     // for remove
+    vector<struct td> vTD_add;    // for add
+    
+    int64 sum =0ll;
+    for(uint i=0; i<K; ++i){
+        sum += vTD[i].d;
+        ++htUN[ vTD[i].t ];
+        if(htUN[ vTD[i].t ]>=2){ vTD_rm.push_back( vTD[i] ); }
+    }
+    sort(vTD_rm.begin(), vTD_rm.end(), cmp_d);
+    
+    for(uint i=K; i<N; ++i){
+        vTD_add.push_back( vTD[i] );
+    }
+    sort(vTD_add.begin(), vTD_add.end(), cmp_gr_d);
+    
+    int64 numT = K - vTD_rm.size(); // num of type
+    int64 prev = sum + numT*numT;
+    int64 next = 0ll;
+    for(uint i=0; i<min(vTD_rm.size(), vTD_add.size()); ++i){
+        sum -= vTD_rm[i].d;
+        sum += vTD_add[i].d;
+        
+        ++numT;
+        
+        next = sum + numT * numT;
+        if(prev>next){ break; }
+    }
+    cout << prev << endl;
     
     return 0;
 }
