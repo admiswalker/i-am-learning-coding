@@ -69,23 +69,23 @@ int main(){
     sort(vTD_rm.begin(), vTD_rm.end(), cmp_d);
     
     for(uint i=K; i<N; ++i){
+        if( htUN[ vTD[i].t ] != 0 ){ continue; }
         vTD_add.push_back( vTD[i] );
     }
     sort(vTD_add.begin(), vTD_add.end(), cmp_gr_d);
     
     int64 numT = K - vTD_rm.size(); // num of type
-    int64 prev = sum + numT*numT;
-    int64 next = 0ll;
+    int64 point = sum + numT*numT;
     for(uint i=0; i<min(vTD_rm.size(), vTD_add.size()); ++i){
-        sum -= vTD_rm[i].d;
+        sum -= vTD_rm [i].d;
         sum += vTD_add[i].d;
         
         ++numT;
         
-        next = sum + numT * numT;
-        if(prev>next){ break; }
+        int64 tmp = sum + numT * numT;
+        point = max(point, tmp);
     }
-    cout << prev << endl;
+    cout << point << endl;
     
     return 0;
 }
