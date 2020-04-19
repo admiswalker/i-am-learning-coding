@@ -49,8 +49,8 @@ bool cmp_d   (struct td& lhs, struct td& rhs){ return lhs.d < rhs.d; }
 bool cmp_gr_d(struct td& lhs, struct td& rhs){ return lhs.d > rhs.d; }
 
 int main(){
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+//    ios_base::sync_with_stdio(false);
+//    cin.tie(NULL);
     
     uint N, K; cin >> N >> K;
     vector<struct td> vTD(N); for(uint i=0; i<N; ++i){ cin >> vTD[i].t >> vTD[i].d; }
@@ -78,9 +78,10 @@ int main(){
     int64 point = sum + numT*numT;
     uint ri=0, ai=0;
     while( ri<vTD_rm.size() && ai<vTD_add.size() ){
-        if( htUN[ vTD_add[ai].t ] != 0 ){ ++ai; continue; }
-        sum -= vTD_rm [ri].d; ++ri;
-        sum += vTD_add[ai].d; ++ai;
+        if( htUN[ vTD_rm [ri].t ] == 1 ){ ++ri; continue; }
+//        if( htUN[ vTD_add[ai].t ] != 0 ){ ++ai; continue; }
+        sum -= vTD_rm [ri].d; ++ri; --htUN[ vTD_rm [ri].t ];
+        sum += vTD_add[ai].d; ++ai; ++htUN[ vTD_add[ai].t ];
         
         ++numT;
         
