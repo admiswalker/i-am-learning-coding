@@ -78,12 +78,8 @@ int main(){
     int64 point = sum + numT*numT;
     uint ri=0, ai=0;
     while( ri<vTD_rm.size() && ai<vTD_add.size() ){
-        if( htUN[ vTD_rm [ri].t ] == 1 ){ ++ri; continue; }
-//        if( htUN[ vTD_add[ai].t ] != 0 ){ ++ai; continue; }
-        sum -= vTD_rm [ri].d; ++ri; --htUN[ vTD_rm [ri].t ];
-        sum += vTD_add[ai].d; ++ai; ++htUN[ vTD_add[ai].t ];
-        
-        ++numT;
+        sum -= vTD_rm [ri].d; --htUN[ vTD_rm [ri].t ]; if(htUN[ vTD_rm [ri].t ]==0){ --numT; } ++ri;
+        sum += vTD_add[ai].d; ++htUN[ vTD_add[ai].t ]; if(htUN[ vTD_add[ai].t ]==1){ ++numT; } ++ai;
         
         int64 tmp = sum + numT * numT;
         point = max(point, tmp);
