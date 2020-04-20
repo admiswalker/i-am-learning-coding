@@ -41,8 +41,8 @@ inline void print(const std::vector<std::pair<TR,TL>>& rhs){
 //---
 
 int main(){
-//    ios_base::sync_with_stdio(false);
-//    cin.tie(NULL);
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
     
     uint64 N, K; cin >> N >> K;
     vector<int64> vA(N);
@@ -61,7 +61,14 @@ int main(){
         max <<= 1;
         if(num1 <= num0){ max += 1ll; }
     }
-    uint64 X = K & max;
+    
+    uint64 X  = 0ull;
+    uint64 K2 = 0ull;
+    for(uint64 digit_i=1ull<<numShift; digit_i!=0ull; digit_i>>=1){
+        X  <<= 1; if(max & digit_i){ ++X;  }
+        K2 <<= 1; if(K   & digit_i){ ++K2; }
+        if(X>K2){ --X; }
+    }
     
     uint64 sum=0ull;
     for(uint i=0; i<N; ++i){
