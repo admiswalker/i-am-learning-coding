@@ -40,14 +40,24 @@ inline void print(const std::vector<std::pair<TR,TL>>& rhs){
 
 //---
 
-vector<int> gen_allLen(const vector<int>& vL){
+vector<int> gen_allLen(vector<int>& vVi, const vector<int>& vL, const int& vL_used){
     vector<int> vL_all;
-    for(uint i=1; i < 1<<vL.size(); ++i){
+    vVi.resize( 0 );
+    for(int vi=1; vi < 1<<vL.size(); ++vi){
         int len=0;
         for(uint i=0; i<vL.size(); ++i){
-            if( i & (1<<i) ){ len += vL[i]; }
+            if( vL_used & (1<<i) ){ continue; }
+            if( vi      & (1<<i) ){ len += vL[vi]; }
         }
         vL_all.push_back( len );
+        vVi.push_back( vi );
+    }
+    return vL_all;
+}
+
+vector<int> vec_abs_diff(int ABC, vector<int>& vL_all){
+    for(uint i=0; i<vL_all.size(); ++i){
+        vL_all[i] = abs( vL_all[i] - ABC );
     }
     return vL_all;
 }
@@ -56,7 +66,7 @@ int main(){
 //    ios_base::sync_with_stdio(false);
 //    cin.tie(NULL);
     
-    int N, A, B, C; cin >> N >> A >> B >> C;
+    uint N; int A, B, C; cin >> N >> A >> B >> C;
     vector<int> vL(N);
     for(uint i=0; i<N; ++i){ cin>>vL[i]; }
     
@@ -65,12 +75,15 @@ int main(){
     int mp_min;
     for(uint i=0; i<vvOrder.size(); ++i){
         int mp_sum;
-        vector<bool> vL_used(3, false);
+        int vL_used;
         for(uint j=0; j<vvOrder[i].size(); ++j){
             vector<int> vL_all;
-            vL_all = gen_allLen(vL, vL_used);
+            vector<int> vVi;
+            vL_all = gen_allLen(vVi, vL, vL_used);
             vL_all = vec_abs_diff(vvOrder[i][j], vL_all);
-            mp_sum += min( vL_all );
+            int idx = min_element(vL_all.begin(), vL_all.end()) - vL_all.begin();
+            mp_sum += vL_all[ idx ];
+            vL_used |= vVi[ idx ];
         }
         mp_min = min(mp_min, mp_sum);
     }
