@@ -1,4 +1,5 @@
 // ref: https://www.dropbox.com/sh/arnpe0ef5wds8cv/AABP7ueaiQAVNZLQn4NjGZBSa/ABC119/C/in?dl=0&preview=b04&subfolder_nav_tracking=1
+
 //#define _GLIBCXX_DEBUG
 #include <bits/stdc++.h>
 using namespace std;
@@ -80,15 +81,28 @@ int main(){
         int bit_used=0;
         for(uint j=0; j<vvABC[i].size(); ++j){
             int ABC = vvABC[i][j];
+            printn(ABC);
             
             vector<int> vBit;
-            vector<int> vL_all  = gen_allLen(vBit, vL, bit_used); if( vL_all.size()==0 ){ continue; }
+            vector<int> vL_all  = gen_allLen(vBit, vL, bit_used); if( vL_all.size()==0 ){ mp_sum=INT_MAX; break; }
             vector<int> vL_diff = vec_abs_diff(ABC, vL_all);
             int idx = min_element(vL_diff.begin(), vL_diff.end()) - vL_diff.begin();
             mp_sum += vL_diff[ idx ] + 10*(__builtin_popcount( vBit[ idx ] ) - 1);
             bit_used |= vBit[ idx ];
+            
+            printn(vL_all );
+            printn(vL_diff);
+            printn(idx);
+            printn(vL_diff[idx]);
+            printn(vBit[idx]);
+            printn(mp_sum);
+            printf("\n");
         }
+        printn(mp_min);
+        
         mp_min = min(mp_min, mp_sum);
+        printf("----\n");
+        printf("\n");
     }
     cout << mp_min << endl;
     
