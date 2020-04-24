@@ -40,17 +40,18 @@ inline void print(const std::vector<std::pair<TR,TL>>& rhs){
 
 //---
 
-vector<int> gen_allLen(vector<int>& vVi, const vector<int>& vL, const int& vL_used){
+vector<int> gen_allLen(vector<int>& vBit, const vector<int>& vL, const int& bit_used){
     vector<int> vL_all;
-    vVi.resize( 0 );
-    for(int vi=1; vi < 1<<vL.size(); ++vi){
+    vBit.resize( 0 );
+    for(int bit=1; bit < 1<<vL.size(); ++bit){
         int len=0;
-        for(uint i=0; i<vL.size(); ++i){
-            if( vL_used & (1<<i) ){ continue; }
-            if( vi      & (1<<i) ){ len += vL[vi]; }
+        for(uint vi=0; vi<vL.size(); ++vi){
+            if( bit_used & (1<<vi) ){ continue; }
+            if( bit      & (1<<vi) ){ len += vL[vi]; }
         }
+        if(len==0){ len=INT_MIN; }
         vL_all.push_back( len );
-        vVi.push_back( vi );
+        vBit.push_back( bit );
     }
     return vL_all;
 }
@@ -72,18 +73,17 @@ int main(){
     
     vector<vector<int>> vvOrder = {{A, B, C}, {A, C, B}, {B, A, C}, {B, C, A}, {C, A, B}, {C, B, A}};
     
-    int mp_min;
+    int mp_min=INT_MAX;
     for(uint i=0; i<vvOrder.size(); ++i){
-        int mp_sum;
-        int vL_used;
+        int mp_sum  =0;
+        int bit_used=0;
         for(uint j=0; j<vvOrder[i].size(); ++j){
-            vector<int> vL_all;
-            vector<int> vVi;
-            vL_all = gen_allLen(vVi, vL, vL_used);
-            vL_all = vec_abs_diff(vvOrder[i][j], vL_all);
-            int idx = min_element(vL_all.begin(), vL_all.end()) - vL_all.begin();
-            mp_sum += vL_all[ idx ];
-            vL_used |= vVi[ idx ];
+            vector<int> vL_all, vBit, vL_diff;
+            vL_all = gen_allLen(vBit, vL, bit_used);
+            vL_diff = vec_abs_diff(vvOrder[i][j], vL_all);
+            int idx = min_element(vL_diff.begin(), vL_diff.end()) - vL_diff.begin();
+            mp_sum += vL_diff[ idx ] + 10*(__builtin_popcount( vBit[ idx ] ) - 1);
+            bit_used |= vBit[ idx ];
         }
         mp_min = min(mp_min, mp_sum);
     }
