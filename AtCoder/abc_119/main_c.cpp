@@ -1,3 +1,4 @@
+// ref: https://www.dropbox.com/sh/arnpe0ef5wds8cv/AABP7ueaiQAVNZLQn4NjGZBSa/ABC119/C/in?dl=0&preview=b04&subfolder_nav_tracking=1
 //#define _GLIBCXX_DEBUG
 #include <bits/stdc++.h>
 using namespace std;
@@ -49,7 +50,7 @@ vector<int> gen_allLen(vector<int>& vBit, const vector<int>& vL, const int& bit_
             if( bit_used & (1<<vi) ){ continue; }
             if( bit      & (1<<vi) ){ len += vL[vi]; }
         }
-        if(len==0){ len=INT_MIN; }
+        if(len==0){ continue; }
         vL_all.push_back( len );
         vBit.push_back( bit );
     }
@@ -71,16 +72,18 @@ int main(){
     vector<int> vL(N);
     for(uint i=0; i<N; ++i){ cin>>vL[i]; }
     
-    vector<vector<int>> vvOrder = {{A, B, C}, {A, C, B}, {B, A, C}, {B, C, A}, {C, A, B}, {C, B, A}};
+    vector<vector<int>> vvABC = {{A, B, C}, {A, C, B}, {B, A, C}, {B, C, A}, {C, A, B}, {C, B, A}}; 
     
     int mp_min=INT_MAX;
-    for(uint i=0; i<vvOrder.size(); ++i){
+    for(uint i=0; i<vvABC.size(); ++i){
         int mp_sum  =0;
         int bit_used=0;
-        for(uint j=0; j<vvOrder[i].size(); ++j){
-            vector<int> vL_all, vBit, vL_diff;
-            vL_all = gen_allLen(vBit, vL, bit_used);
-            vL_diff = vec_abs_diff(vvOrder[i][j], vL_all);
+        for(uint j=0; j<vvABC[i].size(); ++j){
+            int ABC = vvABC[i][j];
+            
+            vector<int> vBit;
+            vector<int> vL_all  = gen_allLen(vBit, vL, bit_used); if( vL_all.size()==0 ){ continue; }
+            vector<int> vL_diff = vec_abs_diff(ABC, vL_all);
             int idx = min_element(vL_diff.begin(), vL_diff.end()) - vL_diff.begin();
             mp_sum += vL_diff[ idx ] + 10*(__builtin_popcount( vBit[ idx ] ) - 1);
             bit_used |= vBit[ idx ];
