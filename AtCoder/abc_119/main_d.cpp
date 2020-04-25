@@ -1,6 +1,3 @@
-// ref: https://img.atcoder.jp/abc119/editorial.pdf
-// ref: https://drken1215.hatenablog.com/entry/2019/02/24/224100
-
 //#define _GLIBCXX_DEBUG
 #include <bits/stdc++.h>
 using namespace std;
@@ -43,7 +40,7 @@ inline void print(const std::vector<std::pair<TR,TL>>& rhs){
 
 //---
 
-int nearest_idx(const vector<int>& v, int dst){
+int nearest_idx(const vector<int64>& v, int64 dst){
     int l_idx = 0;
     int r_idx = v.size() - 1;
     
@@ -62,18 +59,18 @@ int main(){
 //    cin.tie(NULL);
     
     int A, B, Q; cin >> A >> B >> Q;
-    vector<int> vS(A); for(int i=0; i<A; ++i){ cin>>vS[i]; }
-    vector<int> vT(B); for(int i=0; i<B; ++i){ cin>>vT[i]; }
-    vector<int> vX(Q); for(int i=0; i<Q; ++i){ cin>>vX[i]; }
+    vector<int64> vS(A); for(int i=0; i<A; ++i){ cin>>vS[i]; }
+    vector<int64> vT(B); for(int i=0; i<B; ++i){ cin>>vT[i]; }
+    vector<int64> vX(Q); for(int i=0; i<Q; ++i){ cin>>vX[i]; }
     
     for(int i=0; i<Q; ++i){
         int idx1, idx2;
         
-        int tmp1=0;
+        int64 tmp1=0;
         idx1 = nearest_idx(vS, vX[i]   ); tmp1 += abs(vS[idx1] - vX[i]   );
         idx2 = nearest_idx(vT, vS[idx1]); tmp1 += abs(vT[idx2] - vS[idx1]);
         
-        int tmp2=0;
+        int64 tmp2=0;
         idx1 = nearest_idx(vT, vX[i]   ); tmp2 += abs(vT[idx1] - vX[i]   );
         idx2 = nearest_idx(vS, vT[idx1]); tmp2 += abs(vS[idx2] - vT[idx1]);
         
