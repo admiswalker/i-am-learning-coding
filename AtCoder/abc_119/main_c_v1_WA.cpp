@@ -95,6 +95,8 @@ int main(){
             printn(idx);
             printn(vL_diff[idx]);
             printn(vBit[idx]);
+            printn(__builtin_popcount( vBit[ idx ] ));
+            printn( vL_diff[ idx ] + 10*(__builtin_popcount( vBit[ idx ] ) - 1) );
             printn(mp_sum);
             printf("\n");
         }
