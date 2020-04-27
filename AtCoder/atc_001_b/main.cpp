@@ -10,28 +10,28 @@ class unionFind{
 private:
     vector<uint> par; // parent
 public:
-    unionFind(){}
     unionFind(uint rhs){
         par.resize(rhs);
         for(uint i=0; i<par.size(); ++i){ par[i]=i; }
     }
     ~unionFind(){}
     
-    uint root(uint rhs){
-        if(par[rhs]==rhs){ return rhs;
-        }      else      { par[rhs]=root(par[rhs]); return par[rhs]; }
+    uint root(uint rhs){ // returning the root index.
+        if(rhs==par[rhs]){ return rhs;
+        }      else      { return par[rhs]=root(par[rhs]); }
     }
     
-    void unite(uint rhs, uint lhs){
-        uint rR = root(rhs);
+    bool unite(uint lhs, uint rhs){
         uint rL = root(lhs);
-        if(par[rR]==par[rL]){ return; }
+        uint rR = root(rhs);
+        if(par[rL]==par[rR]){ return false; }
         
-        par[rR] = rL;
+        par[rL] = rR;
+        return true;
     }
-
-    bool same(uint rhs, uint lhs){
-        return root(par[rhs])==root(par[lhs]);
+    
+    bool same(uint lhs, uint rhs){
+        return root(par[lhs])==root(par[rhs]);
     }
 };
 
