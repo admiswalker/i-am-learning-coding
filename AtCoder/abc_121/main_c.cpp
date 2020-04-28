@@ -50,7 +50,7 @@ int main(){
         cin >> vAB[i].first >> vAB[i].second;
     }
     sort(vAB.begin(), vAB.end());
-
+    
     int64 sum=0;
     int num=0;
     for(int i=0; i<N; ++i){
@@ -58,10 +58,9 @@ int main(){
             num += vAB[i].second;
             sum += (int64)vAB[i].first * (int64)vAB[i].second;
         }else{
-            int add_num = M - num;
-            if(add_num<0){ break; }
+            int add_num = M - num; if(add_num<=0){ break; }
             num += add_num;
-            sum += vAB[i].first * add_num;
+            sum += (int64)vAB[i].first * (int64)add_num;
         }
     }
     cout << sum << endl;
