@@ -59,7 +59,7 @@ int main(){
     }
     
     for(uint i=0; i<Q; ++i){
-        uint l, r; cin >> l >> r;
+        uint l, r; cin >> l >> r; // 逐次読み込みながら出力しているため，表示は少しバグる．
         if(s[l-1]=='C'){ ++l; }
         cout << vCS[r] - vCS[l-1] << endl;
     }
