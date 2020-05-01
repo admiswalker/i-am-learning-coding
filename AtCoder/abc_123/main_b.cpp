@@ -57,8 +57,9 @@ int main(){
         
         sum += 10*div + (mod!=0 ? 10 : 0);
     }
+    if(min_mod!=INT_MAX){ sum -= 10 - min_mod; }
     
-    cout << sum - (10-min_mod) << endl;
+    cout << sum << endl;
     
     return 0;
 }
