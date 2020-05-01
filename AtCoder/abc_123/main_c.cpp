@@ -40,6 +40,9 @@ inline void print(const std::vector<std::pair<TR,TL>>& rhs){
 
 //---
 
+/*
+// WA
+
 int64 div_ceil(int64 lhs, int64 rhs){ return (lhs-1)/rhs + 1; }
 
 int main(){
@@ -54,9 +57,32 @@ int main(){
     int64 sum=0;
     int64 min_v=N;
     for(uint i=0; i<num; ++i){
-        sum += (v[i] <= min_v) ? div_ceil(min_v, v[i]) : 1ull;
+        sum += (v[i] < min_v) ? div_ceil(min_v, v[i]) : 1ull;
         min_v = min(min_v, v[i]);
     }
+    
+    cout << sum << endl;
+    
+    return 0;
+}
+*/
+
+int64 div_ceil(int64 lhs, int64 rhs){ return (lhs-1)/rhs + 1; }
+
+int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    int64 N; cin >> N;
+    
+    uint num=5;
+    vector<int64> v(num); for(uint i=0; i<5; ++i){ cin >> v[i]; }
+    int minIdx  = min_element(v.begin(), v.end()) - v.begin();
+    int minIdx2 = min_element(v.begin(), v.begin() + minIdx) - v.begin();
+    
+    int64 v_min1 = v[minIdx ];
+    int64 v_min2 = v[minIdx2];
+    int64 sum = 3 + div_ceil(N, v_min1) + div_ceil(v_min1, v_min2);
     
     cout << sum << endl;
     
