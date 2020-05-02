@@ -1,3 +1,5 @@
+// ref: https://img.atcoder.jp/abc123/editorial.pdf
+
 //#define _GLIBCXX_DEBUG
 #include <bits/stdc++.h>
 typedef int64_t int64;
@@ -45,24 +47,26 @@ int64 next(const vector<int64>& v, uint idx){
 }
 
 int main(){
-//    ios_base::sync_with_stdio(false);
-//    cin.tie(NULL);
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
     
     uint X, Y, Z, K; cin >> X >> Y >> Z >> K;
-    vector<int64> vA(X); for(uint i=0; i<X; ++i){ cin >> vA[i]; } sort(vA.begin(), vA.end(), greater<int>());
-    vector<int64> vB(Y); for(uint i=0; i<Y; ++i){ cin >> vB[i]; } sort(vB.begin(), vB.end(), greater<int>());
-    vector<int64> vC(Z); for(uint i=0; i<Z; ++i){ cin >> vC[i]; } sort(vC.begin(), vC.end(), greater<int>());
+    vector<int64> vA(X); for(uint i=0; i<X; ++i){ cin >> vA[i]; } sort(vA.begin(), vA.end(), greater<int64>());
+    vector<int64> vB(Y); for(uint i=0; i<Y; ++i){ cin >> vB[i]; } sort(vB.begin(), vB.end(), greater<int64>());
+    vector<int64> vC(Z); for(uint i=0; i<Z; ++i){ cin >> vC[i]; } sort(vC.begin(), vC.end(), greater<int64>());
     
-    uint ia=0;
-    uint ib=0;
-    uint ic=0;
-    for(uint i=0; i<K; ++i){
-        cout << vA[ia] + vB[ib] + vC[ic] << endl;
-        
-        if      (ia+1<vA.size()&& next(vA,ia+1)>=next(vB,ib+1) && next(vA,ia+1)>=next(vC,ic+1)){ ++ia;
-        }else if(ib+1<vB.size()&& next(vB,ib+1)>=next(vA,ia+1) && next(vB,ib+1)>=next(vC,ic+1)){ ++ib;
-        }else if(ic+1<vC.size()&& next(vC,ic+1)>=next(vA,ia+1) && next(vC,ic+1)>=next(vB,ib+1)){ ++ic; }
+    vector<int64> vK(K);
+    for(uint x=0; x<X; ++x){
+        for(uint y=0; y<Y; ++y){
+            for(uint z=0; z<Z; ++z){
+                if((x+1)*(y+1)*(z+1)>K){ continue; }
+                vK.push_back( vA[x]+vB[y]+vC[z] );
+            }
+        }
     }
+    
+    sort(vK.begin(), vK.end(), greater<int64>());
+    for(uint i=0; i<K; ++i){ cout << vK[i] << endl; }
     
     return 0;
 }
