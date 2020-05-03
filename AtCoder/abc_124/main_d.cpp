@@ -64,7 +64,7 @@ int main(){
     int end = s[0]=='0' ? 2*K-1 : 2*K; end=min(end, (int)vCSum.size()-1);
     int maxLen = vCSum[end];
     begin = s[0]=='0' ? 0 : 1;
-    end += 2; end = min(end, (int)vCSum.size()-1);
+    end  += 2; end=min(end, (int)vCSum.size()-1);
     for(int i=2; i<(int)vCSum.size(); i+=2){
         maxLen = max(maxLen, vCSum[end] - vCSum[begin]); // (begin, end]
         
