@@ -1,3 +1,5 @@
+// ref: https://drken1215.hatenablog.com/entry/2019/04/27/224100_1
+
 //#define _GLIBCXX_DEBUG
 #include <bits/stdc++.h>
 typedef int64_t int64;
@@ -53,38 +55,24 @@ int64 gcd_range(vector<int> vA, int l, int r){
     return ret;
 }
 
+int64 max(int64 l, int64 r){ return (r>=l ? r:l); }
+
 int main(){
-//    ios_base::sync_with_stdio(false);
-//    cin.tie(NULL);
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
     
     int N; cin >> N;
     vector<int> vA(N); for(int i=0; i<N; ++i){ cin >> vA[i]; }
     
-    int l=0;
-    int r=vA.size(); // index
-    while(r-l>1){
-        int c = (l+r)/2;
-        int64 l_gcd = gcd_range(vA, l, c);
-        int64 r_gcd = gcd_range(vA, c, r);
-        if(l_gcd<r_gcd){ l=c;
-        }     else     { l=r; }
+    vector<int> vL(N+1, 0); for(int i=0; i< N; ++i){ vL[i+1] = gcd(vL[i], vA[i  ]); }
+    vector<int> vR(N+1, 0); for(int i=N; i>=1; --i){ vR[i-1] = gcd(vR[i], vA[i-1]); }
+    
+    int ret = 0;
+    for(int i=0; i<N; ++i){
+        ret = max(ret, gcd(vL[i], vR[i+1]));
     }
     
-    // gcd without l
-    int64 gcd_wo_l = l!=0 ? vA[0]:vA[1];
-    for(int i=1; i<N; ++i){
-        if(i==l){ continue; }
-        gcd_wo_l = gcd(gcd_wo_l, vA[i]);
-    }
-    
-    // gcd without r
-    int64 gcd_wo_r = r!=0 ? vA[0]:vA[1];
-    for(int i=1; i<N; ++i){
-        if(i==r){ continue; }
-        gcd_wo_r = gcd(gcd_wo_r, vA[i]);
-    }
-    
-    cout << ( gcd_wo_l<gcd_wo_r ? gcd_wo_l:gcd_wo_r ) << endl;
+    cout << ret << endl;
     
     return 0;
 }
