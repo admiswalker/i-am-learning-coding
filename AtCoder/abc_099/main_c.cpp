@@ -1,3 +1,6 @@
+// ref: https://img.atcoder.jp/abc099/editorial.pdf
+// ref: https://qiita.com/drken/items/ace3142967c4f01d42e9
+
 //#define _GLIBCXX_DEBUG
 #include <bits/stdc++.h>
 typedef int64_t int64;
@@ -40,10 +43,13 @@ inline void print(const std::vector<std::pair<TR,TL>>& rhs){
 
 //---
 
-template<typename T>
-T nearest_down(const vector<T>& v, const T& value){
-    uint idx = upper_bound(v.begin(), v.end(), value) - v.begin();
-    return v[ (idx!=0 ? idx-1:0) ];
+int NNumber_digitSum(int val, int nNum){
+    int ret=0;
+    while(val > 0){
+        ret += val % nNum;
+        val /= nNum;
+    }
+    return ret;
 }
 
 int main(){
@@ -52,20 +58,11 @@ int main(){
     
     int N; cin >> N;
     
-    vector<int> v;
-    v.push_back(1);
-    int base6=6; while( base6<=N ){ v.push_back(base6); base6*=6; }
-    int base9=9; while( base9<=N ){ v.push_back(base9); base9*=9; }
-    sort(v.begin(), v.end());
-    print(v);
-    
-    int steps=0;
-    do{
-        printn(nearest_down(v, N));
-        N -= nearest_down(v, N);
-        ++steps;
-    }while(N!=0);
-    
+    int steps=INT_MAX;
+    for(int i=0; i<=N; ++i){
+        int tmp = NNumber_digitSum(i, 6) + NNumber_digitSum(N-i, 9);
+        steps = min(steps, tmp);
+    }
     cout << steps << endl;
     
     return 0;
