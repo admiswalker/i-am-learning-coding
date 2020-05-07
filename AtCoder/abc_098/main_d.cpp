@@ -48,13 +48,14 @@ int main(){
     vector<int64> vA(N+1, 0); for(int i=1; i<=N; ++i){ cin >> vA[i]; }
     vector<int64> vA_sum(N+1, 0); for(int i=1; i<=N; ++i){ vA_sum[i]=vA[i]+vA_sum[i-1]; }
     vector<int64> vA_xor(N+1, 0); for(int i=1; i<=N; ++i){ vA_xor[i]=vA[i]^vA_xor[i-1]; }
-
+    
     int64 cnt=0;
     for(int l=1; l<=N; ++l){
         for(int r=l; r<=N; ++r){
             int64 xor_lr = vA_xor[r] ^ vA_xor[l-1];
             int64 sum_lr = vA_sum[r] - vA_sum[l-1];
-            if(xor_lr == sum_lr){ ++cnt; }
+            if(xor_lr == sum_lr){ ++cnt;
+            }else{ break; }
         }
     }
     
