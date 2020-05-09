@@ -44,7 +44,7 @@ inline void print(const std::vector<std::pair<TR,TL>>& rhs){
 
 vector<int64> v_max(const vector<int64>& v){
     vector<int64> ret; ret.push_back( 0ll );
-    int64 maxKCal=0;
+    int64 maxKCal=INT_MIN;
     for(uint i=0; i<v.size(); ++i){
         maxKCal = max(maxKCal, v[i]);
         ret.push_back( maxKCal );
@@ -53,57 +53,53 @@ vector<int64> v_max(const vector<int64>& v){
 }
 
 int main(){
-//    ios_base::sync_with_stdio(false);
-//    cin.tie(NULL);
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
     
-    int N, C; cin >> N >> C;
-    vector<int64> vDistR(N+1, 0ll); // distance
-    vector<int64> vKCal (N+1, 0ll); // kcal
-    for(int i=1; i<=N; ++i){ cin >> vDistR[i] >> vKCal[i]; }
+    int64 N, C; cin >> N >> C;
+    vector<int64> vDistR(N); // distance
+    vector<int64> vKCal (N); // kcal
+    for(int i=0; i<N; ++i){ cin >> vDistR[i] >> vKCal[i]; }
     
-    vector<int64> vDistL(N+1, 0ll); // distance
-    for(int i=1; i<=N; ++i){ vDistL[N+1-i] = C - vDistR[i]; }
+    vector<int64> vDistL(N); // distance
+    for(int i=0; i<N; ++i){ vDistL[N-1-i] = C - vDistR[i]; }
     
-    printn(vDistR);
-    printn(vDistL);
-    printn(vKCal);
     
     // R: clockwise
     vector<int64> vR;
     int64 prevKCal=0, prevDist=0;
-    for(int i=0; i<=N; ++i){
+    for(int i=0; i<N; ++i){
         int64 kcal = prevKCal + vKCal[i] - (vDistR[i] - prevDist);
         vR.push_back( kcal );
         prevKCal = kcal;
         prevDist = vDistR[i];
     }
     vector<int64> vR_max = v_max(vR);
-    printn(vR);
-    
     // L: counterclockwise
     vector<int64> vL;
-    prevKCal=0, prevDist=0;
-    for(int i=N; i>=0; --i){
-        int64 kcal = prevKCal + vKCal[i] - (vDistL[i] - prevDist);
+    prevKCal=0ll, prevDist=0ll;
+    for(int i=0; i<N; ++i){
+        int64 kcal = prevKCal + vKCal[N-1-i] - (vDistL[i] - prevDist);
         vL.push_back( kcal );
         prevKCal = kcal;
         prevDist = vDistL[i];
     }
     vector<int64> vL_max = v_max(vL);
-    printn(vL);
     
     
-    int64 sum=0;
+    int64 sum=0ll;
     // R: clockwise
-    for(int i=0; i<=N; ++i){
+    sum = max(sum, vL_max[N-1]);
+    for(int i=0; i<N; ++i){
         int64 tmp1 = vR[i];
-        int64 tmp2 = vR[i] + vL_max[N-i] - vDistR[i];
+        int64 tmp2 = vR[i] + vL_max[N-1-i] - vDistR[i];
         sum = max(sum, max(tmp1, tmp2));
     }
     // L: counterclockwise
-    for(int i=0; i<=N; ++i){
+    sum = max(sum, vR_max[N-1]);
+    for(int i=0; i<N; ++i){
         int64 tmp1 = vL[i];
-        int64 tmp2 = vL[i] + vR_max[N-i] - vDistL[i];
+        int64 tmp2 = vL[i] + vR_max[N-1-i] - vDistL[i];
         sum = max(sum, max(tmp1, tmp2));
     }
     
