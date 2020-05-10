@@ -43,8 +43,6 @@ inline void print(const std::vector<std::pair<TR,TL>>& rhs){
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-
-    string s;
     
     int A, B, K; cin >> A >> B >> K;
     for(int i=A; i<=B; ++i){
