@@ -41,32 +41,18 @@ inline void print(const std::vector<std::pair<TR,TL>>& rhs){
 //---
 
 int main(){
-//    ios_base::sync_with_stdio(false);
-//    cin.tie(NULL);
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
     
     int N; cin >> N;
     vector<int> vA(N+2, 0); for(int i=1; i<=N; ++i){ cin >> vA[i]; }
     vector<int> vA_sum(N+2, 0); for(int i=1; i<=N+1; ++i){ vA_sum[i] = vA_sum[i-1] + abs(vA[i]-vA[i-1]); }
-    printn(vA);
-    printn(vA_sum);
     
     for(int i=1; i<=N; ++i){
         int r = vA_sum[N+1] - vA_sum[i+1]; // [N+1, i+1)
         int m = abs(vA[i+1] - vA[i-1]);    // [i+1, i-1)
         int l = vA_sum[i-1] - vA_sum[0];   // [i-1, 0  )
-        printn(N+1);
-        printn(i);
-        printn(vA_sum[N+1]);
-        printn(vA_sum[i+1]);
-        printn(vA[i+1]);
-        printn(vA[i  ]);
-        printn(vA_sum[i-1]);
-        printn(vA_sum[0  ]);
-        printn(r);
-        printn(m);
-        printn(l);
         cout << r + m + l << endl;
-        printf("\n");
     }
     
     return 0;
@@ -85,9 +71,6 @@ int main(){
 /*
 3
 3 5 -1
-
 vA     = [ 0 3 5 -1 0 ]
-vA_sum = [ 0 3 5 11 12 ]
----
 vA_sum = [ 0 3 5 11 12 ]
 */
