@@ -47,7 +47,7 @@ int main(){
     cin.tie(NULL);
     
     int K=50;
-    int A, B; cin >> A >> B;
+    int A, B; cin >> A >> B; --A; --B;
     vector<string> vS(100);
     for(int i=0; i<K;   ++i){ vS[i] = string(100, '#'); }
     for(int i=K; i<2*K; ++i){ vS[i] = string(100, '.'); }
@@ -71,6 +71,7 @@ int main(){
         }
     }
     
+    cout << 2*K << ' ' << 2*K << endl;
     for(int i=0; i<2*K; ++i){
         cout << vS[i] << endl;
     }
