@@ -1,3 +1,6 @@
+// ref: https://img.atcoder.jp/arc092/editorial.pdf
+// ref: https://qiita.com/shihou22/items/2e9522344917c0e39a00
+
 //#define _GLIBCXX_DEBUG
 #include <bits/stdc++.h>
 typedef int64_t int64;
@@ -41,17 +44,20 @@ inline void print(const std::vector<std::pair<TR,TL>>& rhs){
 //---
 
 int main(){
-//    ios_base::sync_with_stdio(false);
-//    cin.tie(NULL);
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
     
     int N; cin >> N;
-    vector<pair<int,int>> vA(N); for(int i=0; i<N; ++i){ cin >> vA[i].first >> vA[i].second; } sort(vA.begin(), vA.end());
+//    vector<pair<int,int>> vA(N); for(int i=0; i<N; ++i){ cin >> vA[i].first >> vA[i].second; } sort(vA.begin(), vA.end());
+    vector<pair<int,int>> vA(N); for(int i=0; i<N; ++i){ cin >> vA[i].second >> vA[i].first; } sort(vA.begin(), vA.end());
     vector<pair<int,int>> vB(N); for(int i=0; i<N; ++i){ cin >> vB[i].first >> vB[i].second; } sort(vB.begin(), vB.end());
     
     int cnt = 0;
     for(int ib=0; ib<N; ++ib){
-        for(int ia=0; ia<N; ++ia){
-            if(! (vA[ia].first<vB[ib].first && vA[ia].second<vB[ib].second) ){ continue; }
+//        for(int ia=0; ia<N; ++ia){
+        for(int ia=N-1; ia>=0; --ia){
+//            if(! (vA[ia].first<vB[ib].first && vA[ia].second<vB[ib].second) ){ continue; }
+            if(! (vA[ia].second<vB[ib].first && vA[ia].first<vB[ib].second) ){ continue; }
             ++cnt;
             vA[ia].first  = INT_MAX;
             vA[ia].second = INT_MAX;
