@@ -58,7 +58,7 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    int digs=28;
+    int digs=28+1;
     int N; cin >> N;
     vector<int> vA(N); for(int i=0; i<N; ++i){ cin >> vA[i]; }
     vector<int> vB(N); for(int i=0; i<N; ++i){ cin >> vB[i]; }
