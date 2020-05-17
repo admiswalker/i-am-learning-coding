@@ -1,3 +1,5 @@
+// ref: https://img.atcoder.jp/arc092/editorial.pdf
+
 //#define _GLIBCXX_DEBUG
 #include <bits/stdc++.h>
 typedef int64_t int64;
@@ -40,69 +42,44 @@ inline void print(const std::vector<std::pair<TR,TL>>& rhs){
 
 //---
 
-vector<int> digSum(const int digs, const vector<int>& v){
-    vector<int> v_dsum(digs, 0);
-    for(int i=0; i<(int)v.size(); ++i){
-        int tmp=v[i];
-        for(int d=0; d<digs; ++d){
-            if(tmp & 1){ ++(v_dsum[d]); }
-            tmp >>= 1;
-        }
-    }
-    return v_dsum;
+vector<int> mask(const vector<int>& vB, const int k){
+    int m=1; for(int i=0; i<k; ++i){ m<<=1; m+=1; }
+    vector<int> v_ret=vB; for(uint i=0; i<v_ret.size(); ++i){ v_ret[i]&=m; }
+    return v_ret;
 }
 
-vector<int> digMul(const int digs, int a, const int N){
-    vector<int> v_dmul(digs, 0);
-    for(int i=0; i<digs; ++i){
-        if(a & 1){ v_dmul[i] = 1*N; }
-        a >>= 1;
-    }
-    return v_dmul;
-}
-
-vector<int> dig_shift(const int digs, vector<int> v, const vector<int>& v_shiftNum){
-//    vector<int> v_ret(digs);
-    for(int i=0; i<(int)v.size()-1; ++i){
-        int numShift = min(v[i], v_shiftNum[i]);
-        v[i  ] = v[i  ] - numShift;
-        v[i+1] = v[i+1] + numShift;
-    }
-    return v;
-//    return v_ret;
-}
-int vec2int(const vector<int>& v){
-    int ret=0;
-    for(int i=v.size()-1; i>=1; --i){
-        if(v[i] & 1){ ret += 1; }
-        ret <<= 1;
-    }
-    if(v[0] & 1){ ret += 1; }
-    return ret;
+int cnt_range(const vector<int>& v, const int a, const int b){ // [a, b)
+    int lo = lower_bound(v.begin(), v.end(), a) - v.begin();
+    int hi = lower_bound(v.begin(), v.end(), b) - v.begin() - 1;
+    return hi-lo;
 }
 
 int main(){
-//    ios_base::sync_with_stdio(false);
-//    cin.tie(NULL);
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
     
-    int digs=32;
+    int digs=28;
     int N; cin >> N;
     vector<int> vA(N); for(int i=0; i<N; ++i){ cin >> vA[i]; }
     vector<int> vB(N); for(int i=0; i<N; ++i){ cin >> vB[i]; }
     
-    vector<int> vTmp(N);
-    vector<int> vB_dsum = digSum(digs, vB);
-    printn(vB_dsum); // ok
-    for(int i=0; i<N; ++i){
-        vector<int> vA_dmul = digMul(digs, vA[i], N);
-        printn(vA_dmul); // ok
-        vector<int> vS = dig_shift(digs, vB_dsum, vA_dmul);
-        printn(vS); // ok ???
-        vTmp[i] = vec2int( vS );
-        printn(vTmp[i]); // 
+    int ans=0;
+    for(int k=digs-1; k>=0; --k){
+        ans <<= 1;
+        vector<int> vA_m = mask(vA, k);
+        vector<int> vB_m = mask(vB, k);
+        sort(vB_m.begin(), vB_m.end());
+        vB_m.push_back( INT_MAX );
+        
+        int cnt = 0;
+        int T=1<<k; // pow(2, k)
+        for(int i=0; i<N; ++i){
+            cnt += cnt_range(vB_m, 1*T-vA_m[i], 2*T-vA_m[i]); // [ T, 2T)
+            cnt += cnt_range(vB_m, 3*T-vA_m[i], 4*T-vA_m[i]); // [3T, 4T)
+        }
+        if(cnt & 1){ ans+=1; }
     }
     
-    int ans=0; for(int i=0; i<N; ++i){ ans^=vTmp[i]; }
     cout << ans << endl;
     
     return 0;
