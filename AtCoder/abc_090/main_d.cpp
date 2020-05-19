@@ -1,5 +1,5 @@
-// ref: https://www.dropbox.com/sh/arnpe0ef5wds8cv/AAA0c7bOd45pMFGk9D8av1Uqa/ARC091/C?dl=0&subfolder_nav_tracking=1
-// WA: overflow. cnv int32 -> int64.
+// ref: https://img.atcoder.jp/arc091/editorial.pdf
+// ref: https://twitter.com/task4233/status/973160336474828800/photo/1
 
 //#define _GLIBCXX_DEBUG
 #include <bits/stdc++.h>
@@ -43,15 +43,25 @@ inline void print(const std::vector<std::pair<TR,TL>>& rhs){
 
 //---
 
+int64 max(const int64 lhs, const int64 rhs){ return lhs>rhs?lhs:rhs; }
+
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    int64 N, M; cin >> N >> M;
-    if      (N==1 && M==1){ cout << 1 << endl;
-    }else if(N==1 && M>=2){ cout << (M-2) << endl;
-    }else if(N>=2 && M==1){ cout << (N-2) << endl;
-    }else if(N>=2 && M>=2){ cout << (N-2)*(M-2) << endl; }
+    int64 N, K; cin >> N >> K;
+    if(K==0){ cout << N*N << endl; return 0; }
+    
+    int64 sum=0;
+    for(int b=1; b<=N; ++b){
+        int64 div = (N+1)/b;
+        int64 mod = (N+1) - div*b; // int64 mod = (N+1)%b;
+        
+        sum += max(0ll,   b-K) * div;
+        sum += max(0ll, mod-K);
+    }
+    
+    cout << sum << endl;
     
     return 0;
 }
