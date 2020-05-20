@@ -67,7 +67,7 @@ int main(){
     for(uint i=0; i<(uint)1<<v.size(); ++i){
         uint bit=i;
         if(__builtin_popcount(bit)!=3){ continue; }
-        int mul=1;
+        int64 mul=1;
         for(uint i=0; i<v.size(); ++i){
             if(bit & 1){ mul*=v[i]; }
             bit>>=1;
