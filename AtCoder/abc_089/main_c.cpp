@@ -45,35 +45,29 @@ int main(){
     cin.tie(NULL);
     
     int N; cin >> N;
-    unordered_map<string,int> ht_M, ht_A, ht_R, ht_C, ht_H;
+    vector<unordered_map<string,int>> ht(5);
     
     for(int i=0; i<N; ++i){
         string s; cin >> s;
-        if(s[0]=='M'){ ht_M[s]+=1; continue; }
-        if(s[0]=='A'){ ht_A[s]+=1; continue; }
-        if(s[0]=='R'){ ht_R[s]+=1; continue; }
-        if(s[0]=='C'){ ht_C[s]+=1; continue; }
-        if(s[0]=='H'){ ht_H[s]+=1; continue; }
+        if(s[0]=='M'){ ht[0][s]+=1; continue; }
+        if(s[0]=='A'){ ht[1][s]+=1; continue; }
+        if(s[0]=='R'){ ht[2][s]+=1; continue; }
+        if(s[0]=='C'){ ht[3][s]+=1; continue; }
+        if(s[0]=='H'){ ht[4][s]+=1; continue; }
     }
     
-    vector<int64> v;
-    if(ht_M.size()!=0){ v.push_back( ht_M.size() ); }
-    if(ht_A.size()!=0){ v.push_back( ht_A.size() ); }
-    if(ht_R.size()!=0){ v.push_back( ht_R.size() ); }
-    if(ht_C.size()!=0){ v.push_back( ht_C.size() ); }
-    if(ht_H.size()!=0){ v.push_back( ht_H.size() ); }
-    
-    int64 sum=0;
-    for(uint i=0; i<(uint)1<<v.size(); ++i){
+    int64 sum=0ll;
+    for(uint i=0; i<(uint)1<<ht.size(); ++i){
         uint bit=i;
         if(__builtin_popcount(bit)!=3){ continue; }
-        int64 mul=1;
-        for(uint i=0; i<v.size(); ++i){
-            if(bit & 1){ mul*=v[i]; }
-            bit>>=1;
+        
+        int64 mul=1ll;
+        for(uint i=0; i<ht.size(); ++i, bit>>=1){
+            if(bit & 1){ mul*=ht[i].size(); }
         }
         sum+=mul;
     }
+    
     cout << sum << endl;
     
     return 0;
