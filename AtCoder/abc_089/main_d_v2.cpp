@@ -1,4 +1,6 @@
-#define _GLIBCXX_DEBUG
+// ref: https://img.atcoder.jp/abc089/editorial.pdf
+
+//#define _GLIBCXX_DEBUG
 #include <bits/stdc++.h>
 typedef int64_t int64;
 typedef uint32_t uint;
@@ -54,32 +56,21 @@ int main(){
         }
     }
     
-    vector<vector<int>> vvSum_skipD(H*W);
-    for(int begin=0; begin<H*W; ++begin){
+    vector<int> vSum(H*W, 0);
+    for(int idx=D; idx<H*W; ++idx){
+        int i = idx2ij[ idx-D ].first;
+        int j = idx2ij[ idx-D ].second;
+        int x = idx2ij[ idx   ].first;
+        int y = idx2ij[ idx   ].second;
+        int tmp = abs( x-i ) + abs( y-j );
         
-        int sum=0;
-        int idx = begin;
-        while(idx+D<H*W){
-            int i = idx2ij[ idx ].first;
-            int j = idx2ij[ idx ].second;
-            idx += D;
-            int x = idx2ij[ idx ].first;
-            int y = idx2ij[ idx ].second;
-            sum += abs( x-i ) + abs( y-j );
-            
-            vvSum_skipD[ begin ].push_back( sum );
-        }
+        vSum[idx] = vSum[idx-D] + tmp;
     }
     
     int Q; cin >> Q;
     for(int i=0; i<Q; ++i){
         int L, R; cin >> L >> R; --L; --R;
-        
-        int begin = L;
-        int steps = (R-L)/D - 1;
-        
-        cout << vvSum_skipD[ begin ][ steps ] << endl;
-        
+        cout << vSum[R] - vSum[L] << endl;
     }
     
     return 0;
