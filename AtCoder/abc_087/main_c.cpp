@@ -45,8 +45,8 @@ int main(){
     cin.tie(NULL);
     
     int N; cin >> N;
-    vector<int> vA1(N+2, 0); for(int i=1; i<=N; ++i){ int tmp;cin>>tmp; vA1[i]=vA1[i-1]+tmp; } vA1[N+1]=vA1[N];
-    vector<int> vA2(N+2, 0); for(int i=1; i<=N; ++i){ int tmp;cin>>tmp; vA2[i]=vA2[i-1]+tmp; } vA2[N+1]=vA2[N];
+    vector<int> vA1(N+1, 0); for(int i=1; i<=N; ++i){ int tmp;cin>>tmp; vA1[i]=vA1[i-1]+tmp; }
+    vector<int> vA2(N+1, 0); for(int i=1; i<=N; ++i){ int tmp;cin>>tmp; vA2[i]=vA2[i-1]+tmp; }
     
     int sum=0;
     for(int i=1; i<=N; ++i){
