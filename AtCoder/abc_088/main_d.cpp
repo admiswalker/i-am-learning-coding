@@ -48,26 +48,6 @@ int search(const vector<string>& vStr, int r_begin, int c_begin, int r_end, int 
     int Cols = vStr[0].size();
     vector<vector<int>> vvS(Rows, vector<int>(Cols, INT_MAX)); // steps
     
-    queue<tuple<int,int>> queRC; queRC.push(make_tuple(r_begin, c_begin)); // row, col, steps
-    vector<int> dr = {-1,  0, 1, 0};
-    vector<int> dc = { 0, -1, 0, 1};
-    while(queRCS.size()){
-        int r, c;
-        tie(r, c) = queRC.front(); queRC.pop();
-        if(r==r_end && c==c_end){ break; }
-        
-        for(int i=0; i<4; ++i){
-            int r_next = r+dr[i];
-            int c_next = c+dc[i];
-            if(!( 0<=r_next&&r_next<Rows && 0<=c_next&&c_next<Cols) ){ continue; }
-            if(vStr[r_next][c_next]=='#'){ continue; }
-            
-            queRCS.push(make_tuple(r_next, c_next, steps+1));
-            vvS[r_next][c_next] = vvS[r][c] + 1;
-        }
-    }
-    return vvS[r_end][c_end];
-    /*
     queue<tuple<int,int,int>> queRCS; queRCS.push(make_tuple(r_begin, c_begin, 0)); // row, col, steps
     while(queRCS.size()!=0){
         int r, c, steps;
@@ -86,7 +66,6 @@ int search(const vector<string>& vStr, int r_begin, int c_begin, int r_end, int 
         queRCS.push(make_tuple(r  , c+1, steps));
     }
     return vvS[r_end][c_end];
-    //*/
 }
 
 int main(){
@@ -107,6 +86,8 @@ int main(){
     }
     
     int steps = search(vS, 0, 0, H-1, W-1);
+    if(steps==INT_MAX){ cout << -1 << endl; return 0; }
+    
     cout << H*W - cnt_B - steps - 1 << endl;
     
     return 0;
