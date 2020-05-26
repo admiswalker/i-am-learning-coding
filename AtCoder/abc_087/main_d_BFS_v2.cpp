@@ -47,41 +47,45 @@ struct edge{
     int cost;
 };
 
+bool BFS(vector<int>& vDist, const vector<vector<edge>>& vGraph, int begin){
+    vDist[begin] = 0; // cost
+    queue<int> que; que.push(begin); // index (from)
+    while(que.size()!=0){
+        int u = que.front(); que.pop(); // index (from)
+        for(int i=0; i<(int)vGraph[u].size(); ++i){
+            int v    = vGraph[u][i].to; // u to v
+            int cost = vGraph[u][i].cost;
+            
+            if(vDist[v]!=INT_MAX && vDist[v]!=vDist[u]+cost){ return false; }
+            if(vDist[v]==INT_MAX){
+                vDist[v] = vDist[u]+cost; // cost of u to v.
+                que.push( v );
+            }
+        }
+    }
+    return true;
+}
+
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
     int N, M; cin >> N >> M;
-    vector<vector<edge>> vvGraph(N);
+    vector<vector<edge>> vGraph(N);
     for(int i=0; i<M; ++i){
         int L, R, D; cin >> L >> R >> D; --L; --R;
-        vvGraph[ L ].push_back( edge{R, D} );
-        vvGraph[ R ].push_back( edge{L,-D} );
+        vGraph[ L ].push_back( edge{R, D} );
+        vGraph[ R ].push_back( edge{L,-D} );
     }
     
-    vector<int> id2cost(N, INT_MAX);
-    for(int n=0; n<N; ++n){
-        if(id2cost[n]!=INT_MAX){ continue; }
-        id2cost[n] = 0;              // cost
-        queue<int> que; que.push(n); // index (from)
-        while(que.size()!=0){
-            int u = que.front(); que.pop(); // index (from)
-            for(int i=0; i<(int)vvGraph[u].size(); ++i){
-                int v    = vvGraph[u][i].to; // u to v
-                int cost = vvGraph[u][i].cost;
-                
-                if(id2cost[v]==INT_MAX){
-                    id2cost[v] = id2cost[u]+cost; // cost of u to v.
-                    que.push( v );
-                }else{
-                    if(id2cost[v] != id2cost[u]+cost){ cout << "No" << endl; return 0; }
-                }
-            }
-        }
+    vector<int> vDist(N, INT_MAX);
+    for(int i=0; i<N; ++i){
+        if(vDist[i]!=INT_MAX){ continue; }
+        if(! BFS(vDist, vGraph, i)){ cout << "No" << endl; return 0; }
     }
     cout << "Yes" << endl;
     
     return 0;
 }
 
-// 92 ms
+// 97 ms
