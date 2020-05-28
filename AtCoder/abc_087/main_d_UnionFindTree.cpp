@@ -48,7 +48,7 @@ class unionFind_rw{ // rank and weight
  private:
     vector<uint> par;  // parent
     vector<uint> rank; // rank
-    vector<T> cSum_w;   // cumulative weight sum
+    vector<T> cSum_w;  // cumulative weight sum
     
  public:
     unionFind_rw(uint N): par(N), rank(N,(uint)0), cSum_w(N,(T)0) {
@@ -75,9 +75,9 @@ class unionFind_rw{ // rank and weight
     }
     
     bool same(uint lhs, uint rhs){
-        return root(par[lhs])==root(par[rhs]);
+        return root(lhs)==root(rhs);
     }
-
+    
     T diff(uint lhs, uint rhs){
         return cSum_w[rhs] - cSum_w[lhs];
     }
