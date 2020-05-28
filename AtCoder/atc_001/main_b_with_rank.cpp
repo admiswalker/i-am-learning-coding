@@ -1,5 +1,3 @@
-// ref: https://www.slideshare.net/chokudai/union-find-49066733?ref=https://atcoder.jp/contests/atc001/tasks/unionfind_a
-
 #include <bits/stdc++.h>
 using namespace std;
 typedef int64_t int64;
@@ -9,9 +7,10 @@ typedef uint64_t uint64;
 class unionFind{
 private:
     vector<uint> par; // parent
+    vector<uint> rank;
+    
 public:
-    unionFind(uint rhs){
-        par.resize(rhs);
+    unionFind(uint rhs): par(rhs), rank(rhs, (uint)0) {
         for(uint i=0; i<par.size(); ++i){ par[i]=i; }
     }
     ~unionFind(){}
@@ -26,7 +25,10 @@ public:
         uint rR = root(rhs);
         if(rL==rR){ return false; }
         
-        par[rL] = rR;
+        if(rank[rL]< rank[rR]){ swap(rL, rR); }
+        if(rank[rL]==rank[rR]){ ++rank[rL]; }
+        par[rR] = rL;
+        
         return true;
     }
     
@@ -52,4 +54,4 @@ int main(){
     return 0;
 }
 
-// 359 ms
+// 340 ms
