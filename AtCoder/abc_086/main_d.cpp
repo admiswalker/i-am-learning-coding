@@ -49,24 +49,23 @@ vector<int> cumulativeSum(const vector<int>& v){
 }
 
 int main(){
-//    ios_base::sync_with_stdio(false);
-//    cin.tie(NULL);
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
     
     int N, K; cin >> N >> K;
-    vector<int> vX_b(2*K), vX_w(2*K);
-    vector<int> vY_b(2*K), vY_w(2*K);
+    vector<int> vX_b(4*K), vX_w(4*K);
+    vector<int> vY_b(4*K), vY_w(4*K);
     for(int i=0; i<N; ++i){
         int x, y; char c; cin >> x >> y >> c;
-        if(c=='B'){ ++vX_b[x % K]; ++vY_b[y % K];
-        }   else  { ++vX_w[x % K]; ++vY_w[y % K]; }
+        if(c=='B'){ ++vX_b[x % K]; ++vX_b[x % K + 2*K]; ++vY_b[y % K]; ++vY_b[y % K + 2*K];
+        }   else  { ++vX_w[x % K]; ++vX_w[x % K + 2*K]; ++vY_w[y % K]; ++vY_w[y % K + 2*K]; }
     }
     
     vector<int> vX_b_cSum = cumulativeSum(vX_b);
     vector<int> vX_w_cSum = cumulativeSum(vX_w);
     vector<int> vY_b_cSum = cumulativeSum(vY_b);
     vector<int> vY_w_cSum = cumulativeSum(vY_w);
-
-    int K2 = K*2;
+    
     int sum_max=0;
     for(int xk=0; xk<K; ++xk){
         for(int yk=0; yk<K; ++yk){
@@ -78,10 +77,10 @@ int main(){
             int yB_w = yk + K, yE_w = yk + K + K;
             
             int sum_tmp_b = 0, sum_tmp_w = 0;
-            sum_tmp_b += vX_b_cSum[xE_b % K2] - vX_b_cSum[xB_b % K2];
-            sum_tmp_b += vY_b_cSum[yE_b % K2] - vY_b_cSum[yB_b % K2];
-            sum_tmp_w += vX_w_cSum[xE_w % K2] - vX_w_cSum[xB_w % K2];
-            sum_tmp_w += vY_w_cSum[yE_w % K2] - vY_w_cSum[yB_w % K2];
+            sum_tmp_b += vX_b_cSum[xE_b] - vX_b_cSum[xB_b+1];
+            sum_tmp_b += vY_b_cSum[yE_b] - vY_b_cSum[yB_b+1];
+            sum_tmp_w += vX_w_cSum[xE_w] - vX_w_cSum[xB_w+1];
+            sum_tmp_w += vY_w_cSum[yE_w] - vY_w_cSum[yB_w+1];
             
             sum_max = max(sum_max, sum_tmp_b + sum_tmp_w);
         }
