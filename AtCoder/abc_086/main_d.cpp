@@ -54,10 +54,13 @@ vector<int> cumulativeSum(const vector<int>& v){
 int64 slove(const vector<vector<int64>>& vvXY_cSum, const int K, const int x, const int y){
     int xB = max(x, 0);
     int yB = max(y, 0);
+//    printn(xB);
+//    printn(yB);
     
     int xE = x+K;
     int yE = y+K;
-    if(!(0<=xE&&xE<2*K && 0<=yE&&yE<2*K)){ return 0ll; }
+//    printn(xE);
+//    printn(yE);
     xE = max(xE, 0); xE = min(xE, 2*K);
     yE = max(yE, 0); yE = min(yE, 2*K);
     
@@ -82,6 +85,7 @@ int main(){
         y %= K2;
         ++vvXY[x][y];
     }
+//    printn(vvXY);
     
     vector<vector<int64>> vvXY_cSum(K2+1, vector<int64>(K2+1, 0ll));
     for(int xk=0; xk<K2; ++xk){
@@ -89,7 +93,12 @@ int main(){
             vvXY_cSum[xk+1][yk+1] = vvXY[xk][yk] + vvXY_cSum[xk+1][yk] + vvXY_cSum[xk][yk+1] - vvXY_cSum[xk][yk];
         }
     }
-    
+//    printn(vvXY_cSum);
+//    int x=K;
+//    int y=K;
+//    int64 ret = slove(vvXY_cSum, K, x, y);
+//    printn(ret);
+    //*
     int64 sum_max=0;
     for(int x=0; x<K; ++x){
         for(int y=0; y<K; ++y){
@@ -102,8 +111,9 @@ int main(){
             sum_max = max(sum_max, tmp);
         }
     }
-    
+
     cout << sum_max << endl;
+    //*/
     
     return 0;
 }
