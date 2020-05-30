@@ -1,4 +1,6 @@
-//#define _GLIBCXX_DEBUG
+// ref: https://img.atcoder.jp/arc089/editorial.pdf
+
+#define _GLIBCXX_DEBUG
 #include <bits/stdc++.h>
 typedef int64_t int64;
 typedef uint32_t uint;
@@ -39,7 +41,7 @@ inline void print(const std::vector<std::pair<TR,TL>>& rhs){
 #define printn_all(var) {printf("%s(%d): ", __func__, __LINE__);printf("%s", #var);print(var);}
 
 //---
-
+/*
 vector<int> cumulativeSum(const vector<int>& v){
     vector<int> v_cSum(v.size()+1, 0);
     for(uint i=0; i<v.size(); ++i){
@@ -47,42 +49,57 @@ vector<int> cumulativeSum(const vector<int>& v){
     }
     return v_cSum;
 }
+//*/
+
+int64 slove(const vector<vector<int64>>& vvXY_cSum, const int K, const int x, const int y){
+    int xB = max(x, 0);
+    int yB = max(y, 0);
+    
+    int xE = x+K;
+    int yE = y+K;
+    if(!(0<=xE&&xE<2*K && 0<=yE&&yE<2*K)){ return 0ll; }
+    xE = max(xE, 0); xE = min(xE, 2*K);
+    yE = max(yE, 0); yE = min(yE, 2*K);
+    
+//  int64 tmp = vvXY_cSum[xk+K][yk+K] - vvXY_cSum[xk+K][yk] - vvXY_cSum[xk][yk+K] + vvXY_cSum[xk][yk];
+    return vvXY_cSum[xE][yE] - vvXY_cSum[xE][yB] - vvXY_cSum[xB][yE] + vvXY_cSum[xB][yB];
+}
+
+int64 max(const int64& lhs, const int64& rhs){ return (lhs > rhs ? lhs : rhs); }
 
 int main(){
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+//    ios_base::sync_with_stdio(false);
+//    cin.tie(NULL);
     
     int N, K; cin >> N >> K;
-    vector<int> vX_b(4*K), vX_w(4*K);
-    vector<int> vY_b(4*K), vY_w(4*K);
+    
+    int K2=K*2;
+    vector<vector<int64>> vvXY(K2, vector<int64>(K2, 0ll));
     for(int i=0; i<N; ++i){
         int x, y; char c; cin >> x >> y >> c;
-        if(c=='B'){ ++vX_b[x % K]; ++vX_b[x % K + 2*K]; ++vY_b[y % K]; ++vY_b[y % K + 2*K];
-        }   else  { ++vX_w[x % K]; ++vX_w[x % K + 2*K]; ++vY_w[y % K]; ++vY_w[y % K + 2*K]; }
+        if(c == 'W'){ y += K; }
+        x %= K2;
+        y %= K2;
+        ++vvXY[x][y];
     }
     
-    vector<int> vX_b_cSum = cumulativeSum(vX_b);
-    vector<int> vX_w_cSum = cumulativeSum(vX_w);
-    vector<int> vY_b_cSum = cumulativeSum(vY_b);
-    vector<int> vY_w_cSum = cumulativeSum(vY_w);
+    vector<vector<int64>> vvXY_cSum(K2+1, vector<int64>(K2+1, 0ll));
+    for(int xk=0; xk<K2; ++xk){
+        for(int yk=0; yk<K2; ++yk){
+            vvXY_cSum[xk+1][yk+1] = vvXY[xk][yk] + vvXY_cSum[xk+1][yk] + vvXY_cSum[xk][yk+1] - vvXY_cSum[xk][yk];
+        }
+    }
     
-    int sum_max=0;
-    for(int xk=0; xk<K; ++xk){
-        for(int yk=0; yk<K; ++yk){
-            // B: begin, E: end
-            int xB_b = xk,     xE_b = xk + K;
-            int xB_w = xk + K, xE_w = xk + K + K;
-            
-            int yB_b = yk,     yE_b = yk + K;
-            int yB_w = yk + K, yE_w = yk + K + K;
-            
-            int sum_tmp_b = 0, sum_tmp_w = 0;
-            sum_tmp_b += vX_b_cSum[xE_b] - vX_b_cSum[xB_b+1];
-            sum_tmp_b += vY_b_cSum[yE_b] - vY_b_cSum[yB_b+1];
-            sum_tmp_w += vX_w_cSum[xE_w] - vX_w_cSum[xB_w+1];
-            sum_tmp_w += vY_w_cSum[yE_w] - vY_w_cSum[yB_w+1];
-            
-            sum_max = max(sum_max, sum_tmp_b + sum_tmp_w);
+    int64 sum_max=0;
+    for(int x=0; x<K; ++x){
+        for(int y=0; y<K; ++y){
+            int64 tmp = 0ll;
+            tmp += slove(vvXY_cSum, K, x-K, y-K);
+            tmp += slove(vvXY_cSum, K, x+K, y-K);
+            tmp += slove(vvXY_cSum, K, x-K, y+K);
+            tmp += slove(vvXY_cSum, K, x  , y  );
+            tmp += slove(vvXY_cSum, K, x+K, y+K);
+            sum_max = max(sum_max, tmp);
         }
     }
     
