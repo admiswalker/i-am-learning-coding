@@ -1,6 +1,6 @@
 // ref: https://img.atcoder.jp/arc089/editorial.pdf
 
-#define _GLIBCXX_DEBUG
+//#define _GLIBCXX_DEBUG
 #include <bits/stdc++.h>
 typedef int64_t int64;
 typedef uint32_t uint;
@@ -62,7 +62,7 @@ int main(){
     
     int N, K; cin >> N >> K;
     
-    int64 K2=K*2;
+    int K2=K*2;
     vector<vector<int64>> vvXY(K2, vector<int64>(K2, 0ll));
     for(int i=0; i<N; ++i){
         int x, y; char c; cin >> x >> y >> c;
@@ -88,7 +88,8 @@ int main(){
             tmp += slove(vvXY_cSum, K, x-K, y+K);
             tmp += slove(vvXY_cSum, K, x  , y  );
             tmp += slove(vvXY_cSum, K, x+K, y+K);
-            sum_max = max(sum_max, tmp);
+            sum_max = max(sum_max,     tmp);
+            sum_max = max(sum_max, N - tmp);
         }
     }
     
