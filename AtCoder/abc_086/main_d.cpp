@@ -41,38 +41,24 @@ inline void print(const std::vector<std::pair<TR,TL>>& rhs){
 #define printn_all(var) {printf("%s(%d): ", __func__, __LINE__);printf("%s", #var);print(var);}
 
 //---
-/*
-vector<int> cumulativeSum(const vector<int>& v){
-    vector<int> v_cSum(v.size()+1, 0);
-    for(uint i=0; i<v.size(); ++i){
-        v_cSum[i+1] = v[i] + v_cSum[i];
-    }
-    return v_cSum;
-}
-//*/
 
 int64 slove(const vector<vector<int64>>& vvXY_cSum, const int K, const int x, const int y){
     int xB = max(x, 0);
     int yB = max(y, 0);
-//    printn(xB);
-//    printn(yB);
     
     int xE = x+K;
     int yE = y+K;
-//    printn(xE);
-//    printn(yE);
     xE = max(xE, 0); xE = min(xE, 2*K);
     yE = max(yE, 0); yE = min(yE, 2*K);
     
-//  int64 tmp = vvXY_cSum[xk+K][yk+K] - vvXY_cSum[xk+K][yk] - vvXY_cSum[xk][yk+K] + vvXY_cSum[xk][yk];
     return vvXY_cSum[xE][yE] - vvXY_cSum[xE][yB] - vvXY_cSum[xB][yE] + vvXY_cSum[xB][yB];
 }
 
 int64 max(const int64& lhs, const int64& rhs){ return (lhs > rhs ? lhs : rhs); }
 
 int main(){
-//    ios_base::sync_with_stdio(false);
-//    cin.tie(NULL);
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
     
     int N, K; cin >> N >> K;
     
@@ -85,7 +71,6 @@ int main(){
         y %= K2;
         ++vvXY[x][y];
     }
-//    printn(vvXY);
     
     vector<vector<int64>> vvXY_cSum(K2+1, vector<int64>(K2+1, 0ll));
     for(int xk=0; xk<K2; ++xk){
@@ -93,12 +78,7 @@ int main(){
             vvXY_cSum[xk+1][yk+1] = vvXY[xk][yk] + vvXY_cSum[xk+1][yk] + vvXY_cSum[xk][yk+1] - vvXY_cSum[xk][yk];
         }
     }
-//    printn(vvXY_cSum);
-//    int x=K;
-//    int y=K;
-//    int64 ret = slove(vvXY_cSum, K, x, y);
-//    printn(ret);
-    //*
+    
     int64 sum_max=0;
     for(int x=0; x<K; ++x){
         for(int y=0; y<K; ++y){
@@ -113,7 +93,6 @@ int main(){
     }
 
     cout << sum_max << endl;
-    //*/
     
     return 0;
 }
