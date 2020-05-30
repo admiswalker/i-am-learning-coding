@@ -62,7 +62,7 @@ int main(){
     
     int N, K; cin >> N >> K;
     
-    int K2=K*2;
+    int64 K2=K*2;
     vector<vector<int64>> vvXY(K2, vector<int64>(K2, 0ll));
     for(int i=0; i<N; ++i){
         int x, y; char c; cin >> x >> y >> c;
@@ -79,7 +79,7 @@ int main(){
         }
     }
     
-    int64 sum_max=0;
+    int64 sum_max=0ll;
     for(int x=0; x<K; ++x){
         for(int y=0; y<K; ++y){
             int64 tmp = 0ll;
@@ -91,7 +91,7 @@ int main(){
             sum_max = max(sum_max, tmp);
         }
     }
-
+    
     cout << sum_max << endl;
     
     return 0;
