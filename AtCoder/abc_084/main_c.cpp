@@ -40,12 +40,16 @@ inline void print(const std::vector<std::pair<TR,TL>>& rhs){
 
 //---
 
-int64 solve(const int64 C, const int64 S, const int64 F, int64& now){
+int64 div_ceil(int64 lhs, int64 rhs){ return (lhs-1)/rhs + 1; }
+
+void solve(const int64 C, const int64 S, const int64 F, int64& now){
     int64 diff = now - S;
-    if(diff > 0){ if(diff % F != 0){ now += F; }
-    }    else   { now += abs(diff); }
+    if(diff > 0ll){
+        now += F * div_ceil(diff, F) - diff;
+    }else{
+        now += abs(diff);
+    }
     now += C;
-    return now;
 }
 
 int main(){
