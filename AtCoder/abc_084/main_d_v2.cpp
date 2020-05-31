@@ -42,38 +42,27 @@ inline void print(const std::vector<std::pair<TR,TL>>& rhs){
 
 //---
 
-vector<int> prime_list(const int size){
-    vector<bool> v(size+1, true);
-    v[0] = false;
-    v[1] = false;
-    
-    for(int prime=2; prime<=size; ++prime){
-        if(!v[prime]){ continue; }
-        for(int tmp=2*prime; tmp<=size; tmp+=prime){ v[tmp]=false; }
-    }
-    
-    vector<int> vPrime;
-    for(int i=0; i<=size; ++i){
-        if(v[i]){ vPrime.push_back(i); }
-    }
-    return vPrime;
-}
-
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); 
     
+    int N=100000;
+    
     int Q; cin >> Q;
     
-    int N=100000;
-    vector<int> vPrime = prime_list(N);
-    
-    unordered_map<int,int> ht(vPrime.size());
-    for(uint i=0; i<vPrime.size(); ++i){ ht[vPrime[i]]=1; }
+    vector<bool> pTbl(N+1, true);
+    pTbl[0] = false;
+    pTbl[1] = false;
+    for(int prime=2; prime<=N; ++prime){
+        if(!pTbl[prime]){ continue; }
+        for(int tmp=2*prime; tmp<=N; tmp+=prime){ pTbl[tmp]=false; }
+    }
     
     vector<int> vSimilar2017;
-    for(uint i=0; i<vPrime.size(); ++i){
-        if(ht.find((vPrime[i]+1)/2) != ht.end()){ vSimilar2017.push_back(vPrime[i]); }
+    for(int i=0; i<=N; ++i){
+        if(pTbl[i] && pTbl[(i+1)/2]){
+            vSimilar2017.push_back(i);
+        }
     }
     
     vector<int> cSum(N+1, 0);

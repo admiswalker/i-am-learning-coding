@@ -1,3 +1,5 @@
+// ref: https://img.atcoder.jp/abc084/editorial.pdf
+
 //#define _GLIBCXX_DEBUG
 #include <bits/stdc++.h>
 typedef int64_t int64;
@@ -40,19 +42,18 @@ inline void print(const std::vector<std::pair<TR,TL>>& rhs){
 
 //---
 
-vector<int> gen_primeList(const int size){
-    vector<bool> v(size, true);
+vector<int> prime_list(const int size){
+    vector<bool> v(size+1, true);
     v[0] = false;
     v[1] = false;
     
-    for(int prime=2; prime<size;){
-        for(int tmp=2*prime; tmp<size; tmp+=prime){ v[tmp]=false; }
-        ++prime;
-        while(prime<size && v[prime]==false){ ++prime; }
+    for(int prime=2; prime<=size; ++prime){
+        if(!v[prime]){ continue; }
+        for(int tmp=2*prime; tmp<=size; tmp+=prime){ v[tmp]=false; }
     }
     
     vector<int> vPrime;
-    for(int i=0; i<size; ++i){
+    for(int i=0; i<=size; ++i){
         if(v[i]){ vPrime.push_back(i); }
     }
     return vPrime;
@@ -65,7 +66,7 @@ int main(){
     int Q; cin >> Q;
     
     int N=100000;
-    vector<int> vPrime = gen_primeList(N+1);
+    vector<int> vPrime = prime_list(N);
     
     unordered_map<int,int> ht(vPrime.size());
     for(uint i=0; i<vPrime.size(); ++i){ ht[vPrime[i]]=1; }
