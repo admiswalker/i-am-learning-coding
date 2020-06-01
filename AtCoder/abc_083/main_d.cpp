@@ -1,3 +1,5 @@
+// ref: https://img.atcoder.jp/arc088/editorial.pdf
+
 //#define _GLIBCXX_DEBUG
 #include <bits/stdc++.h>
 typedef int64_t int64;
@@ -45,12 +47,13 @@ int main(){
     cin.tie(NULL);
     
     string s; cin >> s;
+    int N = s.size();
     
-    int num0=0, num1=0;
-    for(uint i=0; i<s.size(); ++i){
-        if(s[i]=='0'){ ++num0; }else{ ++num1; }
+    int num=N;
+    for(int i=0; i<(int)s.size()-1; ++i){
+        if(s[i]!=s[i+1]){ num = min(num, max(i+1, N-i-1)); }
     }
-    cout << max(num0, num1) << endl;
+    cout << num << endl;
     
     return 0;
 }
