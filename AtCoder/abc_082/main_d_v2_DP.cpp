@@ -1,5 +1,6 @@
 // ref: https://scrapbox.io/longshoujin/AtCoder_Begginer_Contest_ABC082_D_-_FT_Robot
 // ref: https://atcoder.jp/contests/abc082/submissions/9934921
+// ref: https://www.dropbox.com/sh/nx3tnilzqz7df8a/AAAmnVrIKjiXJTFUeca10hwAa/ARC087/D/in?dl=0&preview=1_01.txt&subfolder_nav_tracking=1
 
 //#define _GLIBCXX_DEBUG
 #include <bits/stdc++.h>
@@ -66,16 +67,13 @@ int main(){
         if( isLR && cnt!=0){ vLR.push_back(cnt); }
         if(!isLR && cnt!=0){ vTB.push_back(cnt); }
     }
-    if(s[0]!='T'){
-        x -= vLR[0]; vLR.erase(vLR.begin());
-    }
     
     // DP
-    int base = 8000;
-    vector<vector<bool>> vvDP_x(vLR.size()+1, vector<bool>(base*2+1, false)); vvDP_x[0][base] = true;
+    int base = 10000;
+    vector<vector<bool>> vvDP_x(vLR.size()+1, vector<bool>(base*2+1, false)); vvDP_x[0][base] = true; if(s[0]!='T'){ vvDP_x[0][base+vLR[0]]=true; vLR.erase(vLR.begin()); }
     vector<vector<bool>> vvDP_y(vTB.size()+1, vector<bool>(base*2+1, false)); vvDP_y[0][base] = true;
     for(uint vi=0; vi<vLR.size(); ++vi){
-        for(int i=0; i<base*2; ++i){
+        for(int i=0; i<=base*2; ++i){
             if(! vvDP_x[vi][i]){ continue; }
             
             if(i + vLR[vi] <= base*2){ vvDP_x[vi+1][i + vLR[vi]]=true; }
@@ -83,7 +81,7 @@ int main(){
         }
     }
     for(uint vi=0; vi<vTB.size(); ++vi){
-        for(int i=0; i<base*2; ++i){
+        for(int i=0; i<=base*2; ++i){
             if(! vvDP_y[vi][i]){ continue; }
             
             if(i + vTB[vi] <= base*2){ vvDP_y[vi+1][i + vTB[vi]]=true; }
