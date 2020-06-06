@@ -63,6 +63,7 @@ int main(){
     int minIdx = min_element(vA.begin(), vA.end()) - vA.begin();
     int maxIdx = max_element(vA.begin(), vA.end()) - vA.begin();
     
+    cout << 2*N-1 << endl;
     if(abs(vA[maxIdx]) >= abs(vA[minIdx])){
         for(int i=0; i<N; ++i){
             if(i==maxIdx){ continue; }
