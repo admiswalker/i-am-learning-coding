@@ -1,3 +1,5 @@
+// ref: https://img.atcoder.jp/arc086/editorial.pdf
+
 //#define _GLIBCXX_DEBUG
 #include <bits/stdc++.h>
 typedef int64_t int64;
@@ -40,15 +42,14 @@ inline void print(const std::vector<std::pair<TR,TL>>& rhs){
 
 //---
 
-template<typename T>
-uint argnearest_up(const vector<T>& v, const T& value){
-    uint idx = lower_bound(v.begin(), v.end(), value) - v.begin();
-    return (idx!=v.size() ? idx:v.size()-1);
-}
-
 int max(const vector<int>& v){
     int m = v[0];
-    for(uint i=0; i<v.size(); ++i){ m = (v[i]<m ? m : v[i]); }
+    for(uint i=0; i<v.size(); ++i){ m = (v[i]>m ? v[i] : m); }
+    return m;
+}
+int min(const vector<int>& v){
+    int m = v[0];
+    for(uint i=0; i<v.size(); ++i){ m = (v[i]<m ? v[i] : m); }
     return m;
 }
 
@@ -59,57 +60,30 @@ int main(){
     int N; cin >> N;
     vector<int> vA(N); for(int i=0; i<N; ++i){ cin >> vA[i]; }
     
-    vector<pair<int,int>> vFT;
-    if(max(vA) > 0){
+    int minIdx = min_element(vA.begin(), vA.end()) - vA.begin();
+    int maxIdx = max_element(vA.begin(), vA.end()) - vA.begin();
+    
+    if(abs(vA[maxIdx]) >= abs(vA[minIdx])){
+        for(int i=0; i<N; ++i){
+            if(i==maxIdx){ continue; }
+            cout << maxIdx+1 << ' ' << i+1 << endl;
+        }
+        cout << maxIdx+1 << ' ' << maxIdx+1 << endl;
+        
         for(int i=1; i<N; ++i){
-            while(!(vA[i-1]<=vA[i])){
-                vector<int> vA_s = vA; sort(vA_s.begin(), vA_s.end());
-            
-                vector<pair<int,int>> vA_sp(N);
-                for(int i=0; i<N; ++i){
-                    vA_sp[i].first  = vA[i];
-                    vA_sp[i].second = i;
-                }
-                sort(vA_sp.begin(), vA_sp.end());
-                
-                int val = vA[i-1] - vA[i];
-                int from_s = argnearest_up(vA_s, val);
-                int from = vA_sp[ from_s ].second;
-                int to   = i;
-                vFT.push_back(make_pair(from+1, to+1));
-            
-                vA[to] += vA[from];
-            }
+            cout << (i-1)+1 << ' ' << (i)+1 << endl;
         }
     }else{
+        for(int i=0; i<N; ++i){
+            if(i==minIdx){ continue; }
+            cout << minIdx+1 << ' ' << i+1 << endl;
+        }
+        cout << minIdx+1 << ' ' << minIdx+1 << endl;
+        
         for(int i=N-1; i>=1; --i){
-            while(!(vA[i-1]<=vA[i])){
-                vector<int> vA_s = vA; sort(vA_s.begin(), vA_s.end());
-                
-                vector<pair<int,int>> vA_sp(N);
-                for(int i=0; i<N; ++i){
-                    vA_sp[i].first  = vA[i];
-                    vA_sp[i].second = i;
-                }
-                sort(vA_sp.begin(), vA_sp.end());
-                
-                int val = vA[i] - vA[i-1];
-                int from_s = argnearest_up(vA_s, val);
-                int from = vA_sp[ from_s ].second;
-                int to   = i;
-                vFT.push_back(make_pair(to+1, from+1));
-                
-                vA[from] += vA[to];
-            }
+            cout << (i)+1 << ' ' << (i-1)+1 << endl;
         }
     }
-    
-    cout << vFT.size() << endl;
-    for(uint i=0; i<vFT.size(); ++i){
-        cout << vFT[i].first  << ' ' << vFT[i].second << endl;
-    }
-
-//    printn(vA);
     
     return 0;
 }
