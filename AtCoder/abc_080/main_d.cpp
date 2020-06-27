@@ -43,19 +43,20 @@ inline void print(const std::vector<std::pair<TR,TL>>& rhs){
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    
+
     int N, C; cin >> N >> C;
-    vector<vector<bool>> vCN(C, vector<bool>(100000, false));
+    int time_max = 100000;
+    vector<vector<bool>> vCN(C, vector<bool>(2*time_max, false));
     
     for(int n=0; n<N; ++n){
-        int s, t, c; cin >> s >> t >> c; --c;
-        for(int i=s*2-1; i<t*2; ++i){
+        int s, t, c; cin >> s >> t >> c; --s; --t; --c;
+        for(int i=max(0, s*2-1); i<t*2; ++i){
             vCN[c][i] = true;
         }
     }
     
     int num = 0;
-    for(int n=0; n<100000; ++n){
+    for(int n=0; n<2*time_max; ++n){
         int num_tmp = 0;
         for(int i=0; i<C; ++i){
             if(vCN[i][n]){ ++num_tmp; }
