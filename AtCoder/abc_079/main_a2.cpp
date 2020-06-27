@@ -46,14 +46,7 @@ int main(){
     
     string s; cin >> s;
     
-    int cLen = 0;
-    int cLen_tmp=1;
-    for(uint i=1; i<s.size(); ++i){
-        if( s[i-1]==s[i] ){ ++cLen_tmp; }else{ cLen_tmp=1; }
-        cLen = max(cLen, cLen_tmp);
-    }
-    
-    cout << (cLen>=3 ? "Yes":"No") << endl;
+    cout << (((s[0]==s[1] && s[0]==s[2]) || (s[1]==s[2] && s[2]==s[3])) ? "Yes":"No") << endl;
     
     return 0;
 }
